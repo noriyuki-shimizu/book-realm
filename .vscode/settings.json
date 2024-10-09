@@ -17,7 +17,7 @@
   },
 
   "stylelint.validate": ["css", "scss", "vue"],
-  "stylelint.configFile": "./.stylelintrc.js",
+  "stylelint.configFile": "./.stylelintrc",
 
   "css.validate": false,
   "scss.validate": false,
