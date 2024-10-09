@@ -1,0 +1,28 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "dprint.dprint",
+
+  "[markdown]": {
+    "editor.formatOnSave": false
+  },
+
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit"
+  },
+
+  "eslint.validate": ["javascript", "typescript", "vue"],
+  "eslint.options": {
+    "overrideConfigFile": "eslint.config.mjs"
+  },
+
+  "stylelint.validate": ["css", "scss", "vue"],
+  "stylelint.configFile": "./.stylelintrc.js",
+
+  "css.validate": false,
+  "scss.validate": false,
+  "javascript.format.enable": false,
+  "typescript.format.enable": false,
+
+  "typescript.referencesCodeLens.enabled": true
+}

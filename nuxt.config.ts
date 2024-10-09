@@ -1,10 +1,6 @@
 /** 本番モードか */
 const isProduction = process.env.NODE_ENV === 'production'
 
-/*
-api/health/index.get.ts
-*/
-
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
@@ -16,6 +12,7 @@ export default defineNuxtConfig({
       }
     }
   },
+  modules: ['@nuxt/eslint'],
   runtimeConfig: {
     googleAiStudioApiKey: '',
     public: {
