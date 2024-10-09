@@ -1,3 +1,5 @@
+import viteSvgLoader from 'vite-svg-loader'
+
 /** 本番モードか */
 const isProduction = process.env.NODE_ENV === 'production'
 
@@ -5,6 +7,7 @@ const isProduction = process.env.NODE_ENV === 'production'
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
+  modules: ['@nuxt/eslint', '@nuxt/test-utils/module'],
   app: {
     head: {
       htmlAttrs: {
@@ -12,7 +15,17 @@ export default defineNuxtConfig({
       }
     }
   },
-  modules: ['@nuxt/eslint'],
+  vite: {
+    plugins: [viteSvgLoader()],
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler' // or "modern"
+        }
+      }
+    }
+  },
+  css: ['ress', '@/assets/style/_index.scss'],
   runtimeConfig: {
     googleAiStudioApiKey: '',
     public: {
