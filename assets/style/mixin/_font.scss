@@ -1,0 +1,24 @@
+// font-face
+@mixin font-face($name: null) {
+  @if $name == 'Roboto' {
+    font-family: 'Roboto Condensed', sans-serif;
+  }
+
+ @else {
+    font-family: YuGothic, 'Yu Gothic M', 'Yu Gothic Medium', sans-serif;
+  }
+}
+
+// font-size
+@mixin font-size($font-size: var(--font-size-root), $line-height: null) {
+  font-size: calc(#{$font-size} / var(--font-size-root) * 1rem);
+
+  @if $line-height {
+    line-height: calc(#{$line-height} / #{$font-size});
+  }
+
+ @else {
+    line-height: calc(var(--line-height-root) / var(--font-size-root));
+  }
+}
+

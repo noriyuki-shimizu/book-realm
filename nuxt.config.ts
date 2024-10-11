@@ -25,13 +25,16 @@ export default defineNuxtConfig({
       }
     }
   },
-  css: ['ress', '@/assets/style/_index.scss'],
+  css: ['ress', '@/assets/style/_base.scss'],
   runtimeConfig: {
     googleAiStudioApiKey: '',
     public: {
       isProduction
     }
   },
+  plugins: [
+    '@/plugins/rest/nuxtServerHttpClient.ts'
+  ],
   imports: {
     dirs: [
       'composables/*/index.{ts,js,mjs,mts}',

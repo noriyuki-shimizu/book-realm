@@ -1,0 +1,151 @@
+@use './mixin/font' as font;
+
+// font setting
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Noto+Sans:wght@100..900&display=swap');
+
+@font-face {
+  font-family: 'Yu Gothic M';
+  src: local('Yu Gothic Medium');
+}
+
+@font-face {
+  font-family: 'Yu Gothic M';
+  font-weight: bold;
+  src: local('Yu Gothic Bold');
+}
+
+:root {
+  --vt-c-white: #fff;
+  --vt-c-indigo: #2c3e50;
+  // gray
+  --vt-c-gray-5: #f9fafa;
+  --vt-c-gray-10: #f5f6f6;
+  --vt-c-gray-20: #edeeee;
+  --vt-c-gray-25: #e6e6e6;
+  --vt-c-gray-30: #dfe0e0;
+  --vt-c-gray-40: #bcbdbd;
+  --vt-c-gray-50: #9c9e9e;
+  --vt-c-gray-60: #7a7d7d;
+  --vt-c-gray-70: #5e6060;
+  --vt-c-gray-80: #494b4b;
+  --vt-c-gray-90: #3a3c3c;
+  --vt-c-gray-100: #2f3232;
+  --vt-c-gray-110: #1d2020;
+  // blue
+  --vt-c-blue-5: #e6f2ff;
+  --vt-c-blue-10: #cce5ff;
+  --vt-c-blue-20: #9cf;
+  --vt-c-blue-30: #66b3ff;
+  --vt-c-blue-40: #39f;
+  --vt-c-blue-50: #007fff;
+  --vt-c-blue-60: #06c;
+  --vt-c-blue-70: #004c99;
+  --vt-c-blue-80: #036;
+  --vt-c-blue-90: #001a33;
+  --vt-c-blue-100: #000f1a;
+  // green
+  --vt-c-green-5: #e6ffe6;
+  --vt-c-green-10: #cfc;
+  --vt-c-green-20: #9f9;
+  --vt-c-green-30: #6f6;
+  --vt-c-green-40: #3f3;
+  --vt-c-green-50: #0f0;
+  --vt-c-green-55: #0d0;
+  --vt-c-green-60: #0c0;
+  --vt-c-green-70: #090;
+  --vt-c-green-80: #060;
+  --vt-c-green-90: #030;
+  --vt-c-green-100: #001a00;
+  // red
+  --vt-c-red-5: #ffe6e6;
+  --vt-c-red-10: #fcc;
+  --vt-c-red-20: #f99;
+  --vt-c-red-30: #f66;
+  --vt-c-red-40: #f33;
+  --vt-c-red-50: #f00;
+  --vt-c-red-60: #c00;
+  --vt-c-red-70: #900;
+  --vt-c-red-80: #600;
+  --vt-c-red-90: #300;
+  --vt-c-red-100: #1a0000;
+  // yellow
+  --vt-c-yellow-5: #fff9e6;
+  --vt-c-yellow-10: #fff2cc;
+  --vt-c-yellow-20: #ffeb99;
+  --vt-c-yellow-30: #ffe466;
+  --vt-c-yellow-40: #fd3;
+  --vt-c-yellow-50: #ffd600;
+  --vt-c-yellow-60: #ccac00;
+  --vt-c-yellow-70: #998300;
+  --vt-c-yellow-80: #665900;
+  --vt-c-yellow-90: #332c00;
+  --vt-c-yellow-100: #1a1600;
+  // orange
+  --vt-c-orange-5: #fff2e6;
+  --vt-c-orange-10: #ffe6cc;
+  --vt-c-orange-20: #fc9;
+  --vt-c-orange-30: #ffb366;
+  --vt-c-orange-40: #f93;
+  --vt-c-orange-50: #ff8000;
+  --vt-c-orange-60: #c60;
+  --vt-c-orange-70: #994c00;
+  --vt-c-orange-80: #630;
+  --vt-c-orange-90: #331a00;
+  --vt-c-orange-100: #1a0d00;
+
+  /* semantic color variables for this project */
+  --color-text: var(--vt-c-indigo);
+  --color-text-primary: var(--vt-c-blue-40);
+  --color-light-text-normal: var(--vt-c-gray-5);
+  --color-light-text-processing: var(--vt-c-blue-60);
+  --color-light-text-primary: var(--vt-c-orange-60);
+  --color-light-text-success: var(--vt-c-green-80);
+  --color-light-text-error: var(--vt-c-red-60);
+  --color-light-text-warning: var(--vt-c-yellow-80);
+  --color-background-normal: var(--vt-c-gray-20);
+  --color-background-processing: var(--vt-c-blue-50);
+  --color-background-primary: var(--vt-c-orange-50);
+  --color-background-success: var(--vt-c-green-60);
+  --color-background-error: var(--vt-c-red-5);
+  --color-background-warning: var(--vt-c-yellow-5);
+  --color-background-disabled: var(--vt-c-gray-40);
+  --color-background-normal-hover: var(--vt-c-gray-10);
+  --color-background-processing-hover: var(--vt-c-blue-40);
+  --color-background-primary-hover: var(--vt-c-orange-40);
+  --color-background-success-hover: var(--vt-c-green-55);
+  --color-background-error-hover: var(--vt-c-red-10);
+  --color-background-warning-hover: var(--vt-c-yellow-10);
+  --color-border-normal: var(--vt-c-gray-50);
+  --color-border-processing: var(--vt-c-blue-20);
+  --color-border-primary: var(--vt-c-orange-20);
+  --color-border-success: var(--vt-c-green-30);
+  --color-border-error: var(--vt-c-red-20);
+  --color-border-warning: var(--vt-c-yellow-30);
+  --color-drag-over-background: var(--vt-c-blue-5);
+  --color-drag-over-border: var(--vt-c-blue-10);
+  --color-light-text: var(--vt-c-white);
+  --section-gap: 160px;
+  --font-size-root: 16px;
+  --line-height-root: 24px;
+}
+
+html {
+  @include font.font-size(var(--font-size-root));
+
+  height: 100%;
+  font-family: YuGothic, 'Yu Gothic M', 'Yu Gothic Medium', sans-serif;
+  color: var(--color-text);
+}
+
+a {
+  color: var(--color-text-primary);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:visited {
+    color: var(--color-link-visited);
+  }
+}
