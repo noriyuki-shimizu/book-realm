@@ -23,6 +23,26 @@ export default defineNuxtConfig({
           api: 'modern-compiler' // or "modern"
         }
       }
+    },
+    vue: {
+      template: {
+        // MEMO: https://github.com/vitejs/vite/issues/636
+        compilerOptions: {
+          nodeTransforms: [
+            (node) => {
+              if (isProduction && node.type === 1) {
+                for (let i = 0; i < node.props.length; i++) {
+                  const p = node.props[i]
+                  if (p && p.type === 6 && p.name === 'data-testid') {
+                    node.props.splice(i, 1)
+                    i--
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
     }
   },
   css: ['ress', '@/assets/style/_base.scss'],
