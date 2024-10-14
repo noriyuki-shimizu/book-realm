@@ -22,4 +22,9 @@
     color: var(--color-text-success);
     background-color: var(--color-background-light-success);
   }
+
+  &--error {
+    color: var(--color-text-error);
+    background-color: var(--color-background-light-error);
+  }
 }
