@@ -1,0 +1,42 @@
+@use '/assets/style/mixin/font' as font;
+
+.picture-form {
+  text-align: center;
+
+  &__input-file {
+    margin-bottom: 16px;
+  }
+
+  &__preview {
+    max-width: 100%;
+    margin-bottom: 16px;
+  }
+
+  &__submit-text {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+  }
+}
+
+.preview {
+  &__title {
+    @include font.font-size(20);
+
+    margin-bottom: 8px;
+  }
+
+  &__image-container {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 16px;
+    justify-content: center;
+  }
+
+  &__image {
+    height: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border: 1px solid var(--color-border-normal);
+  }
+}

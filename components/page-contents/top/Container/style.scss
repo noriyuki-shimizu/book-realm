@@ -1,0 +1,39 @@
+@use '/assets/style/mixin/font' as font;
+
+.container {
+  padding: 24px;
+  margin: 16px 12px;
+  background-color: var(--color-background-light);
+  border-radius: 8px;
+
+  &--text-bold {
+    font-weight: bold;
+  }
+
+  &__title {
+    @include font.font-size(32);
+
+    margin-bottom: 8px;
+  }
+
+  &__description-section {
+    margin-bottom: 24px;
+  }
+
+  &__icon {
+    width: 16px;
+    height: auto;
+  }
+
+  &__analysis-text {
+    margin-bottom: 12px;
+  }
+
+  &__picture-form {
+    margin-bottom: 24px;
+  }
+
+  &__analysis-table {
+    width: 100%;
+  }
+}

@@ -1,0 +1,12 @@
+@use '/assets/style/mixin/font' as font;
+
+.description-section {
+  &__title {
+    @include font.font-size(24);
+
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+}

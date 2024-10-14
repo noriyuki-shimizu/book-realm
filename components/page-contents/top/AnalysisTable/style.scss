@@ -1,0 +1,36 @@
+.analysis-table {
+  width: 100%;
+
+  &__body {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse:  collapse;
+  }
+
+  &__caption {
+    margin-bottom: 12px;
+    text-align: left;
+  }
+
+  &__head-cell {
+    padding: 8px;
+    text-align: left;
+    background-color: var(--color-background-light-normal);
+    border-top: 1px solid var(--color-border-normal);
+    border-bottom: 1px solid var(--color-border-normal);
+
+    &:first-child {
+      width: 45%;
+    }
+  }
+
+  &__body-cell {
+    padding: 8px;
+    border-top: 1px solid var(--color-border-normal);
+    border-bottom: 1px solid var(--color-border-normal);
+
+    &:first-child {
+      width: 45%;
+    }
+  }
+}
