@@ -1,0 +1,67 @@
+.basic-button {
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 6px;
+
+  &--small {
+    padding: 4px 8px;
+  }
+
+  &--medium {
+    padding: 8px 16px;
+  }
+
+  &--large {
+    padding: 8px 24px;
+  }
+
+  &--full {
+    width: 100%;
+    padding: 8px;
+  }
+
+  &--normal {
+    color: var(--color-text-normal);
+    background-color: var(--color-background-normal);
+
+    &:hover {
+      background-color: var(--color-background-hover-normal);
+    }
+
+    &:disabled {
+      color: var(--color-text-disabled);
+      cursor: not-allowed;
+      background-color: var(--color-background-disabled);
+    }
+  }
+
+  &--processing {
+    color: var(--color-text-processing);
+    background-color: var(--color-background-light-processing);
+
+    &:hover {
+      background-color: var(--color-background-light-hover-processing);
+    }
+
+    &:disabled {
+      color: var(--color-text-disabled);
+      cursor: not-allowed;
+      background-color: var(--color-background-disabled);
+    }
+  }
+
+  &--primary {
+    color: var(--color-text-primary);
+    background-color: var(--color-background-light-primary);
+
+    &:hover {
+      background-color: var(--color-background-light-hover-primary);
+    }
+
+    &:disabled {
+      color: var(--color-text-disabled);
+      cursor: not-allowed;
+      background-color: var(--color-background-disabled);
+    }
+  }
+}

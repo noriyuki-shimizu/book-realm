@@ -1,0 +1,28 @@
+.input-file {
+  &__input {
+    display: none;
+  }
+}
+
+.drop-zone {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  min-width: 80vw;
+  padding: 24px 12px;
+  text-align: center;
+  background-color: var(--color-background-light-normal);
+  border: 3px dashed var(--color-border-normal);
+  border-radius: 8px;
+
+  &.drag-over {
+    background-color: var(--color-background-light-drag-over);
+    border: 3px solid var(--color-border-processing);
+  }
+
+  &__text {
+    display: inline-block;
+  }
+}

@@ -1,0 +1,25 @@
+.alert {
+  display: block;
+  padding: 8px;
+  border-radius: 8px;
+
+  &--normal {
+    color: var(--color-text-normal);
+    background-color: var(--color-background-light-normal);
+  }
+
+  &--processing {
+    color: var(--color-text-processing);
+    background-color: var(--color-background-light-processing);
+  }
+
+  &--primary {
+    color: var(--color-text-primary);
+    background-color: var(--color-background-light-primary);
+  }
+
+  &--success {
+    color: var(--color-text-success);
+    background-color: var(--color-background-light-success);
+  }
+}
