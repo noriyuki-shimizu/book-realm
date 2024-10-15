@@ -22,6 +22,7 @@
     "@google/generative-ai": "^0.21.0",
     "@nuxt/eslint": "^0.5.7",
     "camelcase-keys": "^9.1.3",
+    "dayjs": "^1.11.13",
     "nuxt": "^3.13.0",
     "ress": "^5.0.2",
     "snakecase-keys": "^8.0.1",
