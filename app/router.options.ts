@@ -27,8 +27,9 @@ function _getInitPosition(...args: Parameters<NonNullable<RouterConfig['scrollBe
   // savedPosition is only available for popstate navigations (back button)
   const position: ScrollPosition = savedPosition || undefined
 
-  const routeAllowsScrollToTop =
-    typeof to.meta.scrollToTop === 'function' ? to.meta.scrollToTop(to, from) : to.meta.scrollToTop
+  const routeAllowsScrollToTop = typeof to.meta.scrollToTop === 'function'
+    ? to.meta.scrollToTop(to, from)
+    : to.meta.scrollToTop
 
   // Scroll to top if route is changed by default
   if (!position && from && to && routeAllowsScrollToTop !== false && isChangingPage(to, from)) {
@@ -58,8 +59,8 @@ function _getHashElementScrollMarginTop(selector: string): number {
     const elem = document.querySelector(selector)
     if (elem) {
       return (
-        Number.parseFloat(getComputedStyle(elem).scrollMarginTop) +
-        Number.parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop)
+        Number.parseFloat(getComputedStyle(elem).scrollMarginTop)
+        + Number.parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop)
       )
     }
   } catch {
@@ -82,7 +83,7 @@ function _getHashElementScrollMarginTop(selector: string): number {
  * @remark
  * 注意点としては、nuxt フレームワークの機能を担保するため、nuxt パッケージの変更は都度確認する必要がある
  */
-export default <RouterConfig>{
+export default <RouterConfig> {
   scrollBehavior(to, from, savedPosition) {
     const nuxtApp = useNuxtApp()
     // @ts-expect-error untyped, nuxt-injected option
