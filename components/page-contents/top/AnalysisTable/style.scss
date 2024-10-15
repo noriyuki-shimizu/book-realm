@@ -1,3 +1,5 @@
+@use '/assets/style/mixin/font' as font;
+
 .analysis-table {
   width: 100%;
 
@@ -13,7 +15,7 @@
   }
 
   &__head-cell {
-    padding: 8px;
+    padding: 8px 16px;
     text-align: left;
     background-color: var(--color-background-light-normal);
     border-top: 1px solid var(--color-border-normal);
@@ -25,12 +27,19 @@
   }
 
   &__body-cell {
-    padding: 8px;
+    padding: 8px 16px;
     border-top: 1px solid var(--color-border-normal);
     border-bottom: 1px solid var(--color-border-normal);
 
     &:first-child {
       width: 45%;
+    }
+  }
+
+  &__text {
+    &--number {
+      @include font.font-size(18);
+      @include font.font-face('Roboto');
     }
   }
 }

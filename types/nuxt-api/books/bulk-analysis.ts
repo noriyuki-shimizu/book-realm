@@ -6,6 +6,8 @@ export type BookBulkAnalysisPostResponseData = {
   title: string
   /** 著者名 */
   author: string
+  /** 価格 */
+  price: number
   /** 出版社名 */
   publisher: string
   /** 出版年月日 */
