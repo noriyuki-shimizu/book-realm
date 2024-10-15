@@ -5,11 +5,15 @@ const cssModule = useCssModule('classes')
 
 <template>
   <div :class="cssModule['layout-container']">
-    <LayoutContentsHeader :class="cssModule['layout-container__header']" />
+    <header :class="cssModule['layout-container__header']">
+      <LayoutContentsHeader :class="cssModule['layout-container__header-content']" />
+    </header>
     <main :class="cssModule['layout-container__main']">
       <slot />
     </main>
-    <LayoutContentsFooter :class="cssModule['layout-container__footer']" />
+    <footer :class="cssModule['layout-container__footer']">
+      <LayoutContentsFooter :class="cssModule['layout-container__footer-content']" />
+    </footer>
   </div>
 </template>
 

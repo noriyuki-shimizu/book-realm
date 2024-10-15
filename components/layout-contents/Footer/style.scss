@@ -1,9 +1,8 @@
-.footer {
+.footer-content {
   display: flex;
   justify-content: center;
-  padding: 16px;
+  padding: 16px 40px;
   background-color: var(--color-background-light);
-  box-shadow: 0 5px 15px rgb(0 0 0 / 30%);
 
   &__link {
     display: flex;

@@ -6,17 +6,17 @@ const cssModule = useCssModule('classes')
 </script>
 
 <template>
-  <footer :class="cssModule['footer']">
+  <div :class="cssModule['footer-content']">
     <span>@ 2024 Noriyuki Shimizu</span>
     <NuxtLink
-      :class="cssModule['footer__link']"
+      :class="cssModule['footer-content__link']"
       to="https://github.com/noriyuki-shimizu/book-realm"
       target="_blank"
     >
-      <GitHubIconSvg :class="cssModule['footer__icon']" />
-      <span :class="cssModule['footer__link-text']">GitHub</span>
+      <GitHubIconSvg :class="cssModule['footer-content__icon']" />
+      <span :class="cssModule['footer-content__link-text']">GitHub</span>
     </NuxtLink>
-  </footer>
+  </div>
 </template>
 
 <style module="classes" lang="scss">

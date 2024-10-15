@@ -4,8 +4,8 @@ const cssModule = useCssModule('classes')
 </script>
 
 <template>
-  <header :class="cssModule['header']">
-    <NuxtLink :class="cssModule['header__icon-link']" to="/">
+  <div :class="cssModule['header-content']">
+    <NuxtLink :class="cssModule['header-content__icon-link']" to="/">
       <img
         src="/favicon/favicon-48x48.ico"
         alt="アプリケーションアイコン"
@@ -13,11 +13,17 @@ const cssModule = useCssModule('classes')
         height="48"
       >
       <div>
-        <span :class="cssModule['header__icon-link-text']">BOOK</span>
-        <span :class="cssModule['header__icon-link-text']">Realm</span>
+        <span :class="cssModule['header-content__icon-link-text']">BOOK</span>
+        <span :class="cssModule['header-content__icon-link-text']">Realm</span>
       </div>
     </NuxtLink>
-  </header>
+    <div :class="cssModule['header-content__navigate']">
+      <UiPartsGeneralBasicButton
+      type="button"
+      color="primary"
+    >ログイン</UiPartsGeneralBasicButton>
+    </div>
+  </div>
 </template>
 
 <style module="classes" lang="scss">

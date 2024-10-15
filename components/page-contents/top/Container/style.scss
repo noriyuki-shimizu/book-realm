@@ -2,7 +2,6 @@
 
 .container {
   padding: 24px;
-  margin: 16px 12px;
   background-color: var(--color-background-light);
   border-radius: 8px;
 
@@ -34,6 +33,6 @@
   }
 
   &__analysis-table {
-    width: 100%;
+    margin-bottom: 12px;
   }
 }
