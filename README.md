@@ -1,75 +1,63 @@
-# Nuxt 3 Minimal Starter
+# Book Realm
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+書籍管理アプリです。
+個人の書籍を管理できます。
+画像を解析させ、登録を補助します。
+その他、フォームからの入力も行えます。
 
-## Setup
+## アプリケーションリンク
+
+https://book-realm-xi.vercel.app/
+
+## Develop Guid
+
+### Setup
 
 Make sure to install the dependencies:
 
 ```bash
-# npm
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
-## Development Server
+### Development Server
 
 Start the development server on `http://localhost:3000`:
 
 ```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+### Production
 
 Build the application for production:
 
 ```bash
-# npm
 npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
 ```
 
 Locally preview production build:
 
 ```bash
-# npm
 npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+### Linter
+
+```bash
+# ESLint / dprint / StyleLint
+npm run lint
+```
+
+### Format
+
+```bash
+# ESLint / dprint / StyleLint
+npm run format
+```
+
+### Unit Test
+
+```bash
+# Vitest
+npm run test:ut
+```
