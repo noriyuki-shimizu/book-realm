@@ -53,7 +53,8 @@ export default defineNuxtConfig({
     }
   },
   plugins: [
-    '@/plugins/rest/nuxtServerHttpClient.ts'
+    { order: 0, mode: 'all', src: '@/plugins/rest/nuxtServerHttpClient.ts' },
+    { order: 99, mode: 'client', src: '@/plugins/vercel.client.ts' }
   ],
   imports: {
     dirs: [
