@@ -12,33 +12,7 @@ export const useApiStore = () => {
   /** State */
   const _state = useState<ApiState>('page-api-top-store', () => {
     return {
-      // bookBulkAnalysisPostResponse: null
-      bookBulkAnalysisPostResponse: {
-        data: [{
-          uid: '1',
-          title: '既存のコードを安全に改善するリファクタリング',
-          author: 'マーチン・ファウラー',
-          price: 10000,
-          publisher: 'オーム社',
-          publishedDate: '2019.7.19'
-        }, {
-          uid: '2',
-          title: 'はじめてのSpring Boot ―やさしいJavaフレームワークで、改訂版',
-          author: '槙 俊行',
-          price: 10000,
-          publisher: '秀和システム',
-          publishedDate: '2021.12.20'
-        }, {
-          uid: '3',
-          title: 'リーダブルコード ―より良いコードを書くためのシンプルで実践的なテクニック',
-          author: 'Dustin Boswell',
-          price: 10000,
-          publisher: 'オライリージャパン',
-          publishedDate: '2012.1.3'
-        }],
-        status: StatusCode.STATUS_CODE_OK,
-        error: null
-      }
+      bookBulkAnalysisPostResponse: null
     }
   })
 
