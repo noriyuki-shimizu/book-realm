@@ -40,7 +40,8 @@
           "include",
           "mixin",
           "if",
-          "else"
+          "else",
+          "warn"
         ]
       }
     ],
@@ -49,6 +50,16 @@
       {
         "ignoreAtRules": ["use"]
       }
-    ]
+    ],
+    "annotation-no-unknown": [
+      true,
+      {
+        "ignoreAnnotations": [
+          "default"
+        ]
+      }
+    ],
+    "function-no-unknown": null,
+    "media-query-no-invalid": null
   }
 }
