@@ -47,8 +47,7 @@ const convertImageSrc = (file: File): string => {
               :class="cssModule['preview__image']"
               :src="convertImageSrc(f)"
               :alt="f.name"
-              width="300"
-              height="400"
+              sizes="(max-width: 896px) 200px, 300px"
               loading="lazy"
               decoding="async"
             />

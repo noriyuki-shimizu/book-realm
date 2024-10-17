@@ -1,4 +1,5 @@
 @use '/assets/style/mixin/font' as font;
+@use '@/assets/style/mixin/mediaQuery' as mediaQuery;
 
 .description-section {
   &__title {
@@ -8,5 +9,9 @@
     gap: 8px;
     align-items: center;
     margin-bottom: 8px;
+
+    @include mediaQuery.media {
+      @include font.font-size(20, 20);
+    }
   }
 }

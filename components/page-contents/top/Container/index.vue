@@ -2,6 +2,7 @@
 import LightIconSvg from '@/assets/svg/light-icon.svg?component'
 import SearchIconSvg from '@/assets/svg/search-icon.svg?component'
 import { StatusCode } from '@/enums/common/http/statusCode'
+import AnalysisList from '../AnalysisList/index.vue'
 import AnalysisTable from '../AnalysisTable/index.vue'
 import DescriptionSection from '../DescriptionSection/index.vue'
 import PictureForm from '../PictureForm/index.vue'
@@ -61,7 +62,21 @@ const cssModule = useCssModule('classes')
       </template>
     </DescriptionSection>
 
-    <AnalysisTable :class="cssModule['container__analysis-table']" />
+    <UiPartsFeedbackAlert
+      v-if="!LangUtil.isNull(bookBulkAnalysisPostResponse) && !LangUtil.isNull(bookBulkAnalysisPostResponse.data)"
+      :class="cssModule['container__analysis-text']"
+      type="success"
+    >
+      ファイルの解析が完了しました。
+    </UiPartsFeedbackAlert>
+
+    <div :class="cssModule['container__analysis-table-wrapper']">
+      <AnalysisTable />
+    </div>
+
+    <div :class="cssModule['container__analysis-list-wrapper']">
+      <AnalysisList />
+    </div>
   </div>
 </template>
 

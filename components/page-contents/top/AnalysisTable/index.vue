@@ -13,9 +13,14 @@ const viewData = computed<ViewData>(() => {
     return []
   }
   return data.map((d) => {
+    const { uid, title, author, price, publisher, publishedDate } = d
     return {
-      ...d,
-      publishedDate: DateUtil.parseDateString(d.publishedDate)
+      uid,
+      title,
+      author,
+      price,
+      publisher,
+      publishedDate: LangUtil.isNull(publishedDate) ? null : DateUtil.parseDateString(publishedDate)
     }
   })
 })
@@ -26,11 +31,8 @@ const cssModule = useCssModule('classes')
 
 <template>
   <div :class="cssModule['analysis-table']">
-    <template v-if="!LangUtil.isNull(bookBulkAnalysisPostResponse) && !LangUtil.isNull(bookBulkAnalysisPostResponse.data)">
+    <template v-if="!(LangUtil.isNull(bookBulkAnalysisPostResponse) || LangUtil.isNull(bookBulkAnalysisPostResponse.data))">
       <table :class="[cssModule['container__analysis-table'], cssModule['analysis-table__body']]">
-        <caption :class="cssModule['analysis-table__caption']">
-          <UiPartsFeedbackAlert type="success">ファイルの解析が完了しました。</UiPartsFeedbackAlert>
-        </caption>
         <thead>
           <tr>
             <th :class="cssModule['analysis-table__head-cell']" scope="col">書籍名</th>
@@ -44,19 +46,31 @@ const cssModule = useCssModule('classes')
           <template v-for="data in viewData" :key="data.uid">
             <tr>
               <td :class="cssModule['analysis-table__body-cell']">{{ data.title }}</td>
-              <td :class="cssModule['analysis-table__body-cell']">{{ data.author }}</td>
               <td :class="cssModule['analysis-table__body-cell']">
-                <span :class="cssModule['analysis-table__text--number']">{{ formatNumberWithCommas(data.price) }}</span><span>円</span>
+                <template v-if="LangUtil.isNull(data.author)">---</template>
+                <template v-else>{{ data.author }}</template>
               </td>
-              <td :class="cssModule['analysis-table__body-cell']">{{ data.publisher }}</td>
               <td :class="cssModule['analysis-table__body-cell']">
-                <span :class="cssModule['analysis-table__text--number']">{{
-                  data.publishedDate.year
-                }}</span><span>年</span><span :class="cssModule['analysis-table__text--number']">{{
-                  padZero(data.publishedDate.month)
-                }}</span><span>月</span><span :class="cssModule['analysis-table__text--number']">{{
-                  padZero(data.publishedDate.day)
-                }}</span><span>日</span>
+                <template v-if="LangUtil.isNull(data.price)">---</template>
+                <template v-else>
+                  <span :class="cssModule['analysis-table__text--number']">{{ formatNumberWithCommas(data.price) }}</span><span>円</span>
+                </template>
+              </td>
+              <td :class="cssModule['analysis-table__body-cell']">
+                <template v-if="LangUtil.isNull(data.publisher)">---</template>
+                <template v-else>{{ data.publisher }}</template>
+              </td>
+              <td :class="cssModule['analysis-table__body-cell']">
+                <template v-if="LangUtil.isNull(data.publishedDate)">---</template>
+                <template v-else>
+                  <span :class="cssModule['analysis-table__text--number']">{{
+                    data.publishedDate.year
+                  }}</span><span>年</span><span :class="cssModule['analysis-table__text--number']">{{
+                    padZero(data.publishedDate.month)
+                  }}</span><span>月</span><span :class="cssModule['analysis-table__text--number']">{{
+                    padZero(data.publishedDate.day)
+                  }}</span><span>日</span>
+                </template>
               </td>
             </tr>
           </template>

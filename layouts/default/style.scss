@@ -1,6 +1,12 @@
+@use '@/assets/style/mixin/mediaQuery' as mediaQuery;
+
 .layout-container {
   position: relative;
   padding: 80px 0 56px;
+
+  @include mediaQuery.media {
+    padding: 80px 0 48px;
+  }
 
   &__header {
     position: fixed;
@@ -15,6 +21,10 @@
   &__header-content {
     max-width: var(--pc-max-width);
     margin: auto;
+
+    @include mediaQuery.media {
+      max-width: var(--sp-max-width);
+    }
   }
 
   &__main {
@@ -22,6 +32,11 @@
     max-width: var(--pc-max-width);
     padding: 24px 40px;
     margin: auto;
+
+    @include mediaQuery.media {
+      max-width: var(--sp-max-width);
+      padding: 16px 8px;
+    }
   }
 
   &__footer {
@@ -37,5 +52,9 @@
   &__footer-content {
     max-width: var(--pc-max-width);
     margin: auto;
+
+    @include mediaQuery.media {
+      max-width: var(--sp-max-width);
+    }
   }
 }

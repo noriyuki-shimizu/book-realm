@@ -1,8 +1,17 @@
+@use '/assets/style/mixin/font' as font;
+@use '@/assets/style/mixin/mediaQuery' as mediaQuery;
+
 .footer-content {
   display: flex;
   justify-content: center;
   padding: 16px 40px;
   background-color: var(--color-background-light);
+
+  @include mediaQuery.media {
+    @include font.font-size(12, 12);
+
+    padding: 16px;
+  }
 
   &__link {
     display: flex;
@@ -17,5 +26,10 @@
   &__icon {
     width: 24px;
     height: 24px;
+
+    @include mediaQuery.media {
+      width: 16px;
+      height: 16px;
+    }
   }
 }

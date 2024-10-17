@@ -5,13 +5,13 @@ export type BookBulkAnalysisPostResponseData = {
   /** 本のタイトル */
   title: string
   /** 著者名 */
-  author: string
+  author: string | null
   /** 価格 */
-  price: number
+  price: number | null
   /** 出版社名 */
-  publisher: string
+  publisher: string | null
   /** 出版年月日 */
-  publishedDate: string
+  publishedDate: string | null
 }
 
 /** 本の一括解析結果レスポンス */

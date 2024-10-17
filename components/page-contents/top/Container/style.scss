@@ -1,9 +1,14 @@
 @use '/assets/style/mixin/font' as font;
+@use '@/assets/style/mixin/mediaQuery' as mediaQuery;
 
 .container {
   padding: 24px;
   background-color: var(--color-background-light);
   border-radius: 8px;
+
+  @include mediaQuery.media {
+    padding: 24px 16px;
+  }
 
   &--text-bold {
     font-weight: bold;
@@ -13,10 +18,16 @@
     @include font.font-size(32);
 
     margin-bottom: 8px;
+
+    @include mediaQuery.media {
+      @include font.font-size(24, 32);
+
+      margin-bottom: 16px;
+    }
   }
 
   &__description-section {
-    margin-bottom: 24px;
+    margin-bottom: 16px;
   }
 
   &__icon {
@@ -32,7 +43,19 @@
     margin-bottom: 24px;
   }
 
-  &__analysis-table {
+  &__analysis-table-wrapper {
     margin-bottom: 12px;
+
+    @include mediaQuery.media {
+      display: none;
+    }
+  }
+
+  &__analysis-list-wrapper {
+    display: none;
+
+    @include mediaQuery.media {
+      display: block;
+    }
   }
 }

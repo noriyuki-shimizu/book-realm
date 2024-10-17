@@ -1,0 +1,50 @@
+@use '/assets/style/mixin/font' as font;
+
+.analysis-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+
+  &--number {
+    @include font.font-size(18, 18);
+    @include font.font-face('Roboto');
+  }
+
+  &__container {
+    list-style: none;
+    border: 1px solid var(--color-border-normal);
+    border-radius: 6px;
+  }
+
+  &__item {
+    display: flex;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &__title {
+    display: block;
+    width: 80px;
+    min-width: 80px;
+    max-width: 80px;
+    padding: 8px;
+    font-weight: bold;
+    background-color: var(--color-background-light-normal);
+
+    &--first {
+      border-radius: 6px 0 0;
+    }
+
+    &--last {
+      border-radius: 0 0 0 6px;
+    }
+  }
+
+  &__text {
+    display: block;
+    padding: 8px;
+  }
+}
