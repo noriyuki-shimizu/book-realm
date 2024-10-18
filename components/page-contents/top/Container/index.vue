@@ -34,6 +34,18 @@ const cssModule = useCssModule('classes')
       v-if="
         !LangUtil.isNull(bookBulkAnalysisPostResponse) &&
         !LangUtil.isNull(bookBulkAnalysisPostResponse.error) &&
+        bookBulkAnalysisPostResponse.error.statusCode !== StatusCode.STATUS_CODE_BAD_REQUEST
+      "
+      :class="cssModule['container__analysis-text']"
+      type="error"
+    >
+      <pre>{{ bookBulkAnalysisPostResponse.error.stack }}</pre>
+    </UiPartsFeedbackAlert>
+
+    <UiPartsFeedbackAlert
+      v-if="
+        !LangUtil.isNull(bookBulkAnalysisPostResponse) &&
+        !LangUtil.isNull(bookBulkAnalysisPostResponse.error) &&
         bookBulkAnalysisPostResponse.error.statusCode === StatusCode.STATUS_CODE_BAD_REQUEST
       "
       :class="cssModule['container__analysis-text']"
