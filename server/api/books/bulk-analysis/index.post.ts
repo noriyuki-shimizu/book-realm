@@ -1,3 +1,4 @@
+import { consola } from 'consola'
 import { LangUtil } from '@/utils/core'
 import { StatusCode } from '@/enums/common/http/statusCode'
 import { BookBulkAnalysisService } from '@/server/src/service/BookBulkAnalysisService'
@@ -14,12 +15,14 @@ export default defineEventHandler(async (event) => {
     })
   }
 
+  const config = useRuntimeConfig()
+  consola.level = config.public.logLevel
+
   try {
     const service = BookBulkAnalysisService.of()
     const resultDataList: BookBulkAnalysisPostResponse = await service.analyze(data)
 
-    console.log('=== guest book bulk analysis result ===')
-    console.dir(resultDataList, { depth: null })
+    consola.info('guest book bulk analysis result: ', resultDataList)
 
     if (LangUtil.isEmpty(resultDataList)) {
       setResponseStatus(event, StatusCode.STATUS_CODE_NO_CONTENT)

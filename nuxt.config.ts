@@ -57,7 +57,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     googleAiStudioApiKey: '',
     public: {
-      isProduction
+      isProduction,
+      logLevel: isProduction ? 3 : 5
     }
   },
   plugins: [
