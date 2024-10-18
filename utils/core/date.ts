@@ -10,7 +10,7 @@ export const parseDateString = (value: string, format: string = 'YYYY.MM.DD'): D
   const date = dayjs(value, format)
 
   if (!date.isValid()) {
-    throw new Error('Invalid date format')
+    throw new Error(`Invalid date format, value: ${value}`)
   }
 
   return {
