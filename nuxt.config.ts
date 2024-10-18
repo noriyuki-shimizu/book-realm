@@ -15,6 +15,11 @@ export default defineNuxtConfig({
       }
     }
   },
+  build: {
+    transpile: [
+      ...(isProduction ? ['dayjs'] : [])
+    ]
+  },
   vite: {
     plugins: [viteSvgLoader()],
     css: {

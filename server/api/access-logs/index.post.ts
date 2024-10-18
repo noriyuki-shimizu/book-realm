@@ -15,7 +15,6 @@ export default defineEventHandler(async (event) => {
 
   consola.info(
     JSON.stringify({
-      id: getHeader(event, 'x-amzn-trace-id'),
       time: ServerDateUtil.getNow().format(DATE_TIME_YYYYMMDDHHMMSS_COLON),
       'x-forwarded-for': getHeader(event, 'x-forwarded-for'),
       'user-agent': getHeader(event, 'user-agent'),
