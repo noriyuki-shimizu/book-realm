@@ -31,7 +31,6 @@ const cssModule = useCssModule('classes')
 
 <template>
   <div :class="cssModule['analysis-list']">
-    <pre>{{ bookBulkAnalysisPostResponse }}</pre>
     <template v-if="!(LangUtil.isNull(bookBulkAnalysisPostResponse) || LangUtil.isNull(bookBulkAnalysisPostResponse.data))">
       <template v-for="data in viewData" :key="data.uid">
         <ul :class="cssModule['analysis-list__container']">
