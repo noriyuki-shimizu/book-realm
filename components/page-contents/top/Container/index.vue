@@ -39,6 +39,9 @@ const cssModule = useCssModule('classes')
       :class="cssModule['container__analysis-text']"
       type="error"
     >
+      <pre>{{ bookBulkAnalysisPostResponse.error.message }}</pre>
+      <pre>{{ bookBulkAnalysisPostResponse.error.name }}</pre>
+      <pre>{{ bookBulkAnalysisPostResponse.error.statusCode }}</pre>
       <pre>{{ bookBulkAnalysisPostResponse.error.stack }}</pre>
     </UiPartsFeedbackAlert>
 
