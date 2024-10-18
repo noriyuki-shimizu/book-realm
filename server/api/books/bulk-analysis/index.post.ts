@@ -18,6 +18,9 @@ export default defineEventHandler(async (event) => {
     const service = BookBulkAnalysisService.of()
     const resultDataList: BookBulkAnalysisPostResponse = await service.analyze(data)
 
+    console.log('=== guest book bulk analysis result ===')
+    console.dir(resultDataList, { depth: null })
+
     if (LangUtil.isEmpty(resultDataList)) {
       setResponseStatus(event, StatusCode.STATUS_CODE_NO_CONTENT)
     } else {
