@@ -48,10 +48,11 @@ const cssModule = useCssModule('classes')
           <li :class="cssModule['analysis-list__item']">
             <span :class="cssModule['analysis-list__title']">価格</span>
             <div :class="cssModule['analysis-list__text']">
-              <span :class="cssModule['analysis-list--number']">
-                <template v-if="LangUtil.isNull(data.price)">---</template>
-                <template v-else>{{ formatNumberWithCommas(data.price) }}</template>
-              </span><span>円</span>
+              <template v-if="LangUtil.isNull(data.price)">---</template>
+              <template v-else>
+                <span :class="cssModule['analysis-list--number']">{{ formatNumberWithCommas(data.price) }}</span>
+              </template>
+              <span :class="cssModule['analysis-list__currency-symbol']">円</span>
             </div>
           </li>
           <li :class="cssModule['analysis-list__item']">

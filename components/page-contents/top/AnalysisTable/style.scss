@@ -37,4 +37,8 @@
       @include font.font-face('Roboto');
     }
   }
+
+  &__currency-symbol {
+    margin-left: 4px;
+  }
 }

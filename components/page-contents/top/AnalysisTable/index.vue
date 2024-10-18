@@ -53,8 +53,9 @@ const cssModule = useCssModule('classes')
               <td :class="cssModule['analysis-table__body-cell']">
                 <template v-if="LangUtil.isNull(data.price)">---</template>
                 <template v-else>
-                  <span :class="cssModule['analysis-table__text--number']">{{ formatNumberWithCommas(data.price) }}</span><span>円</span>
+                  <span :class="cssModule['analysis-table__text--number']">{{ formatNumberWithCommas(data.price) }}</span>
                 </template>
+                <span :class="cssModule['analysis-table__currency-symbol']">円</span>
               </td>
               <td :class="cssModule['analysis-table__body-cell']">
                 <template v-if="LangUtil.isNull(data.publisher)">---</template>
