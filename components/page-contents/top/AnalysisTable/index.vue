@@ -20,7 +20,7 @@ const viewData = computed<ViewData>(() => {
       author,
       price,
       publisher,
-      publishedDate: LangUtil.isNull(publishedDate) ? null : DateUtil.parseDateString(publishedDate)
+      publishedDate: LangUtil.isNull(publishedDate) ? null : DateUtil.parseDotSeparatedDate(publishedDate)
     }
   })
 })

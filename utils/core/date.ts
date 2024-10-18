@@ -1,21 +1,21 @@
-import dayjs from 'dayjs'
 import type { DateObject } from '@/types/core/date'
 
 /**
- * 日付文字列を解析する
+ * ドット区切りの日付文字列を解析する
  * @param {string} value 日付文字列
  * @returns {DateObject} 日付オブジェクト
  */
-export const parseDateString = (value: string, format: string = 'YYYY.MM.DD'): DateObject => {
-  const date = dayjs(value, format)
+export const parseDotSeparatedDate = (value: `${string}.${string}.${string}`): DateObject => {
+  const dateParts = value.split('.').map(Number)
+  const hasInvalidDatePart = dateParts.some(date => isNaN(date))
 
-  if (!date.isValid()) {
+  if (hasInvalidDatePart) {
     throw new Error(`Invalid date format, value: ${value}`)
   }
 
   return {
-    year: date.year(),
-    month: date.month() + 1,
-    day: date.date()
+    year: dateParts[0],
+    month: dateParts[1],
+    day: dateParts[2]
   }
 }

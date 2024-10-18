@@ -11,7 +11,7 @@ export type BookBulkAnalysisPostResponseData = {
   /** 出版社名 */
   publisher: string | null
   /** 出版年月日 */
-  publishedDate: string | null
+  publishedDate: `${string}.${string}.${string}` | null
 }
 
 /** 本の一括解析結果レスポンス */
