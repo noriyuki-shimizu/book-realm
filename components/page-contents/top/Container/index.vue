@@ -21,7 +21,7 @@ const cssModule = useCssModule('classes')
 
     <DescriptionSection :class="cssModule['container__description-section']">
       <template #icon>
-        <LightIconSvg :class="cssModule['container__icon']" />
+        <LightIconSvg :class="cssModule['container__icon']" aria-hidden="true" />
       </template>
       <template #title>機能を試してみる</template>
       <template #default>
@@ -30,32 +30,26 @@ const cssModule = useCssModule('classes')
       </template>
     </DescriptionSection>
 
-    <UiPartsFeedbackAlert
-      v-if="
-        !LangUtil.isNull(bookBulkAnalysisPostResponse) &&
-        !LangUtil.isNull(bookBulkAnalysisPostResponse.error) &&
-        bookBulkAnalysisPostResponse.error.statusCode !== StatusCode.STATUS_CODE_BAD_REQUEST
-      "
-      :class="cssModule['container__analysis-text']"
-      type="error"
+    <template
+      v-if="!LangUtil.isNull(bookBulkAnalysisPostResponse) &&
+      !LangUtil.isNull(bookBulkAnalysisPostResponse.error)"
     >
-      <pre>{{ bookBulkAnalysisPostResponse.error.message }}</pre>
-      <pre>{{ bookBulkAnalysisPostResponse.error.name }}</pre>
-      <pre>{{ bookBulkAnalysisPostResponse.error.statusCode }}</pre>
-      <pre>{{ bookBulkAnalysisPostResponse.error.stack }}</pre>
-    </UiPartsFeedbackAlert>
+      <UiPartsFeedbackAlert
+        v-if="bookBulkAnalysisPostResponse.error.statusCode === StatusCode.STATUS_CODE_BAD_REQUEST"
+        :class="cssModule['container__analysis-text']"
+        type="error"
+      >
+        ファイルの解析に失敗しました。書籍が正しく写されているか確認してください。
+      </UiPartsFeedbackAlert>
+      <UiPartsFeedbackAlert
+        v-else-if="bookBulkAnalysisPostResponse.error.statusCode === StatusCode.STATUS_CODE_PAYLOAD_TOO_LARGE"
+        :class="cssModule['container__analysis-text']"
+        type="error"
+      >
+        ファイルサイズが大きすぎます。ファイルサイズを小さくして再度お試しください。
+      </UiPartsFeedbackAlert>
+    </template>
 
-    <UiPartsFeedbackAlert
-      v-if="
-        !LangUtil.isNull(bookBulkAnalysisPostResponse) &&
-        !LangUtil.isNull(bookBulkAnalysisPostResponse.error) &&
-        bookBulkAnalysisPostResponse.error.statusCode === StatusCode.STATUS_CODE_BAD_REQUEST
-      "
-      :class="cssModule['container__analysis-text']"
-      type="error"
-    >
-      ファイルの解析に失敗しました。書籍が正しく写されているか確認してください。
-    </UiPartsFeedbackAlert>
     <UiPartsFeedbackAlert
       v-if="!LangUtil.isNull(bookBulkAnalysisPostResponse) && !LangUtil.isNull(bookBulkAnalysisPostResponse.data)"
       :class="cssModule['container__analysis-text']"
@@ -68,7 +62,7 @@ const cssModule = useCssModule('classes')
 
     <DescriptionSection :class="cssModule['container__description-section']">
       <template #icon>
-        <SearchIconSvg :class="cssModule['container__icon']" />
+        <SearchIconSvg :class="cssModule['container__icon']" aria-hidden="true" />
       </template>
       <template #title>解析結果</template>
       <template #default>

@@ -13,7 +13,7 @@ const cssModule = useCssModule('classes')
       to="https://github.com/noriyuki-shimizu/book-realm"
       target="_blank"
     >
-      <GitHubIconSvg :class="cssModule['footer-content__icon']" />
+      <GitHubIconSvg :class="cssModule['footer-content__icon']" aria-hidden="true" />
       <span :class="cssModule['footer-content__link-text']">GitHub</span>
     </NuxtLink>
   </div>

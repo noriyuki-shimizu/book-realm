@@ -1,15 +1,33 @@
 <script setup lang="ts">
+import type { Props } from './types'
+
+const props = withDefaults(defineProps<Props>(), {
+  isLoading: false
+})
+
 /** CSS Module */
 const cssModule = useCssModule('classes')
 
 /** Model */
-const model = defineModel<FileList | null>({ required: true })
+const model = defineModel<File[] | null>({ required: true })
 
 /** HTML Input Element Ref */
 const htmlInputElement = ref<HTMLInputElement | null>(null)
 
 /** Drop Zone Element Ref */
 const dropZoneElement = ref<HTMLDivElement | null>(null)
+
+/**
+ * モデル値の更新
+ * @param {FileList} fileList ファイルリスト
+ */
+const updateModelValue = (fileList: FileList): void => {
+  const files: File[] = []
+  for (const file of fileList) {
+    files.push(file)
+  }
+  model.value = files
+}
 
 /**
  * 入力の変更時の処理
@@ -19,7 +37,8 @@ const onChange = (e: Event): void => {
   if (!(e.target instanceof HTMLInputElement) || LangUtil.isNull(e.target.files)) {
     return
   }
-  model.value = e.target.files
+
+  updateModelValue(e.target.files)
 }
 
 /**
@@ -61,7 +80,8 @@ const onDrop = (e: DragEvent): void => {
   if (LangUtil.isNull(e.dataTransfer)) {
     return
   }
-  model.value = e.dataTransfer.files
+
+  updateModelValue(e.dataTransfer.files)
 }
 
 /**
@@ -95,11 +115,13 @@ const onClick = (): void => {
     >
       <span :class="cssModule['drop-zone__text']">ファイルをここにドロップ</span>
       <UiPartsGeneralBasicButton
+        :class="cssModule['drop-zone__button']"
         type="button"
         size="small"
         color="processing"
         @click="onClick"
       >
+        <UiPartsFeedbackSpinner v-show="props.isLoading" size="small" />
         ファイルを読み込む
       </UiPartsGeneralBasicButton>
     </div>

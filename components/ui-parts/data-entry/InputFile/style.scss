@@ -25,4 +25,10 @@
   &__text {
     display: inline-block;
   }
+
+  &__button {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
 }

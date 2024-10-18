@@ -10,5 +10,5 @@ export type ApiState = {
 /** UI State */
 export type UiState = {
   /** ファイル配列 */
-  file: FileList | null
+  files: File[] | null
 }

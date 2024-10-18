@@ -1,22 +1,24 @@
 <script setup lang="ts">
 import { useApiStore, useUiStore } from '@/store/page'
 
+const isFileLoading = ref<boolean>(false)
+
 /** API Store Param */
 const { postBookBulkAnalysis } = useApiStore()
 
 /** UI Store Param */
-const { file, setFile } = useUiStore()
+const { files, setFiles } = useUiStore()
 
 /** CSS Module */
 const cssModule = useCssModule('classes')
 
 /** Submit API */
 const { execute, pending } = useSubmitApi(async (): Promise<void> => {
-  if (LangUtil.isNull(file.value)) {
+  if (LangUtil.isNull(files.value)) {
     return
   }
   const formData = new FormData()
-  for (const f of file.value) {
+  for (const f of files.value) {
     formData.append('file', f)
   }
 
@@ -24,6 +26,16 @@ const { execute, pending } = useSubmitApi(async (): Promise<void> => {
 
   window.scrollTo({ top: 0, behavior: 'smooth' })
 })
+
+/**
+ * ファイルデータを更新する
+ * @param {File[] | null} files ファイルデータ
+ */
+const updateFiles = async (files: File[] | null): Promise<void> => {
+  isFileLoading.value = true
+  await setFiles(files)
+  isFileLoading.value = false
+}
 
 /**
  * 画像データを変換する
@@ -36,13 +48,18 @@ const convertImageSrc = (file: File): string => {
 
 <template>
   <form :class="cssModule['picture-form']" @submit.prevent="execute">
-    <UiPartsDataEntryInputFile :model-value="file" :class="cssModule['picture-form__input-file']" @update:model-value="setFile" />
+    <UiPartsDataEntryInputFile
+      :model-value="files"
+      :is-loading="isFileLoading"
+      :class="cssModule['picture-form__input-file']"
+      @update:model-value="updateFiles"
+    />
 
     <section :class="[cssModule['picture-form__preview'], cssModule['preview']]">
       <h3 :class="cssModule['preview__title']">解析対象ファイル</h3>
-      <template v-if="!LangUtil.isNull(file) && file.length > 0">
+      <template v-if="!LangUtil.isNull(files) && files.length > 0">
         <div :class="cssModule['preview__image-container']">
-          <template v-for="f in file" :key="f.name">
+          <template v-for="f in files" :key="f.name">
             <img
               :class="cssModule['preview__image']"
               :src="convertImageSrc(f)"
@@ -62,7 +79,7 @@ const convertImageSrc = (file: File): string => {
     <UiPartsGeneralBasicButton
       type="submit"
       color="primary"
-      :disabled="LangUtil.isNull(file) || (!LangUtil.isNull(file) && !file.length) || pending"
+      :disabled="LangUtil.isNull(files) || (!LangUtil.isNull(files) && !files.length) || pending"
     >
       <div v-show="pending" :class="cssModule['picture-form__submit-text']">
         <UiPartsFeedbackSpinner size="small" />

@@ -1,3 +1,5 @@
+import imageCompression from 'browser-image-compression'
+import type { Options } from 'browser-image-compression'
 import type { UiState } from './types'
 
 /**
@@ -8,15 +10,15 @@ export const useUiStore = () => {
   /** State */
   const _state = useState<UiState>('page-ui-top-store', () => {
     return {
-      file: null
+      files: null
     }
   })
 
   /** Getters */
   const getters = {
     /** ファイル */
-    file: computed<FileList | null>(() => {
-      return _state.value.file
+    files: computed<File[] | null>(() => {
+      return _state.value.files
     })
   }
 
@@ -24,10 +26,30 @@ export const useUiStore = () => {
   const actions = {
     /**
      * ファイルを設定
-     * @param file ファイル
+     * @param files ファイル配列
      */
-    setFile: (file: FileList | null): void => {
-      _state.value.file = file
+    setFiles: async (files: File[] | null): Promise<void> => {
+      if (LangUtil.isNull(files)) {
+        _state.value.files = null
+        return
+      }
+
+      const options: Options = {
+        maxSizeMB: 4.5,
+        useWebWorker: true
+      }
+      _state.value.files = (
+        await Promise.all(files.map((file) => {
+          try {
+            return imageCompression(file, options)
+          } catch (error) {
+            console.error('Error compressing file:', error)
+            return null
+          }
+        }))
+      ).filter((f) => {
+        return !LangUtil.isNull(f)
+      })
     }
   }
 
