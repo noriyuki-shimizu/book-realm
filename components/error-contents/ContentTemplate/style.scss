@@ -1,0 +1,41 @@
+@use '/assets/style/mixin/font' as font;
+
+.content-template {
+  padding: 24px;
+  text-align: center;
+  background-color: var(--color-background-light);
+  border-radius: 8px;
+
+  &__status-code {
+    margin-bottom: 16px;
+    font-weight: bold;
+
+    @include font.font-size(24, 24);
+    @include font.font-face(Roboto);
+  }
+
+  &__title {
+    margin-bottom: 16px;
+    font-weight: bold;
+
+    @include font.font-size(32, 32);
+  }
+
+  &__item {
+    margin-bottom: 16px;
+
+    @include font.font-size(16, 24);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__detail {
+    padding: 16px;
+    text-align: left;
+    white-space: pre-wrap;
+    background-color: var(--color-background-light-normal);
+    border-radius: 8px;
+  }
+}
