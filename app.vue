@@ -11,7 +11,7 @@ useHead({
 
 <template>
   <NuxtLayout>
-    <LayoutContentsSpinnerWrapper v-show="isLoading" />
+    <AppContentsSpinnerWrapper v-show="isLoading" />
     <div v-show="!isLoading">
       <NuxtPage />
     </div>
