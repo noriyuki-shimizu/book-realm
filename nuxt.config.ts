@@ -64,7 +64,13 @@ export default defineNuxtConfig({
     public: {
       isProduction,
       pageBaseUrl: '',
-      logLevel: isProduction ? 3 : 5
+      logLevel: isProduction ? 3 : 5,
+      firebaseApiKey: '',
+      firebaseAuthDomain: '',
+      firebaseProjectId: '',
+      firebaseStorageBucket: '',
+      firebaseMessagingSenderId: '',
+      firebaseAppId: ''
     }
   },
   plugins: [
