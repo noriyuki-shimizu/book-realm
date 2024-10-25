@@ -1,0 +1,25 @@
+@use '/assets/style/mixin/font' as font;
+
+.icon-link {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: var(--color-text);
+  cursor: pointer;
+
+  &:hover {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  &:visited {
+    color: var(--color-text);
+  }
+
+  &__text {
+    @include font.font-size(14, 18);
+
+    display: block;
+    font-weight: bold;
+  }
+}

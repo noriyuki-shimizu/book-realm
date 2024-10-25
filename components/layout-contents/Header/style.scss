@@ -12,28 +12,4 @@
   @include mediaQuery.media {
     padding: 16px;
   }
-
-  &__icon-link {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    color: var(--color-text);
-    cursor: pointer;
-
-    &:hover {
-      color: var(--color-text);
-      text-decoration: none;
-    }
-
-    &:visited {
-      color: var(--color-text);
-    }
-  }
-
-  &__icon-link-text {
-    @include font.font-size(14, 18);
-
-    display: block;
-    font-weight: bold;
-  }
 }
