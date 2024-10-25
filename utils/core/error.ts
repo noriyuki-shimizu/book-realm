@@ -1,7 +1,9 @@
+import { FirebaseError } from 'firebase/app'
+import { FetchError } from 'ofetch'
 import type { NuxtError } from '#app'
 import { isObject, isString, isUndefined } from './lang'
-import { FetchError } from 'ofetch'
 import { StatusCode } from '@/enums/common/http/statusCode'
+import { FirebaseErrorStatusCode } from '@/enums/common/firebase/code'
 import type { ApiResponseState } from '@/types/store/response'
 
 /**
@@ -21,6 +23,17 @@ export const convertNuxtError = (err: unknown): Partial<NuxtError> => {
       stack: err.stack,
       statusCode: err.status || StatusCode.STATUS_CODE_INTERNAL_SERVER_ERROR,
       data: err.data
+    }
+  }
+  if (err instanceof FirebaseError) {
+    const code = err.code as keyof typeof FirebaseErrorStatusCode
+    return {
+      name: err.name,
+      message: err.message,
+      cause: err.cause,
+      stack: err.stack,
+      statusCode: FirebaseErrorStatusCode[code] || StatusCode.STATUS_CODE_INTERNAL_SERVER_ERROR,
+      data: err.customData
     }
   }
   if (err instanceof Error) {

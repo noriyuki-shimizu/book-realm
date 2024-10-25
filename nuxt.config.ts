@@ -75,6 +75,7 @@ export default defineNuxtConfig({
   },
   plugins: [
     { order: 0, mode: 'all', src: '@/plugins/rest/nuxtServerHttpClient.ts' },
+    { order: 99, mode: 'all', src: '@/plugins/firebase.ts' },
     { order: 99, mode: 'client', src: '@/plugins/vercel.client.ts' },
     { order: 99, mode: 'all', src: '@/plugins/globalErrorHandler.ts' }
   ],
