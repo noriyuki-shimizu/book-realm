@@ -1,27 +1,28 @@
 <script setup lang="ts">
+import IconLink from '../IconLink/index.vue'
+
 /** CSS Module */
 const cssModule = useCssModule('classes')
+
+/**
+ * ログインページへ遷移
+ */
+const onClick = async () => {
+  await navigateTo('/sign-in')
+}
 </script>
 
 <template>
   <div :class="cssModule['header-content']">
-    <NuxtLink :class="cssModule['header-content__icon-link']" to="/">
-      <img
-        src="/favicon/favicon-48x48.ico"
-        alt="アプリケーションアイコン"
-        width="48"
-        height="48"
-      >
-      <div>
-        <span :class="cssModule['header-content__icon-link-text']">BOOK</span>
-        <span :class="cssModule['header-content__icon-link-text']">Realm</span>
-      </div>
-    </NuxtLink>
+    <IconLink />
     <div :class="cssModule['header-content__navigate']">
       <UiPartsGeneralBasicButton
-      type="button"
-      color="primary"
-    >ログイン</UiPartsGeneralBasicButton>
+        type="button"
+        color="primary"
+        @click="onClick"
+      >
+        ログイン
+      </UiPartsGeneralBasicButton>
     </div>
   </div>
 </template>

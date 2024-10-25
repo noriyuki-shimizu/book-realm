@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import LightIconSvg from '@/assets/svg/light-icon.svg?component'
-import SearchIconSvg from '@/assets/svg/search-icon.svg?component'
-import { StatusCode } from '@/enums/common/http/statusCode'
 import AnalysisList from '../AnalysisList/index.vue'
 import AnalysisTable from '../AnalysisTable/index.vue'
 import DescriptionSection from '../DescriptionSection/index.vue'
 import PictureForm from '../PictureForm/index.vue'
+import { StatusCode } from '@/enums/common/http/statusCode'
+import SearchIconSvg from '@/assets/svg/search-icon.svg?component'
+import LightIconSvg from '@/assets/svg/light-icon.svg?component'
 import { useApiStore } from '@/store/page'
 
 /** API Store Param */
@@ -67,7 +67,7 @@ const cssModule = useCssModule('classes')
       <template #title>解析結果</template>
       <template #default>
         ファイルを解析すると、下記に解析結果が表示されます。<br>
-        アプリケーションに<span :class="cssModule['container--text-bold']">ログインすると解析結果を登録・編集する</span>ことができます。
+        アプリケーションに<span :class="cssModule['container--text-bold']"><NuxtLink to="/sign-in">ログイン</NuxtLink>すると解析結果を登録・編集する</span>ことができます。
       </template>
     </DescriptionSection>
 
