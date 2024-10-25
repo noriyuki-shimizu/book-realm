@@ -10,10 +10,8 @@ useHead({
 </script>
 
 <template>
+  <AppContentsSpinnerWrapper v-show="isLoading" />
   <NuxtLayout>
-    <AppContentsSpinnerWrapper v-show="isLoading" />
-    <div v-show="!isLoading">
-      <NuxtPage />
-    </div>
+    <NuxtPage />
   </NuxtLayout>
 </template>
