@@ -1,6 +1,6 @@
+import type { ApiState } from './types'
 import { postRequest } from '@/infrastructures/rest/nuxt/api/books/bulk-analysis'
 import { StatusCode } from '@/enums/common/http/statusCode'
-import type { ApiState } from './types'
 import type { BookBulkAnalysisPostResponse } from '@/types/nuxt-api/books/bulk-analysis'
 import type { ApiResponseState } from '@/types/store/response'
 
@@ -42,7 +42,6 @@ export const useApiStore = () => {
         }
       } catch (err) {
         const nuxtErr = ErrorUtil.convertNuxtError(err)
-        console.log(err)
         _state.value.bookBulkAnalysisPostResponse = {
           data: null,
           status: nuxtErr.statusCode ?? StatusCode.STATUS_CODE_INTERNAL_SERVER_ERROR,

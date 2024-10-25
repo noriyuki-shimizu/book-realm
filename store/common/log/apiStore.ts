@@ -1,5 +1,5 @@
-import type { NuxtError } from '#app'
 import type { RouteLocationNormalizedLoaded } from 'vue-router'
+import type { NuxtError } from '#app'
 import { generateQueryStringFromRoute, truncateString } from './utils'
 import { MAX_LOG_PARAMETER_LENGTH } from '@/constants/common/log'
 import { post as postAccessLogRequest } from '@/infrastructures/rest/nuxt/api/access-logs'

@@ -1,3 +1,4 @@
+/* eslint-disable import-x/no-named-as-default-member */
 import dayjs from 'dayjs'
 import type { Dayjs } from 'dayjs'
 import ja from 'dayjs/locale/ja'

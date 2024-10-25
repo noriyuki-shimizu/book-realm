@@ -1,14 +1,13 @@
 import { consola } from 'consola'
-import { LangUtil } from '@/utils/core'
 import { StatusCode } from '@/enums/common/http/statusCode'
 import { BookBulkAnalysisService } from '@/server/src/service/BookBulkAnalysisService'
-import type { BookBulkAnalysisPostResponse } from '~/types/nuxt-api/books/bulk-analysis'
+import type { BookBulkAnalysisPostResponse } from '@/types/nuxt-api/books/bulk-analysis'
 
 /** 本の一括分析 API */
 export default defineEventHandler(async (event) => {
   const data = await readMultipartFormData(event)
 
-  if (LangUtil.isUndefined(data)) {
+  if (ServerLangUtil.isUndefined(data)) {
     throw createError({
       statusCode: StatusCode.STATUS_CODE_BAD_REQUEST,
       statusMessage: 'Request data is empty.'
@@ -24,7 +23,7 @@ export default defineEventHandler(async (event) => {
 
     consola.info('guest book bulk analysis result: ', resultDataList)
 
-    if (LangUtil.isEmpty(resultDataList)) {
+    if (ServerLangUtil.isEmpty(resultDataList)) {
       setResponseStatus(event, StatusCode.STATUS_CODE_NO_CONTENT)
     } else {
       setResponseStatus(event, StatusCode.STATUS_CODE_OK)

@@ -14,9 +14,6 @@ const model = defineModel<File[] | null>({ required: true })
 /** HTML Input Element Ref */
 const htmlInputElement = ref<HTMLInputElement | null>(null)
 
-/** Drop Zone Element Ref */
-const dropZoneElement = ref<HTMLDivElement | null>(null)
-
 /**
  * モデル値の更新
  * @param {FileList} fileList ファイルリスト
@@ -42,41 +39,10 @@ const onChange = (e: Event): void => {
 }
 
 /**
- * ドラッグ時の処理
- * @param {DragEvent} e イベント
- * @param {boolean} isOver ドラッグ中かどうか
- */
-const handleDrag = (e: DragEvent, isOver: boolean): void => {
-  e.preventDefault()
-  if (isOver) {
-    dropZoneElement.value?.classList.add(cssModule['drag-over'])
-  } else {
-    dropZoneElement.value?.classList.remove(cssModule['drag-over'])
-  }
-}
-
-/**
- * ドラッグオーバー時の処理
- * @param {DragEvent} e イベント
- */
-const onDragOver = (e: DragEvent): void => {
-  handleDrag(e, true)
-}
-
-/**
- * ドラッグリーブ時の処理
- * @param {DragEvent} e イベント
- */
-const onDragLeave = (e: DragEvent): void => {
-  handleDrag(e, false)
-}
-
-/**
  * ドロップ時の処理
  * @param {DragEvent} e イベント
  */
 const onDrop = (e: DragEvent): void => {
-  handleDrag(e, false)
   if (LangUtil.isNull(e.dataTransfer)) {
     return
   }
@@ -97,34 +63,31 @@ const onClick = (): void => {
 
 <template>
   <div :class="cssModule['input-file']">
-    <input
-      ref="htmlInputElement"
-      :class="cssModule['input-file__input']"
-      type="file"
-      name="input-file"
-      accept="image/png, image/jpeg"
-      multiple
-      @change="onChange"
-    />
-    <div
-      ref="dropZoneElement"
-      :class="[cssModule['input-file__drop-zone'], cssModule['drop-zone']]"
-      @drag-over="onDragOver"
-      @dragleave="onDragLeave"
-      @drop="onDrop"
+    <label for="input-file">
+      <input
+        id="input-file"
+        ref="htmlInputElement"
+        :class="cssModule['input-file__input']"
+        type="file"
+        name="input-file"
+        accept="image/png, image/jpeg"
+        multiple
+        @change="onChange"
+        @drop="onDrop"
+      />
+    </label>
+    <span :class="cssModule['input-file__text']">ここにファイルをドロップ</span>
+    <span :class="cssModule['input-file__text']">または</span>
+    <UiPartsGeneralBasicButton
+      :class="cssModule['input-file__button']"
+      type="button"
+      size="small"
+      color="processing"
+      @click="onClick"
     >
-      <span :class="cssModule['drop-zone__text']">ファイルをここにドロップ</span>
-      <UiPartsGeneralBasicButton
-        :class="cssModule['drop-zone__button']"
-        type="button"
-        size="small"
-        color="processing"
-        @click="onClick"
-      >
-        <UiPartsFeedbackSpinner v-show="props.isLoading" size="small" />
-        ファイルを読み込む
-      </UiPartsGeneralBasicButton>
-    </div>
+      <UiPartsFeedbackSpinner v-show="props.isLoading" size="small" />
+      ファイルを読み込む
+    </UiPartsGeneralBasicButton>
   </div>
 </template>
 
