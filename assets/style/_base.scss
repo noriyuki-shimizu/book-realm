@@ -60,6 +60,7 @@
   --vt-c-red-5: #ffe6e6;
   --vt-c-red-10: #fcc;
   --vt-c-red-20: #f99;
+  --vt-c-red-25: #ff8080;
   --vt-c-red-30: #f66;
   --vt-c-red-40: #f33;
   --vt-c-red-50: #f00;
@@ -107,6 +108,7 @@
 
   /* semantic color variables for this project */
   --color-text: var(--vt-c-gray-75);
+  --color-dark-text: var(--vt-c-gray-110);
   --color-text-light-normal: var(--vt-c-gray-60);
   --color-text-light-processing: var(--vt-c-blue-60);
   --color-text-light-primary: var(--vt-c-orange-60);
@@ -140,6 +142,7 @@
   --color-background-light-hover-warning: var(--vt-c-yellow-30);
   --color-background-light-drag-over: var(--vt-c-blue-5);
   --color-background-input-error: var(--vt-c-red-5);
+  --color-background-tag-red: var(--vt-c-red-25);
   --color-border-light: var(--vt-c-gray-30);
   --color-border-normal: var(--vt-c-gray-70);
   --color-border-processing: var(--vt-c-blue-70);
