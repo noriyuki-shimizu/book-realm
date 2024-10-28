@@ -17,7 +17,8 @@
     "format:e": "eslint . --fix",
     "format:d": "dprint fmt",
     "format:s": "npm run lint:s -- --fix",
-    "test:ut": "vitest run"
+    "test:ut": "vitest run",
+    "typecheck": "npx nuxi typecheck"
   },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
