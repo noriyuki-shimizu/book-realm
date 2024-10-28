@@ -1,21 +1,21 @@
-import type { UiActions, UiGetters, UiState } from './types'
 import { FormValue } from './types'
+import type { UiActions, UiGetters, UiState } from './types'
 import { errorIssues } from '@/functions/business/validation/error'
 import { defineStore } from '@/store/main'
 
 /**
- * ログイン画面の UI Store を返す
- * @returns ログイン画面の UI Store
+ * アカウント登録画面の UI Store を返す
+ * @returns アカウント登録画面の UI Store
  */
-
-export const useUiStore = defineStore<UiState, UiGetters, UiActions>('page-ui-sign-in-store', () => {
+export const useUiStore = defineStore<UiState, UiGetters, UiActions>('page-ui-sign-up-store', () => {
   return {
     state: {
       formState: {
         validation: null,
         data: {
           email: '',
-          password: ''
+          password: '',
+          confirmPassword: ''
         }
       }
     },
@@ -32,6 +32,11 @@ export const useUiStore = defineStore<UiState, UiGetters, UiActions>('page-ui-si
         return errorIssues(state.formState.validation)
           .filter(issue => issue.path.some((p) => p === 'password'))
           .map(issue => issue.code)
+      },
+      confirmPasswordErrorCodes(state) {
+        return errorIssues(state.formState.validation)
+          .filter(issue => issue.path.some((p) => p === 'confirmPassword'))
+          .map(issue => issue.code)
       }
     },
     actions: {
@@ -40,6 +45,9 @@ export const useUiStore = defineStore<UiState, UiGetters, UiActions>('page-ui-si
       },
       setPassword(value: FormValue['password']) {
         this.formState.data.password = value
+      },
+      setConfirmPassword(value: FormValue['confirmPassword']) {
+        this.formState.data.confirmPassword = value
       },
       checkForm() {
         const { data } = this.formState
