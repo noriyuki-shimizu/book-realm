@@ -4,7 +4,10 @@ import { formatNumberWithCommas, padZero } from '@/filter/number'
 import { useApiStore } from '@/store/page'
 
 /** API Store Param */
-const { bookBulkAnalysisPostResponse } = useApiStore()
+const { getters } = useApiStore()
+
+/** API State Getter */
+const { bookBulkAnalysisPostResponse } = getters
 
 /** View Data */
 const viewData = computed<ViewData>(() => {

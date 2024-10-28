@@ -9,7 +9,10 @@ import LightIconSvg from '@/assets/svg/light-icon.svg?component'
 import { useApiStore } from '@/store/page'
 
 /** API Store Param */
-const { bookBulkAnalysisPostResponse } = useApiStore()
+const { getters } = useApiStore()
+
+/** API State Getter */
+const { bookBulkAnalysisPostResponse } = getters
 
 /** CSS Module */
 const cssModule = useCssModule('classes')

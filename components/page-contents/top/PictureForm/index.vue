@@ -4,10 +4,19 @@ import { useApiStore, useUiStore } from '@/store/page'
 const isFileLoading = ref<boolean>(false)
 
 /** API Store Param */
-const { postBookBulkAnalysis } = useApiStore()
+const { actions: apiActions } = useApiStore()
+
+/** API Store Action */
+const { postBookBulkAnalysis } = apiActions
 
 /** UI Store Param */
-const { files, setFiles } = useUiStore()
+const { getters: uiGetters, actions: UiActions } = useUiStore()
+
+/** UI Store Getter */
+const { files } = uiGetters
+
+/** UI Store Action */
+const { setFiles } = UiActions
 
 /** CSS Module */
 const cssModule = useCssModule('classes')

@@ -2,6 +2,9 @@
 import GoogleIconSvg from '@/assets/svg/google-icon.svg?component'
 import { useCommonAuthApiStore } from '@/store/common/auth'
 
+/** Nuxt App */
+const { $auth } = useNuxtApp()
+
 /** Loading Indicator */
 const { start, finish } = useLoadingIndicator()
 
@@ -9,14 +12,20 @@ const { start, finish } = useLoadingIndicator()
 const cssModule = useCssModule('classes')
 
 /** Auth API Store */
-const { signInGoogleResponse, signInWithGoogle } = useCommonAuthApiStore()
+const { getters: commonAuthApiGetters, actions: commonAuthApiActions } = useCommonAuthApiStore()
+
+/** Auth API Store Getters */
+const { signInGoogleResponse } = commonAuthApiGetters
+
+/** Auth API Store Actions */
+const { signInWithGoogle } = commonAuthApiActions
 
 /**
  * Google でログインする
  */
 const onClickGoogleSignIn = async (): Promise<void> => {
   start()
-  await signInWithGoogle()
+  await signInWithGoogle($auth)
   if (!LangUtil.isNull(signInGoogleResponse.value) && LangUtil.isNull(signInGoogleResponse.value.error)) {
     await navigateTo('/home')
   }
@@ -30,6 +39,8 @@ const onClickGoogleSignIn = async (): Promise<void> => {
       <UiPartsFeedbackAlert
         :class="cssModule['external-form__alert-text']"
         type="error"
+        role="alert"
+        aria-live="assertive"
       >
         Google アカウントにおけるログインに失敗しました。
       </UiPartsFeedbackAlert>
