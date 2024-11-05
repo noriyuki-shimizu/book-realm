@@ -18,10 +18,13 @@ useHeadSafe(() => {
     ]
   }
 })
+
+definePageMeta({
+  auth: false,
+  layout: 'simple'
+})
 </script>
 
 <template>
-  <div>
-    <h1>アカウント登録</h1>
-  </div>
+  <PageContentsSignUpContainer />
 </template>

@@ -3,6 +3,12 @@ import type { ApiResponseState } from '@/types/store/response'
 
 export type ApiGetters<S = ApiState> = {
   /**
+   * ログインしているかどうかを返す
+   * @param {S} state - ステート
+   * @returns {boolean} ログインしているかどうか
+   */
+  isLoggedIn: (state: S) => boolean
+  /**
    * ユーザーを返す
    * @param {S} state - ステート
    * @returns {User | null} ユーザー

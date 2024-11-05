@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useCommonAuthApiStore } from '@/store/common/auth'
+
 /** Runtime Config */
 const runtimeConfig = useRuntimeConfig()
 
@@ -17,6 +19,17 @@ useHeadSafe(() => {
       { property: 'og:description', content: description },
     ]
   }
+})
+
+definePageMeta({
+  auth: false,
+  layout: false,
+  middleware: [
+    () => {
+      const { getters: { isLoggedIn } } = useCommonAuthApiStore()
+      setPageLayout(unref(isLoggedIn) ? 'client' : 'guest')
+    },
+  ]
 })
 </script>
 

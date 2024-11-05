@@ -18,6 +18,10 @@ useHeadSafe(() => {
     ]
   }
 })
+
+definePageMeta({
+  layout: 'client'
+})
 </script>
 
 <template>

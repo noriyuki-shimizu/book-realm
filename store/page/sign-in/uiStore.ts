@@ -1,5 +1,5 @@
-import type { UiActions, UiGetters, UiState } from './types'
-import { FormValue } from './types'
+import { FormStateEmail, FormStatePassword } from './types'
+import type { FormState, UiActions, UiGetters, UiState } from './types'
 import { errorIssues } from '@/functions/business/validation/error'
 import { defineStore } from '@/store/main'
 
@@ -7,43 +7,60 @@ import { defineStore } from '@/store/main'
  * ログイン画面の UI Store を返す
  * @returns ログイン画面の UI Store
  */
-
 export const useUiStore = defineStore<UiState, UiGetters, UiActions>('page-ui-sign-in-store', () => {
   return {
     state: {
+      validation: {
+        email: FormStateEmail.safeParse({ email: '' }),
+        password: FormStatePassword.safeParse({ password: '' })
+      },
       formState: {
-        validation: null,
-        data: {
-          email: '',
-          password: ''
-        }
+        email: '',
+        password: ''
+      },
+      submitInvalidParam: {
+        email: false,
+        password: false
       }
     },
     getters: {
       formState(state) {
         return state.formState
       },
-      emailErrorCodes(state) {
-        return errorIssues(state.formState.validation)
-          .filter(issue => issue.path.some((p) => p === 'email'))
-          .map(issue => issue.code)
+      emailErrors(state) {
+        return errorIssues(state.validation.email)
+          .map(issue => {
+            return {
+              code: issue.code,
+              message: issue.message
+            }
+          })
       },
-      passwordErrorCodes(state) {
-        return errorIssues(state.formState.validation)
-          .filter(issue => issue.path.some((p) => p === 'password'))
-          .map(issue => issue.code)
+      passwordErrors(state) {
+        return errorIssues(state.validation.password)
+          .map(issue => {
+            return {
+              code: issue.code,
+              message: issue.message
+            }
+          })
+      },
+      submitInvalidParam(state) {
+        return state.submitInvalidParam
       }
     },
     actions: {
-      setEmail(value: FormValue['email']) {
-        this.formState.data.email = value
+      setEmail(value: FormState['email']) {
+        this.formState.email = value
+        this.validation.email = FormStateEmail.safeParse({ email: value })
       },
-      setPassword(value: FormValue['password']) {
-        this.formState.data.password = value
+      setPassword(value: FormState['password']) {
+        this.formState.password = value
+        this.validation.password = FormStatePassword.safeParse({ password: value })
       },
-      checkForm() {
-        const { data } = this.formState
-        this.formState.validation = FormValue.safeParse(data)
+      checkPreSubmitInvalidParam() {
+        this.submitInvalidParam.email = !this.validation.email.success
+        this.submitInvalidParam.password = !this.validation.password.success
       },
       resetAll() {}
     }

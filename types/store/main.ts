@@ -11,7 +11,7 @@ export type State = Record<string, any>
  * @template S - 状態の型。
  */
 export type CreateGetter<S extends State> = {
-  [key: string]: (state: S) => Record<string, any> | null
+  [key: string]: (state: S) => any
 }
 
 /**

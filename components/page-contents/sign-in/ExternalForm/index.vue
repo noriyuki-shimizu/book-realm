@@ -2,8 +2,11 @@
 import GoogleIconSvg from '@/assets/svg/google-icon.svg?component'
 import { useCommonAuthApiStore } from '@/store/common/auth'
 
-/** Nuxt App */
-const { $auth } = useNuxtApp()
+/** Firebase Auth */
+const auth = useFirebaseAuth()!
+
+/** Route */
+const route = useRoute()
 
 /** Loading Indicator */
 const { start, finish } = useLoadingIndicator()
@@ -25,9 +28,11 @@ const { signInWithGoogle } = commonAuthApiActions
  */
 const onClickGoogleSignIn = async (): Promise<void> => {
   start()
-  await signInWithGoogle($auth)
+  await signInWithGoogle(auth)
   if (!LangUtil.isNull(signInGoogleResponse.value) && LangUtil.isNull(signInGoogleResponse.value.error)) {
-    await navigateTo('/home')
+    const { query } = route
+    const path = LangUtil.isNil(query.redirect) ? '/home' : query.redirect.toString()
+    await navigateTo(path)
   }
   finish()
 }

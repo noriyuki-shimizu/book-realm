@@ -24,6 +24,9 @@ export const useCommonAuthApiStore = defineStore<ApiState, ApiGetters, ApiAction
       signInGoogleResponse: null
     },
     getters: {
+      isLoggedIn(state) {
+        return !LangUtil.isNull(state.user)
+      },
       user(state) {
         return state.user
       },

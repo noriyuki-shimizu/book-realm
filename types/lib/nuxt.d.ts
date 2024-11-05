@@ -1,4 +1,3 @@
-import type { Auth } from 'firebase/auth'
 import type { AppFetchResponse } from 'ofetch'
 import type { FetchRawParameters } from '@/types/core/http'
 
@@ -14,8 +13,11 @@ declare module '#app' {
       request: FetchRawParameters<T>[0],
       options?: FetchRawParameters<T>[1]
     ) => Promise<AppFetchResponse<T>>
-    /** Firebase Auth */
-    $auth: Auth
+  }
+
+  interface PageMeta {
+    /** 認証なしに閲覧可能なページかどうか */
+    auth?: boolean
   }
 }
 
@@ -31,8 +33,6 @@ declare module '@vue/runtime-core' {
       request: FetchRawParameters<T>[0],
       options?: FetchRawParameters<T>[1]
     ) => Promise<AppFetchResponse<T>>
-    /** Firebase Auth */
-    $auth: Auth
   }
 }
 

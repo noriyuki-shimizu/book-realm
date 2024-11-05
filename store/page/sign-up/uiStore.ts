@@ -1,5 +1,5 @@
-import { FormValue } from './types'
-import type { UiActions, UiGetters, UiState } from './types'
+import { FormStateConfirmPassword, FormStateEmail, FormStatePassword } from './types'
+import type { FormState, UiActions, UiGetters, UiState } from './types'
 import { errorIssues } from '@/functions/business/validation/error'
 import { defineStore } from '@/store/main'
 
@@ -11,47 +11,74 @@ export const useUiStore = defineStore<UiState, UiGetters, UiActions>('page-ui-si
   return {
     state: {
       formState: {
-        validation: null,
-        data: {
-          email: '',
-          password: '',
-          confirmPassword: ''
-        }
+        email: '',
+        password: '',
+        confirmPassword: ''
+      },
+      validation: {
+        email: FormStateEmail.safeParse({ email: '' }),
+        password: FormStatePassword.safeParse({ password: '' }),
+        confirmPassword: FormStateConfirmPassword.safeParse({ confirmPassword: '' })
+      },
+      submitInvalidParam: {
+        email: false,
+        password: false,
+        confirmPassword: false
       }
     },
     getters: {
       formState(state) {
         return state.formState
       },
-      emailErrorCodes(state) {
-        return errorIssues(state.formState.validation)
-          .filter(issue => issue.path.some((p) => p === 'email'))
-          .map(issue => issue.code)
+      emailErrors(state) {
+        return errorIssues(state.validation.email)
+          .map(issue => {
+            return {
+              code: issue.code,
+              message: issue.message
+            }
+          })
       },
-      passwordErrorCodes(state) {
-        return errorIssues(state.formState.validation)
-          .filter(issue => issue.path.some((p) => p === 'password'))
-          .map(issue => issue.code)
+      passwordErrors(state) {
+        return errorIssues(state.validation.password)
+          .map(issue => {
+            return {
+              code: issue.code,
+              message: issue.message
+            }
+          })
       },
-      confirmPasswordErrorCodes(state) {
-        return errorIssues(state.formState.validation)
-          .filter(issue => issue.path.some((p) => p === 'confirmPassword'))
-          .map(issue => issue.code)
+      confirmPasswordErrors(state) {
+        return errorIssues(state.validation.confirmPassword)
+          .map(issue => {
+            return {
+              code: issue.code,
+              message: issue.message
+            }
+          })
+      },
+      submitInvalidParam(state) {
+        return state.submitInvalidParam
       }
     },
     actions: {
-      setEmail(value: FormValue['email']) {
-        this.formState.data.email = value
+      setEmail(value: FormState['email']) {
+        this.formState.email = value
+        this.validation.email = FormStateEmail.safeParse({ email: value })
       },
-      setPassword(value: FormValue['password']) {
-        this.formState.data.password = value
+      setPassword(value: FormState['password']) {
+        this.formState.password = value
+        this.validation.password = FormStatePassword.safeParse({ password: value })
       },
-      setConfirmPassword(value: FormValue['confirmPassword']) {
-        this.formState.data.confirmPassword = value
+      setConfirmPassword(value: FormState['confirmPassword']) {
+        this.formState.confirmPassword = value
+        this.validation.confirmPassword = FormStateConfirmPassword.safeParse({ confirmPassword: value })
       },
-      checkForm() {
-        const { data } = this.formState
-        this.formState.validation = FormValue.safeParse(data)
+      checkPreSubmitInvalidParam() {
+        this.submitInvalidParam.email = !this.validation.email.success
+        this.submitInvalidParam.password = !this.validation.password.success
+        this.submitInvalidParam.confirmPassword = !this.validation.confirmPassword.success
+          || this.formState.password !== this.formState.confirmPassword
       },
       resetAll() {}
     }

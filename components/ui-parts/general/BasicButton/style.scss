@@ -3,6 +3,11 @@
   cursor: pointer;
   border-radius: 6px;
 
+  &:focus-visible {
+    outline: 2px solid var(--color-focus-visible-outline);
+    outline-offset: 2px;
+  }
+
   &--small {
     padding: 4px 8px;
   }

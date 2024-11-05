@@ -6,7 +6,7 @@ const cssModule = useCssModule('classes')
 <template>
   <div :class="cssModule['layout-container']">
     <header :class="cssModule['layout-container__header']">
-      <LayoutContentsHeader :class="cssModule['layout-container__header-content']" />
+      <LayoutContentsSimpleHeader :class="cssModule['layout-container__header-content']" />
     </header>
     <main :class="cssModule['layout-container__main']">
       <slot />

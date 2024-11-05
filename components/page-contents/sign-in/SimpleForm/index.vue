@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import { ZodIssueCode } from 'zod'
 import { useCommonAuthApiStore } from '@/store/common/auth'
 import { useUiStore } from '@/store/page/sign-in'
+import type { SubmitInvalidParam } from '@/store/page/sign-in'
 
-/** Nuxt App */
-const { $auth } = useNuxtApp()
+/** Firebase Auth */
+const auth = useFirebaseAuth()!
+
+/** Route */
+const route = useRoute()
 
 /** Loading Indicator */
 const { start, finish } = useLoadingIndicator()
@@ -25,34 +28,10 @@ const { signIn } = commonAuthApiActions
 const { getters, actions } = useUiStore()
 
 /** UI State Getters */
-const { formState, emailErrorCodes, passwordErrorCodes } = getters
+const { formState, submitInvalidParam } = getters
 
 /** UI State Actions */
-const { setEmail, setPassword, checkForm } = actions
-
-/**
- * メールアドレスの入力イベント
- * @param {Event} event イベント
- */
-const onInputEmail = (event: Event): void => {
-  const target = event.target
-  if (!(target instanceof HTMLInputElement)) {
-    return
-  }
-  setEmail(target.value)
-}
-
-/**
- * パスワードの入力イベント
- * @param {Event} event イベント
- */
-const onInputPassword = (event: Event): void => {
-  const target = event.target
-  if (!(target instanceof HTMLInputElement)) {
-    return
-  }
-  setPassword(target.value)
-}
+const { setEmail, setPassword, checkPreSubmitInvalidParam } = actions
 
 /**
  * ログイン処理の実行
@@ -61,92 +40,79 @@ const onInputPassword = (event: Event): void => {
 const handleSubmit = async (event: Event): Promise<void> => {
   event.preventDefault()
 
-  checkForm()
-  if (!(LangUtil.isNull(formState.value.validation) || formState.value.validation.success)) {
-    return
+  checkPreSubmitInvalidParam()
+  for (const key in submitInvalidParam.value) {
+    if (submitInvalidParam.value[key as keyof SubmitInvalidParam]) {
+      document.querySelector<HTMLLabelElement>(`label[for="${key}"]`)?.focus()
+      return
+    }
   }
 
   start()
-  const { email, password } = formState.value.data
-  await signIn($auth, {email, password})
+  await signIn(auth, formState.value)
   if (!LangUtil.isNull(signInResponse.value) && LangUtil.isNull(signInResponse.value.error)) {
-    await navigateTo('/home')
+    const { query } = route
+    const path = LangUtil.isNil(query.redirect) ? '/home' : query.redirect.toString()
+    await navigateTo(path)
   }
   finish()
 }
+
+onMounted(() => {
+  document.querySelector<HTMLLabelElement>('label[for="email"]')?.focus()
+})
 </script>
 
 <template>
   <form :class="cssModule['simple-form']" aria-labelledby="sign-in-form" novalidate @submit="handleSubmit">
     <div :class="cssModule['simple-form__item']">
-      <label :class="cssModule['simple-form__input-item']" for="email">
-        <span :class="cssModule['simple-form__label-text']">メールアドレス</span>
-        <input
-          id="email"
-          v-model="formState.data.email"
-          :class="[cssModule['simple-form__input'], { [cssModule['simple-form__input--error']]: !LangUtil.isEmpty(emailErrorCodes) }]"
-          type="email"
-          name="email"
-          required
-          aria-required="true"
-          aria-describedby="email-description"
-          :aria-invalid="!LangUtil.isEmpty(emailErrorCodes) ? 'true' : 'false'"
-          @change="onInputEmail"
-        />
-      </label>
-      <p
-        v-if="!LangUtil.isEmpty(emailErrorCodes)"
-        id="email-description"
-        :class="cssModule['simple-form__error-message']"
-        role="alert"
-        aria-live="polite"
+      <UiPartsDataEntryInputText
+        id="email"
+        :model-value="formState.email"
+        :class="cssModule['simple-form__input-item']"
+        :is-error="submitInvalidParam.email"
+        name="email"
+        type="email"
+        required
+        aria-describedby="email-description"
+        @update:model-value="setEmail"
       >
-        <template v-for="code in emailErrorCodes" :key="code">
-          <template v-if="code === ZodIssueCode.too_small">
-            <span :class="cssModule['simple-form__error-text']">メールアドレスを入力して下さい。</span>
-          </template>
-          <template v-if="code === ZodIssueCode.invalid_string">
-            <span :class="cssModule['simple-form__error-text']">メールアドレスの形式で入力して下さい。</span>
-          </template>
-        </template>
-      </p>
+        <template #label>メールアドレス</template>
+      </UiPartsDataEntryInputText>
     </div>
-    <div :class="[cssModule['simple-form__item'], cssModule['simple-form__item--last']]">
-      <label :class="cssModule['simple-form__input-item']" for="password">
-        <span :class="cssModule['simple-form__label-text']">パスワード</span>
-        <input
-          id="password"
-          v-model="formState.data.password"
-          :class="[cssModule['simple-form__input'], { [cssModule['simple-form__input--error']]: !LangUtil.isEmpty(passwordErrorCodes) }]"
-          type="password"
-          name="password"
-          required
-          aria-required="true"
-          aria-describedby="password-description"
-          :aria-invalid="!LangUtil.isEmpty(passwordErrorCodes) ? 'true' : 'false'"
-          @input="onInputPassword"
-        />
-      </label>
-      <p
-        v-if="!LangUtil.isEmpty(passwordErrorCodes)"
-        id="password-description"
-        :class="cssModule['simple-form__error-message']"
-        role="alert"
-        aria-live="polite"
+    <div :class="cssModule['simple-form__item']">
+      <UiPartsDataEntryInputText
+        id="password"
+        :model-value="formState.password"
+        :class="cssModule['simple-form__input-item']"
+        :is-error="submitInvalidParam.password"
+        name="password"
+        type="password"
+        required
+        aria-describedby="password-description"
+        @update:model-value="setPassword"
       >
-        <template v-for="code in passwordErrorCodes" :key="code">
-          <template v-if="code === ZodIssueCode.too_small">
-            <span :class="cssModule['simple-form__error-text']">パスワードを入力して下さい。</span>
-          </template>
-          <template v-if="code === ZodIssueCode.too_big">
-            <span :class="cssModule['simple-form__error-text']">パスワードは255文字以内で入力して下さい。</span>
-          </template>
-        </template>
-      </p>
+        <template #label>パスワード</template>
+      </UiPartsDataEntryInputText>
     </div>
+    <template v-if="submitInvalidParam.email || submitInvalidParam.password">
+      <UiPartsFeedbackAlert
+        id="email-description password-description"
+        :class="cssModule['simple-form__alert-message']"
+        type="error"
+        role="alert"
+        aria-live="assertive"
+      >
+        <template v-if="submitInvalidParam.email">「メールアドレス」</template>
+        <template v-if="submitInvalidParam.password">「パスワード」</template>
+        に誤りがあります。<br />
+        入力内容の確認をお願いします。
+      </UiPartsFeedbackAlert>
+    </template>
     <template v-if="!(LangUtil.isNull(signInResponse) || LangUtil.isNull(signInResponse.error))">
       <UiPartsFeedbackAlert
-        :class="cssModule['simple-form__alert-text']"
+        id="email-description password-description"
+        :class="cssModule['simple-form__alert-message']"
         type="error"
         role="alert"
         aria-live="assertive"

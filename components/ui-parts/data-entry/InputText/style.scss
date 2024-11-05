@@ -1,0 +1,42 @@
+@use '@/assets/style/mixin/font' as font;
+
+.input-text {
+  display: block;
+  height: 100%;
+
+  &__label-area {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  &__tag {
+    @include font.font-size(12, 12);
+
+    padding: 6px;
+    color: var(--color-dark-text);
+    background-color: var(--color-background-tag-red);
+    border-radius: 4px;
+  }
+
+  &__text {
+    display: inline-block;
+
+    &--bold {
+      font-weight: bold;
+    }
+  }
+
+  &__input {
+    width: 100%;
+    padding: 8px 16px;
+    border: 1px solid var(--color-border-light);
+    border-radius: 6px;
+
+    &--error {
+      background-color: var(--color-background-input-error);
+      border: 1px solid var(--color-border-error);
+    }
+  }
+}

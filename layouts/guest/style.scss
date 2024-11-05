@@ -1,0 +1,60 @@
+@use '@/assets/style/mixin/mediaQuery' as mediaQuery;
+
+.layout-container {
+  position: relative;
+  padding: 80px 0 56px;
+
+  @include mediaQuery.media {
+    padding: 80px 0 48px;
+  }
+
+  &__header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    background-color: var(--color-background-light);
+    box-shadow: 0 5px 10px rgb(0 0 0 / 10%);
+  }
+
+  &__header-content {
+    max-width: var(--pc-max-width);
+    margin: auto;
+
+    @include mediaQuery.media {
+      max-width: var(--sp-max-width);
+    }
+  }
+
+  &__main {
+    z-index: 1;
+    max-width: var(--pc-max-width);
+    padding: 24px 40px;
+    margin: auto;
+
+    @include mediaQuery.media {
+      max-width: var(--sp-max-width);
+      padding: 16px 8px;
+    }
+  }
+
+  &__footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    background-color: var(--color-background-light);
+    box-shadow: 0 -5px 10px rgb(0 0 0 / 10%);
+  }
+
+  &__footer-content {
+    max-width: var(--pc-max-width);
+    margin: auto;
+
+    @include mediaQuery.media {
+      max-width: var(--sp-max-width);
+    }
+  }
+}

@@ -2,20 +2,47 @@ import z from 'zod'
 import type { SafeParseReturnType } from 'zod'
 
 /** フォーム値 */
-export const FormValue = z.object({
+export const FormState = z.object({
   email: z.string().min(1).email(),
   password: z.string().min(1).max(255)
 })
 
 /** フォーム値 */
-export type FormValue = z.infer<typeof FormValue>
+export type FormState = z.infer<typeof FormState>
 
-/** フォームのステート */
-export type FormState = {
-  /** バリデーション値 */
-  validation: SafeParseReturnType<FormValue, FormValue> | null
-  /** フォーム値 */
-  data: FormValue
+/** メールアドレスのバリデーション設定 */
+export const FormStateEmail = FormState.pick({ email: true })
+
+/** メールアドレスのバリデーション型 */
+export type FormStateEmail = z.infer<typeof FormStateEmail>
+
+/** パスワードのバリデーション設定 */
+export const FormStatePassword = FormState.pick({ password: true })
+
+/** パスワードのバリデーション型 */
+export type FormStatePassword = z.infer<typeof FormStatePassword>
+
+/** 登録実行時のバリデーション */
+export type SubmitInvalidParam = {
+  /** メールアドレス */
+  email: boolean
+  /** パスワード */
+  password: boolean
+}
+
+/** UI State */
+export type UiState = {
+  /** フォームのステート */
+  formState: FormState
+  /** バリデーション */
+  validation: {
+    /** メールアドレス */
+    email: SafeParseReturnType<FormStateEmail, FormStateEmail>
+    /** パスワード */
+    password: SafeParseReturnType<FormStatePassword, FormStatePassword>
+  }
+  /** 送信前のバリデーション */
+  submitInvalidParam: SubmitInvalidParam
 }
 
 export type UiGetters<S = UiState> = {
@@ -25,15 +52,23 @@ export type UiGetters<S = UiState> = {
    */
   formState: (state: S) => FormState
   /**
-   * メールアドレスのエラーコードを返す
+   * メールアドレスのエラーリストを返す
    * @param {S} state - ステート
+   * @returns {{ code: string; message: string }[]} メールアドレスのエラーリスト
    */
-  emailErrorCodes: (state: S) => string[]
+  emailErrors: (state: S) => ({ code: string; message: string })[]
   /**
-   * パスワードのエラーコードを返す
+   * パスワードのエラーリストを返す
    * @param {S} state - ステート
+   * @returns {{ code: string; message: string }[]} パスワードのエラーリスト
    */
-  passwordErrorCodes: (state: S) => string[]
+  passwordErrors: (state: S) => ({ code: string; message: string })[]
+  /**
+   * submit 時のバリデーション結果を返す
+   * @param {S} state - ステート
+   * @returns {boolean} バリデーション結果
+   */
+  submitInvalidParam: (state: S) => SubmitInvalidParam
 }
 
 export type UiActions<S = UiState> = {
@@ -41,20 +76,14 @@ export type UiActions<S = UiState> = {
    * メールアドレスをセットする
    * @param {FormValue['email']} value メールアドレス
    */
-  setEmail: (this: S, value: FormValue['email']) => void
+  setEmail: (this: S, value: FormState['email']) => void
   /**
    * パスワードをセットする
    * @param {FormValue['password']} value パスワード
    */
-  setPassword: (this: S, value: FormValue['password']) => void
+  setPassword: (this: S, value: FormState['password']) => void
   /**
-   * フォームのバリデーションをチェックする
+   * 送信前のバリデーションをチェックする
    */
-  checkForm: (this: S) => void
-}
-
-/** UI State */
-export type UiState = {
-  /** フォームのステート */
-  formState: FormState
+  checkPreSubmitInvalidParam: (this: S) => void
 }

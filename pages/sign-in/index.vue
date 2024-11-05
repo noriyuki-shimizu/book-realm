@@ -18,6 +18,11 @@ useHeadSafe(() => {
     ]
   }
 })
+
+definePageMeta({
+  auth: false,
+  layout: 'simple'
+})
 </script>
 
 <template>
