@@ -10,7 +10,7 @@ const isProduction = process.env.NODE_ENV === 'production'
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
-  modules: ['@nuxt/eslint', '@nuxt/test-utils/module'],
+  modules: ['@nuxt/eslint', '@nuxt/test-utils/module', 'nuxt-vuefire'],
   app: {
     head: {
       htmlAttrs: {
@@ -61,24 +61,32 @@ export default defineNuxtConfig({
       }
     }
   },
+  vuefire: {
+    // ensures the auth module is enabled
+    auth: {
+      enabled: true,
+      sessionCookie: true
+    },
+    config: {
+      apiKey: process.env.FIREBASE_API_KEY,
+      authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+      projectId: process.env.FIREBASE_PROJECT_ID,
+      storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+      messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+      appId: process.env.FIREBASE_APP_ID
+    }
+  },
   css: ['ress', '@/assets/style/_base.scss'],
   runtimeConfig: {
     googleAiStudioApiKey: '',
     public: {
       isProduction,
       pageBaseUrl: '',
-      logLevel: isProduction ? 3 : 5,
-      firebaseApiKey: '',
-      firebaseAuthDomain: '',
-      firebaseProjectId: '',
-      firebaseStorageBucket: '',
-      firebaseMessagingSenderId: '',
-      firebaseAppId: ''
+      logLevel: isProduction ? 3 : 5
     }
   },
   plugins: [
     { order: 0, mode: 'all', src: '@/plugins/rest/nuxtServerHttpClient.ts' },
-    { order: 99, mode: 'all', src: '@/plugins/firebase.ts' },
     { order: 99, mode: 'client', src: '@/plugins/vercel.client.ts' },
     { order: 99, mode: 'all', src: '@/plugins/globalErrorHandler.ts' }
   ],
