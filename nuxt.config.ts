@@ -10,7 +10,7 @@ const isProduction = process.env.NODE_ENV === 'production'
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
-  modules: ['@nuxt/eslint', '@nuxt/test-utils/module', 'nuxt-vuefire'],
+  modules: ['@nuxt/eslint', '@nuxt/test-utils/module', 'nuxt-vuefire', '@pinia/nuxt'],
   app: {
     head: {
       htmlAttrs: {
