@@ -1,10 +1,12 @@
+@use 'sass:map';
+
 $breakpoints: (
     'sp': 'screen and (max-width: 896px)',
     'pc': 'screen and (max-width: 1200px)',
 ) !default;
 
 @mixin media($breakpoint: 'sp') {
-  $query: map-get($breakpoints, $breakpoint);
+  $query: map.get($breakpoints, $breakpoint);
 
   @if $query {
     @media #{$query} {
