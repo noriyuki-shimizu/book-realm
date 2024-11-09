@@ -1,46 +1,45 @@
 import imageCompression from 'browser-image-compression'
 import type { Options } from 'browser-image-compression'
-import type { UiActions, UiGetters, UiState } from './types'
-import { defineStore } from '@/store/main'
+import type { UiState } from './types'
 
 /**
  * トップページの UI Store を返す
  * @returns トップページの UI Store
  */
-export const useUiStore = defineStore<UiState, UiGetters, UiActions>('page-ui-top-store', () => {
-  return {
-    state: {
+export const useUiStore = defineStore('page-ui-top-store', {
+  state: (): UiState => {
+    return {
       files: null
-    },
-    getters: {
-      files(state) {
-        return state.files
+    }
+  },
+  getters: {},
+  actions: {
+    /**
+     * ファイル配列をセットする
+     * @param {File[] | null} files - ファイル配列
+     */
+    async setFiles(files: File[] | null): Promise<void> {
+      if (LangUtil.isNull(files)) {
+        this.files = null
+        return
       }
-    },
-    actions: {
-      async setFiles(files: File[] | null) {
-        if (LangUtil.isNull(files)) {
-          this.files = null
-          return
-        }
 
-        const options: Options = {
-          maxSizeMB: 4.5,
-          useWebWorker: true
-        }
-        this.files = (
-          await Promise.all(files.map((file) => {
-            try {
-              return imageCompression(file, options)
-            } catch (error) {
-              console.error('Error compressing file:', error)
-              return null
-            }
-          }))
-        ).filter((f) => {
-          return !LangUtil.isNull(f)
-        })
+      const options: Options = {
+        maxSizeMB: 5,
+        useWebWorker: true
       }
+      this.files = (
+        await Promise.all(files.map((file) => {
+          try {
+            return imageCompression(file, options)
+          } catch (error) {
+            console.error('Error compressing file:', error)
+            return null
+          }
+        }))
+      ).filter((f) => {
+        return !LangUtil.isNull(f)
+      })
     }
   }
 })

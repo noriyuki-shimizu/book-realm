@@ -1,86 +1,108 @@
-import { FormStateConfirmPassword, FormStateEmail, FormStatePassword } from './types'
-import type { FormState, UiActions, UiGetters, UiState } from './types'
+import type { FormState } from './enums'
+import { FormStateConfirmPassword, FormStateEmail, FormStatePassword } from './enums'
+import type { UiState } from './types'
 import { errorIssues } from '@/functions/business/validation/error'
-import { defineStore } from '@/store/main'
 
 /**
  * アカウント登録画面の UI Store を返す
  * @returns アカウント登録画面の UI Store
  */
-export const useUiStore = defineStore<UiState, UiGetters, UiActions>('page-ui-sign-up-store', () => {
-  return {
-    state: {
+export const useUiStore = defineStore('page-ui-sign-up-store', {
+  state: (): UiState => {
+    return {
       formState: {
         email: '',
         password: '',
         confirmPassword: ''
       },
       validation: {
-        email: FormStateEmail.safeParse({ email: '' }),
-        password: FormStatePassword.safeParse({ password: '' }),
-        confirmPassword: FormStateConfirmPassword.safeParse({ confirmPassword: '' })
+        email: null,
+        password: null,
+        confirmPassword: null
       },
-      submitInvalidParam: {
+      submitValidation: {
         email: false,
         password: false,
         confirmPassword: false
       }
+    }
+  },
+  getters: {
+    /**
+     * メールアドレスのエラーを返す
+     * @param {UiState} state ステート
+     * @returns {({ code: string; message: string })[]} メールアドレスのエラー
+     */
+    emailErrors(state): ({ code: string; message: string })[] {
+      return errorIssues(state.validation.email)
+        .map(issue => {
+          return {
+            code: issue.code,
+            message: issue.message
+          }
+        })
     },
-    getters: {
-      formState(state) {
-        return state.formState
-      },
-      emailErrors(state) {
-        return errorIssues(state.validation.email)
-          .map(issue => {
-            return {
-              code: issue.code,
-              message: issue.message
-            }
-          })
-      },
-      passwordErrors(state) {
-        return errorIssues(state.validation.password)
-          .map(issue => {
-            return {
-              code: issue.code,
-              message: issue.message
-            }
-          })
-      },
-      confirmPasswordErrors(state) {
-        return errorIssues(state.validation.confirmPassword)
-          .map(issue => {
-            return {
-              code: issue.code,
-              message: issue.message
-            }
-          })
-      },
-      submitInvalidParam(state) {
-        return state.submitInvalidParam
-      }
+    /**
+     * パスワードのエラーを返す
+     * @param {UiState} state ステート
+     * @returns {({ code: string; message: string })[]} パスワードのエラー
+     */
+    passwordErrors(state): ({ code: string; message: string })[] {
+      return errorIssues(state.validation.password)
+        .map(issue => {
+          return {
+            code: issue.code,
+            message: issue.message
+          }
+        })
     },
-    actions: {
-      setEmail(value: FormState['email']) {
-        this.formState.email = value
-        this.validation.email = FormStateEmail.safeParse({ email: value })
-      },
-      setPassword(value: FormState['password']) {
-        this.formState.password = value
-        this.validation.password = FormStatePassword.safeParse({ password: value })
-      },
-      setConfirmPassword(value: FormState['confirmPassword']) {
-        this.formState.confirmPassword = value
-        this.validation.confirmPassword = FormStateConfirmPassword.safeParse({ confirmPassword: value })
-      },
-      checkPreSubmitInvalidParam() {
-        this.submitInvalidParam.email = !this.validation.email.success
-        this.submitInvalidParam.password = !this.validation.password.success
-        this.submitInvalidParam.confirmPassword = !this.validation.confirmPassword.success
+    /**
+     * 確認用パスワードのエラーを返す
+     * @param {UiState} state ステート
+     * @returns {({ code: string; message: string })[]} 確認用パスワードのエラー
+     */
+    confirmPasswordErrors(state): ({ code: string; message: string })[] {
+      return errorIssues(state.validation.confirmPassword)
+        .map(issue => {
+          return {
+            code: issue.code,
+            message: issue.message
+          }
+        })
+    }
+  },
+  actions: {
+    /**
+     * メールアドレスをセットする
+     */
+    setEmail(value: FormState['email']): void {
+      this.formState.email = value
+      this.validation.email = FormStateEmail.safeParse(this.formState)
+    },
+    /**
+     * パスワードをセットする
+     */
+    setPassword(value: FormState['password']): void {
+      this.formState.password = value
+      this.validation.password = FormStatePassword.safeParse(this.formState)
+    },
+    /**
+     * 確認用パスワードをセットする
+     */
+    setConfirmPassword(value: FormState['confirmPassword']): void {
+      this.formState.confirmPassword = value
+      this.validation.confirmPassword = FormStateConfirmPassword.safeParse(this.formState)
+    },
+    /**
+     * 送信前のバリデーションエラーをチェックする
+     */
+    checkPreSubmitInvalidParam(): void {
+      this.submitValidation = {
+        email: !this.validation.email?.success,
+        password: !this.validation.password?.success,
+        confirmPassword: !this.validation.confirmPassword?.success
           || this.formState.password !== this.formState.confirmPassword
-      },
-      resetAll() {}
+      }
     }
   }
 })

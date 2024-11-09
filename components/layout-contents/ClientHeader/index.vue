@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { User } from 'firebase/auth';
 import IconLink from '../IconLink/index.vue'
 import { useCommonAuthApiStore } from '@/store/common/auth'
 import UserIconSvg from '@/assets/svg/user-icon.svg?component'
@@ -13,17 +14,12 @@ const { start, finish } = useLoadingIndicator()
 const cssModule = useCssModule('classes')
 
 /** Common Auth API Store */
-const { getters, actions } = useCommonAuthApiStore()
+const commonAuthApiStore = useCommonAuthApiStore()
 
-/** Common Auth API Store Getter */
-const { user } = getters
+/** Login User */
+const user: User | null = await getCurrentUser()
 
-/** Common Auth API Store Action */
-const { signOut } = actions
-
-const userData = unref(user)
-
-if (LangUtil.isNull(userData)) {
+if (LangUtil.isNull(user)) {
   throw createError('User data is null.')
 }
 
@@ -42,7 +38,7 @@ const toggleIconNavigate = (): void => {
  */
 const handleSignOut = async (): Promise<void> => {
   start()
-  await signOut(auth)
+  await commonAuthApiStore.signOut(auth)
   await navigateTo('/sign-in')
   finish()
 }
@@ -53,7 +49,7 @@ const handleSignOut = async (): Promise<void> => {
     <IconLink />
     <div :class="cssModule['header-content__navigate']">
       <button type="button" :class="cssModule['header-content__button']" @click="toggleIconNavigate">
-        <template v-if="LangUtil.isNull(userData.photoURL)">
+        <template v-if="LangUtil.isNull(user.photoURL)">
           <div :class="cssModule['header-content__user-icon-wrapper']">
             <UserIconSvg role="img" aria-label="ユーザーメニューを開くアイコン" :class="cssModule['header-content__user-icon']" />
           </div>
@@ -61,7 +57,7 @@ const handleSignOut = async (): Promise<void> => {
         <template v-else>
           <img
             :class="cssModule['header-content__user-icon-img']"
-            :src="userData.photoURL"
+            :src="user.photoURL"
             alt="ユーザーメニューを開くアイコン"
             loading="lazy"
             decoding="async"

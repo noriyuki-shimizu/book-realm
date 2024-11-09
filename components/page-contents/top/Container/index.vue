@@ -8,11 +8,11 @@ import SearchIconSvg from '@/assets/svg/search-icon.svg?component'
 import LightIconSvg from '@/assets/svg/light-icon.svg?component'
 import { useApiStore } from '@/store/page'
 
-/** API Store Param */
-const { getters } = useApiStore()
+/** API Store */
+const apiStore = useApiStore()
 
-/** API State Getter */
-const { bookBulkAnalysisPostResponse } = getters
+/** API Store Reactive Param */
+const { bookBulkAnalysisPostResponse } = storeToRefs(apiStore)
 
 /** CSS Module */
 const cssModule = useCssModule('classes')

@@ -6,7 +6,7 @@ import { useCommonLogApiStore } from '@/store/common/log'
  */
 export default defineNuxtPlugin((nuxtApp) => {
   const route = useRoute()
-  const { actions } = useCommonLogApiStore()
+  const commonLogApiStore = useCommonLogApiStore()
   const runtimeConfig = useRuntimeConfig()
   const { isProduction, pageBaseUrl } = runtimeConfig.public
 
@@ -14,7 +14,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.hook('vue:error', (error, instance) => {
     if (isProduction) {
       const nuxtError = ErrorUtil.convertNuxtError(error)
-      actions.postErrorLog(pageBaseUrl, instance?.$route ?? route, nuxtError)
+      commonLogApiStore.postErrorLog(pageBaseUrl, instance?.$route ?? route, nuxtError)
     }
   })
 
@@ -25,7 +25,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.hook('app:error', (error) => {
     if (isProduction) {
       const nuxtError = ErrorUtil.convertNuxtError(error)
-      actions.postErrorLog(pageBaseUrl, route, nuxtError)
+      commonLogApiStore.postErrorLog(pageBaseUrl, route, nuxtError)
     }
   })
 })

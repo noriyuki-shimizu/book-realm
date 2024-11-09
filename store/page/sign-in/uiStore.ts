@@ -1,68 +1,52 @@
-import { FormStateEmail, FormStatePassword } from './types'
-import type { FormState, UiActions, UiGetters, UiState } from './types'
-import { errorIssues } from '@/functions/business/validation/error'
-import { defineStore } from '@/store/main'
+import { FormStateEmail, FormStatePassword } from './enums'
+import type { FormState } from './enums'
+import type { UiState } from './types'
 
 /**
  * ログイン画面の UI Store を返す
  * @returns ログイン画面の UI Store
  */
-export const useUiStore = defineStore<UiState, UiGetters, UiActions>('page-ui-sign-in-store', () => {
-  return {
-    state: {
-      validation: {
-        email: FormStateEmail.safeParse({ email: '' }),
-        password: FormStatePassword.safeParse({ password: '' })
-      },
+export const useUiStore = defineStore('page-ui-sign-in-store', {
+  state: (): UiState => {
+    return {
       formState: {
         email: '',
         password: ''
       },
-      submitInvalidParam: {
+      validation: {
+        email: null,
+        password: null
+      },
+      submitValidation: {
         email: false,
         password: false
       }
+    }
+  },
+  getters: {},
+  actions: {
+    /**
+     * メールアドレスをセットする
+     */
+    setEmail(value: FormState['email']): void {
+      this.formState.email = value
+      this.validation.email = FormStateEmail.safeParse(this.formState)
     },
-    getters: {
-      formState(state) {
-        return state.formState
-      },
-      emailErrors(state) {
-        return errorIssues(state.validation.email)
-          .map(issue => {
-            return {
-              code: issue.code,
-              message: issue.message
-            }
-          })
-      },
-      passwordErrors(state) {
-        return errorIssues(state.validation.password)
-          .map(issue => {
-            return {
-              code: issue.code,
-              message: issue.message
-            }
-          })
-      },
-      submitInvalidParam(state) {
-        return state.submitInvalidParam
+    /**
+     * パスワードをセットする
+     */
+    setPassword(value: FormState['password']): void {
+      this.formState.password = value
+      this.validation.password = FormStatePassword.safeParse(this.formState)
+    },
+    /**
+     * 送信前のバリデーションエラーをチェックする
+     */
+    checkPreSubmitInvalidParam(): void {
+      this.submitValidation = {
+        email: !this.validation.email?.success,
+        password: !this.validation.password?.success
       }
-    },
-    actions: {
-      setEmail(value: FormState['email']) {
-        this.formState.email = value
-        this.validation.email = FormStateEmail.safeParse({ email: value })
-      },
-      setPassword(value: FormState['password']) {
-        this.formState.password = value
-        this.validation.password = FormStatePassword.safeParse({ password: value })
-      },
-      checkPreSubmitInvalidParam() {
-        this.submitInvalidParam.email = !this.validation.email.success
-        this.submitInvalidParam.password = !this.validation.password.success
-      },
-      resetAll() {}
     }
   }
 })

@@ -3,11 +3,11 @@ import type { ViewData } from './types'
 import { formatNumberWithCommas, padZero } from '@/filter/number'
 import { useApiStore } from '@/store/page'
 
-/** API Store Param */
-const { getters } = useApiStore()
+/** API Store */
+const apiStore = useApiStore()
 
-/** API State Getter */
-const { bookBulkAnalysisPostResponse } = getters
+/** API Store Reactive Param */
+const { bookBulkAnalysisPostResponse } = storeToRefs(apiStore)
 
 /** View Data */
 const viewData = computed<ViewData>(() => {

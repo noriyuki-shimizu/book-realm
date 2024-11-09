@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useCommonAuthApiStore } from '@/store/common/auth'
+import type { User } from 'firebase/auth';
 
 /** Runtime Config */
 const runtimeConfig = useRuntimeConfig()
@@ -25,9 +25,9 @@ definePageMeta({
   auth: false,
   layout: false,
   middleware: [
-    () => {
-      const { getters: { isLoggedIn } } = useCommonAuthApiStore()
-      setPageLayout(unref(isLoggedIn) ? 'client' : 'guest')
+    async () => {
+      const user: User | null = await getCurrentUser()
+      setPageLayout(!LangUtil.isNil(user) ? 'client' : 'guest')
     },
   ]
 })

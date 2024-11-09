@@ -10,9 +10,9 @@ const recordNuxtApiAccessLog = (to: RouteLocationNormalized): void => {
   const { isProduction, pageBaseUrl } = runtimeConfig.public
 
   if (isProduction) {
-    const { actions } = useCommonLogApiStore()
+    const commonLogApiStore = useCommonLogApiStore()
 
-    actions.postAccessLog(pageBaseUrl, to)
+    commonLogApiStore.postAccessLog(pageBaseUrl, to)
   }
 }
 

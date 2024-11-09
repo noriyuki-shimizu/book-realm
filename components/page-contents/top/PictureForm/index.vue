@@ -4,19 +4,13 @@ import { useApiStore, useUiStore } from '@/store/page'
 const isFileLoading = ref<boolean>(false)
 
 /** API Store Param */
-const { actions: apiActions } = useApiStore()
-
-/** API Store Action */
-const { postBookBulkAnalysis } = apiActions
+const apiStore = useApiStore()
 
 /** UI Store Param */
-const { getters: uiGetters, actions: UiActions } = useUiStore()
+const uiStore = useUiStore()
 
-/** UI Store Getter */
-const { files } = uiGetters
-
-/** UI Store Action */
-const { setFiles } = UiActions
+/** UI Store Reactive Param */
+const { files } = storeToRefs(uiStore)
 
 /** CSS Module */
 const cssModule = useCssModule('classes')
@@ -31,7 +25,7 @@ const { execute, pending } = useSubmitApi(async (): Promise<void> => {
     formData.append('file', f)
   }
 
-  await postBookBulkAnalysis(formData)
+  await apiStore.postBookBulkAnalysis(formData)
 
   window.scrollTo({ top: 0, behavior: 'smooth' })
 })
@@ -42,7 +36,7 @@ const { execute, pending } = useSubmitApi(async (): Promise<void> => {
  */
 const updateFiles = async (files: File[] | null): Promise<void> => {
   isFileLoading.value = true
-  await setFiles(files)
+  await uiStore.setFiles(files)
   isFileLoading.value = false
 }
 

@@ -1,29 +1,27 @@
-import { useCommonAuthApiStore } from '@/store/common/auth'
+import { callWithNuxt } from '#app'
+import type { User } from 'firebase/auth'
 
 /**
  * 認証処理を行うミドルウェア
  */
 export default defineNuxtRouteMiddleware(async (to) => {
-  const { getters, actions } = useCommonAuthApiStore()
-  const { isLoggedIn } = getters
-  const { setUser } = actions
+  const app = useNuxtApp()
+  const user: User | null = await getCurrentUser()
 
-  setUser(await getCurrentUser())
-
-  if (isLoggedIn.value) {
+  if (!LangUtil.isNull(user)) {
     if (to.path.startsWith('/sign-in')) {
-      return navigateTo('/home')
+      return callWithNuxt(app, navigateTo, ['/home'])
     }
   } else {
     if (to.meta.auth === false) {
       return
     }
 
-    return navigateTo({
+    return callWithNuxt(app, navigateTo, [{
       path: '/sign-in',
       query: {
         redirect: to.fullPath
       }
-    })
+    }])
   }
 })

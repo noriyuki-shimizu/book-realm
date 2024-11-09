@@ -15,20 +15,17 @@ const { start, finish } = useLoadingIndicator()
 const cssModule = useCssModule('classes')
 
 /** Auth API Store */
-const { getters: commonAuthApiGetters, actions: commonAuthApiActions } = useCommonAuthApiStore()
+const commonAuthApiStore = useCommonAuthApiStore()
 
-/** Auth API Store Getters */
-const { signInGoogleResponse } = commonAuthApiGetters
-
-/** Auth API Store Actions */
-const { signInWithGoogle } = commonAuthApiActions
+/** UI Store Reactive Param */
+const { signInGoogleResponse } = storeToRefs(commonAuthApiStore)
 
 /**
  * Google でログインする
  */
 const onClickGoogleSignIn = async (): Promise<void> => {
   start()
-  await signInWithGoogle(auth)
+  await commonAuthApiStore.signInWithGoogle(auth)
   if (!LangUtil.isNull(signInGoogleResponse.value) && LangUtil.isNull(signInGoogleResponse.value.error)) {
     const { query } = route
     const path = LangUtil.isNil(query.redirect) ? '/home' : query.redirect.toString()
