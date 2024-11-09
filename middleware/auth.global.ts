@@ -1,5 +1,6 @@
 import { callWithNuxt } from '#app'
 import type { User } from 'firebase/auth'
+import { LangUtil } from '#shared/utils/core'
 
 /**
  * 認証処理を行うミドルウェア

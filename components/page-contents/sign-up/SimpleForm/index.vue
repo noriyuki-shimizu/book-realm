@@ -5,6 +5,7 @@ import { useUiStore } from '@/store/page/sign-up'
 import CheckSolidIconSvg from '@/assets/svg/check-solid-icon.svg?component'
 import XmarkSolidIconSvg from '@/assets/svg/xmark-solid-icon.svg?component'
 import type { FormKey } from '@/store/page/sign-up'
+import { LangUtil } from '#shared/utils/core'
 
 /** Firebase Auth */
 const auth = useFirebaseAuth()!

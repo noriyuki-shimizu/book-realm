@@ -8,6 +8,7 @@ import {
 import type { Auth } from 'firebase/auth'
 import type { ApiState } from './types'
 import { StatusCode } from '@/enums/common/http/statusCode'
+import { ErrorUtil } from '#shared/utils/core'
 
 /**
  * 認証における API Store を返す

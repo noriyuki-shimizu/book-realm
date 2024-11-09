@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useApiStore, useUiStore } from '@/store/page'
+import { LangUtil } from '#shared/utils/core'
 
 const isFileLoading = ref<boolean>(false)
 

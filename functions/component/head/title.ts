@@ -1,4 +1,5 @@
 import { ERROR_TITLE } from '@/constants/components/head/title'
+import { LangUtil } from '#shared/utils/core'
 
 /**
  * ステータスコードからエラータイトルを取得する

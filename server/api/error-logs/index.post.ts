@@ -4,6 +4,7 @@ import snakecaseKeys from 'snakecase-keys'
 import { DATE_TIME_YYYYMMDDHHMMSS_COLON } from '@/constants/date'
 import { StatusCode } from '@/enums/common/http/statusCode'
 import type { ErrorLogRequestBody } from '@/types/nuxt-api/error-log/http'
+import { DateUtil } from '#shared/utils/core'
 
 /**
  * エラーログの送信 API
@@ -15,7 +16,7 @@ export default defineEventHandler(async (event) => {
 
   consola.error(
     JSON.stringify({
-      time: ServerDateUtil.getNow().format(DATE_TIME_YYYYMMDDHHMMSS_COLON),
+      time: DateUtil.getNow().format(DATE_TIME_YYYYMMDDHHMMSS_COLON),
       'x-forwarded-for': getHeader(event, 'x-forwarded-for'),
       'user-agent': getHeader(event, 'user-agent'),
       ...snakecaseKeys(body, { deep: true })

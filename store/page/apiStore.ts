@@ -1,6 +1,7 @@
 import type { ApiState } from './types'
 import { postRequest } from '@/infrastructures/rest/nuxt/api/books/bulk-analysis'
 import { StatusCode } from '@/enums/common/http/statusCode'
+import { ErrorUtil } from '#shared/utils/core'
 
 /**
  * トップページの API Store を返す

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import GoogleIconSvg from '@/assets/svg/google-icon.svg?component'
 import { useCommonAuthApiStore } from '@/store/common/auth'
+import { LangUtil } from '#shared/utils/core'
 
 /** Firebase Auth */
 const auth = useFirebaseAuth()!

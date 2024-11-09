@@ -7,6 +7,7 @@ import { StatusCode } from '@/enums/common/http/statusCode'
 import SearchIconSvg from '@/assets/svg/search-icon.svg?component'
 import LightIconSvg from '@/assets/svg/light-icon.svg?component'
 import { useApiStore } from '@/store/page'
+import { LangUtil } from '#shared/utils/core'
 
 /** API Store */
 const apiStore = useApiStore()

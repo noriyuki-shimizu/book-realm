@@ -93,7 +93,8 @@ export default defineNuxtConfig({
   imports: {
     dirs: [
       'composables/*/index.{ts,js,mjs,mts}',
-      'utils/*/index.{ts,js,mjs,mts}'
+      'utils/*/index.{ts,js,mjs,mts}',
+      'shared/**/index.{ts,js,mjs,mts}'
     ]
   },
   typescript: {

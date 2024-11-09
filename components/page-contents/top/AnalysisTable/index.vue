@@ -2,6 +2,7 @@
 import type { ViewData } from './types'
 import { formatNumberWithCommas, padZero } from '@/filter/number'
 import { useApiStore } from '@/store/page'
+import { DateUtil, LangUtil } from '#shared/utils/core'
 
 /** API Store */
 const apiStore = useApiStore()

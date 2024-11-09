@@ -2,6 +2,7 @@
 import { useCommonAuthApiStore } from '@/store/common/auth'
 import { useUiStore } from '@/store/page/sign-in'
 import type { FormKey } from '@/store/page/sign-in'
+import { LangUtil } from '#shared/utils/core'
 
 /** Firebase Auth */
 const auth = useFirebaseAuth()!

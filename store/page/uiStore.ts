@@ -1,6 +1,7 @@
 import imageCompression from 'browser-image-compression'
 import type { Options } from 'browser-image-compression'
 import type { UiState } from './types'
+import { LangUtil } from '#shared/utils/core'
 
 /**
  * トップページの UI Store を返す

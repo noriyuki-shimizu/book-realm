@@ -1,4 +1,5 @@
 import { useCommonLogApiStore } from '@/store/common/log'
+import { ErrorUtil } from '#shared/utils/core'
 
 /**
  * エラーハンドリング

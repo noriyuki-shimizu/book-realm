@@ -1,4 +1,5 @@
 import type { RouteLocationNormalizedLoaded } from 'vue-router'
+import { LangUtil } from '#shared/utils/core'
 
 /**
  * 画面情報のデータを受け取り、URL のクエリ文字列を返す

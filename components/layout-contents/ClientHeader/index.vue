@@ -3,6 +3,7 @@ import type { User } from 'firebase/auth';
 import IconLink from '../IconLink/index.vue'
 import { useCommonAuthApiStore } from '@/store/common/auth'
 import UserIconSvg from '@/assets/svg/user-icon.svg?component'
+import { LangUtil } from '#shared/utils/core'
 
 /** Firebase Auth */
 const auth = useFirebaseAuth()!
