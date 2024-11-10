@@ -1,44 +1,35 @@
 import imageCompression from 'browser-image-compression'
 import type { Options } from 'browser-image-compression'
 import type { UiState } from './types'
+import { LangUtil } from '#shared/utils/core'
 
 /**
  * トップページの UI Store を返す
  * @returns トップページの UI Store
  */
-export const useUiStore = () => {
-  /** State */
-  const _state = useState<UiState>('page-ui-top-store', () => {
+export const useUiStore = defineStore('page-ui-top-store', {
+  state: (): UiState => {
     return {
       files: null
     }
-  })
-
-  /** Getters */
-  const getters = {
-    /** ファイル */
-    files: computed<File[] | null>(() => {
-      return _state.value.files
-    })
-  }
-
-  /** Actions */
-  const actions = {
+  },
+  getters: {},
+  actions: {
     /**
-     * ファイルを設定
-     * @param files ファイル配列
+     * ファイル配列をセットする
+     * @param {File[] | null} files - ファイル配列
      */
-    setFiles: async (files: File[] | null): Promise<void> => {
+    async setFiles(files: File[] | null): Promise<void> {
       if (LangUtil.isNull(files)) {
-        _state.value.files = null
+        this.files = null
         return
       }
 
       const options: Options = {
-        maxSizeMB: 4.5,
+        maxSizeMB: 5,
         useWebWorker: true
       }
-      _state.value.files = (
+      this.files = (
         await Promise.all(files.map((file) => {
           try {
             return imageCompression(file, options)
@@ -52,9 +43,6 @@ export const useUiStore = () => {
       })
     }
   }
+})
 
-  return {
-    ...getters,
-    ...actions
-  }
-}
+export default useUiStore

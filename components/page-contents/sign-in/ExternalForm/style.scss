@@ -1,0 +1,18 @@
+.external-form {
+  &__alert-text {
+    margin-bottom: 16px;
+  }
+
+  &__button {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    width: 100%;
+    font-weight: bold;
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+  }
+}

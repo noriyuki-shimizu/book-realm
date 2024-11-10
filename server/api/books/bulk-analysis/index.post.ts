@@ -1,8 +1,8 @@
 import { consola } from 'consola'
-import { LangUtil } from '@/utils/core'
 import { StatusCode } from '@/enums/common/http/statusCode'
 import { BookBulkAnalysisService } from '@/server/src/service/BookBulkAnalysisService'
-import type { BookBulkAnalysisPostResponse } from '~/types/nuxt-api/books/bulk-analysis'
+import type { BookBulkAnalysisPostResponse } from '@/types/nuxt-api/books/bulk-analysis'
+import { LangUtil } from '#shared/utils/core'
 
 /** 本の一括分析 API */
 export default defineEventHandler(async (event) => {

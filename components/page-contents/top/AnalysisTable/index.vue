@@ -2,9 +2,13 @@
 import type { ViewData } from './types'
 import { formatNumberWithCommas, padZero } from '@/filter/number'
 import { useApiStore } from '@/store/page'
+import { DateUtil, LangUtil } from '#shared/utils/core'
 
-/** API Store Param */
-const { bookBulkAnalysisPostResponse } = useApiStore()
+/** API Store */
+const apiStore = useApiStore()
+
+/** API Store Reactive Param */
+const { bookBulkAnalysisPostResponse } = storeToRefs(apiStore)
 
 /** View Data */
 const viewData = computed<ViewData>(() => {

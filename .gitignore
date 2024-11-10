@@ -28,3 +28,6 @@ coverage
 
 # vercel
 .vercel
+
+# Google
+service-account.json

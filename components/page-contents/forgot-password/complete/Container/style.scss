@@ -1,0 +1,30 @@
+@use '@/assets/style/mixin/font' as font;
+@use '@/assets/style/mixin/mediaQuery' as mediaQuery;
+
+.container {
+  width: var(--auth-container-max-width);
+  max-width: var(--auth-container-max-width);
+  margin: 0 auto;
+  background-color: var(--color-background-light);
+  border: 1px solid var(--color-border-light);
+  border-radius: 8px;
+
+  @include mediaQuery.media {
+    width: auto;
+  }
+
+  &__title {
+    @include font.font-size(24, 24);
+
+    padding: 24px 0;
+    margin: 0 24px;
+    text-align: center;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  &__navigation {
+    padding: 24px 0 32px;
+    margin: 0 24px;
+    text-align: center;
+  }
+}

@@ -1,4 +1,7 @@
 import viteSvgLoader from 'vite-svg-loader'
+import { createServiceAccount } from './functions/business/google/serviceAccount'
+
+createServiceAccount()
 
 /** 本番モードか */
 const isProduction = process.env.NODE_ENV === 'production'
@@ -7,7 +10,7 @@ const isProduction = process.env.NODE_ENV === 'production'
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
-  modules: ['@nuxt/eslint', '@nuxt/test-utils/module'],
+  modules: ['@nuxt/eslint', '@nuxt/test-utils/module', 'nuxt-vuefire', '@pinia/nuxt'],
   app: {
     head: {
       htmlAttrs: {
@@ -58,6 +61,21 @@ export default defineNuxtConfig({
       }
     }
   },
+  vuefire: {
+    // ensures the auth module is enabled
+    auth: {
+      enabled: true,
+      sessionCookie: true
+    },
+    config: {
+      apiKey: process.env.FIREBASE_API_KEY,
+      authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+      projectId: process.env.FIREBASE_PROJECT_ID,
+      storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+      messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+      appId: process.env.FIREBASE_APP_ID
+    }
+  },
   css: ['ress', '@/assets/style/_base.scss'],
   runtimeConfig: {
     googleAiStudioApiKey: '',
@@ -75,7 +93,8 @@ export default defineNuxtConfig({
   imports: {
     dirs: [
       'composables/*/index.{ts,js,mjs,mts}',
-      'utils/*/index.{ts,js,mjs,mts}'
+      'utils/*/index.{ts,js,mjs,mts}',
+      'shared/**/index.{ts,js,mjs,mts}'
     ]
   },
   typescript: {

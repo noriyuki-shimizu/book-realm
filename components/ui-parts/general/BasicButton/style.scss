@@ -3,6 +3,11 @@
   cursor: pointer;
   border-radius: 6px;
 
+  &:focus-visible {
+    outline: 2px solid var(--color-focus-visible-outline);
+    outline-offset: 2px;
+  }
+
   &--small {
     padding: 4px 8px;
   }
@@ -22,7 +27,8 @@
 
   &--normal {
     color: var(--color-text-normal);
-    background-color: var(--color-background-normal);
+    background-color: var(--color-background-light);
+    border: 1px solid var(--color-border-light);
 
     &:hover {
       background-color: var(--color-background-hover-normal);

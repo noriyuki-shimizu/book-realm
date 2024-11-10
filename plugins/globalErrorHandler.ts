@@ -1,4 +1,5 @@
 import { useCommonLogApiStore } from '@/store/common/log'
+import { ErrorUtil } from '#shared/utils/core'
 
 /**
  * エラーハンドリング
@@ -8,13 +9,13 @@ export default defineNuxtPlugin((nuxtApp) => {
   const route = useRoute()
   const commonLogApiStore = useCommonLogApiStore()
   const runtimeConfig = useRuntimeConfig()
-  const { isProduction } = runtimeConfig.public
+  const { isProduction, pageBaseUrl } = runtimeConfig.public
 
   // トップレベルまでの Vue エラーの伝播を検知 (onErrorCapturedライフサイクルフックに基づいている)
   nuxtApp.hook('vue:error', (error, instance) => {
     if (isProduction) {
       const nuxtError = ErrorUtil.convertNuxtError(error)
-      commonLogApiStore.postErrorLog(instance?.$route ?? route, nuxtError)
+      commonLogApiStore.postErrorLog(pageBaseUrl, instance?.$route ?? route, nuxtError)
     }
   })
 
@@ -25,7 +26,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.hook('app:error', (error) => {
     if (isProduction) {
       const nuxtError = ErrorUtil.convertNuxtError(error)
-      commonLogApiStore.postErrorLog(route, nuxtError)
+      commonLogApiStore.postErrorLog(pageBaseUrl, route, nuxtError)
     }
   })
 })

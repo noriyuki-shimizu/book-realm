@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import type { User } from 'firebase/auth';
+import { LangUtil } from '#shared/utils/core'
+
 /** Runtime Config */
 const runtimeConfig = useRuntimeConfig()
 
@@ -17,6 +20,17 @@ useHeadSafe(() => {
       { property: 'og:description', content: description },
     ]
   }
+})
+
+definePageMeta({
+  auth: false,
+  layout: false,
+  middleware: [
+    async () => {
+      const user: User | null = await getCurrentUser()
+      setPageLayout(!LangUtil.isNil(user) ? 'client' : 'guest')
+    },
+  ]
 })
 </script>
 

@@ -1,0 +1,57 @@
+@use '/assets/style/mixin/font' as font;
+@use '@/assets/style/mixin/mediaQuery' as mediaQuery;
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 40px;
+  background-color: var(--color-background-light);
+
+  @include mediaQuery.media {
+    padding: 16px;
+  }
+
+  &__navigate {
+    position: relative;
+  }
+
+  &__button {
+    height: 48px;
+  }
+
+  &__user-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    padding: 8px;
+    border: 1px solid var(--color-border-light);
+    border-radius: 50%;
+  }
+
+  &__user-icon {
+    width: 30px;
+    height: 27px;
+  }
+
+  &__user-icon-img {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border: 1px solid var(--color-border-normal);
+    border-radius: 50%;
+  }
+
+  &__menu {
+    position: absolute;
+    top: 56px;
+    right: 8px;
+  }
+}
+
+.menu {
+  width: 200px;
+  height: 400px;
+  background-color: var(--color-background-light);
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgb(0 0 0 / 30%);
+}

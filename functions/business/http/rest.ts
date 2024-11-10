@@ -4,6 +4,7 @@ import type { AppFetchResponse, FetchResponse } from 'ofetch'
 import snakecaseKeys from 'snakecase-keys'
 import { SHORT_HASH_LENGTH } from '@/constants/common/hash'
 import type { FetchRawParameters } from '@/types/core/http'
+import { LangUtil } from '#shared/utils/core'
 
 /**
  * リクエストボディが Record 形式のオブジェクトであるか

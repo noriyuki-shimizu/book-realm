@@ -60,6 +60,7 @@
   --vt-c-red-5: #ffe6e6;
   --vt-c-red-10: #fcc;
   --vt-c-red-20: #f99;
+  --vt-c-red-25: #ff8080;
   --vt-c-red-30: #f66;
   --vt-c-red-40: #f33;
   --vt-c-red-50: #f00;
@@ -107,6 +108,13 @@
 
   /* semantic color variables for this project */
   --color-text: var(--vt-c-gray-75);
+  --color-dark-text: var(--vt-c-gray-110);
+  --color-text-light-normal: var(--vt-c-gray-60);
+  --color-text-light-processing: var(--vt-c-blue-60);
+  --color-text-light-primary: var(--vt-c-orange-60);
+  --color-text-light-success: var(--vt-c-green-60);
+  --color-text-light-error: var(--vt-c-red-50);
+  --color-text-light-warning: var(--vt-c-yellow-60);
   --color-text-disabled: var(--vt-c-gray-110);
   --color-text-normal: var(--vt-c-gray-100);
   --color-text-processing: var(--vt-c-blue-100);
@@ -118,7 +126,7 @@
   --color-text-link: var(--vt-c-blue-55);
   --color-background-disabled: var(--vt-c-gray-40);
   --color-background-normal: var(--vt-c-gray-30);
-  --color-background-hover-normal: var(--vt-c-gray-20);
+  --color-background-hover-normal: var(--vt-c-gray-10);
   --color-background-light: var(--vt-c-white);
   --color-background-light-normal: var(--vt-c-gray-20);
   --color-background-light-processing: var(--vt-c-blue-40);
@@ -133,20 +141,25 @@
   --color-background-light-hover-error: var(--vt-c-red-20);
   --color-background-light-hover-warning: var(--vt-c-yellow-30);
   --color-background-light-drag-over: var(--vt-c-blue-5);
+  --color-background-input-error: var(--vt-c-red-5);
+  --color-background-tag-red: var(--vt-c-red-25);
+  --color-border-light: var(--vt-c-gray-30);
   --color-border-normal: var(--vt-c-gray-70);
   --color-border-processing: var(--vt-c-blue-70);
   --color-border-primary: var(--vt-c-orange-70);
   --color-border-success: var(--vt-c-green-70);
-  --color-border-error: var(--vt-c-red-70);
+  --color-border-error: var(--vt-c-red-60);
   --color-border-warning: var(--vt-c-yellow-70);
+  --color-focus-visible-outline: var(--vt-c-blue-50);
   --font-size-root: 16;
   --line-height-root: 24;
   --pc-max-width: 1280px;
   --sp-max-width: 896px;
+  --auth-container-max-width: 400px;
 }
 
 html {
-  @include font.font-size(var(--font-size-root));
+  @include font.font-size(var(--font-size-root), var(--line-height-root));
 
   height: 100%;
   font-family: YuGothic, 'Yu Gothic M', 'Yu Gothic Medium', sans-serif;

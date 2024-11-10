@@ -7,12 +7,12 @@ import { useCommonLogApiStore } from '@/store/common/log'
  */
 const recordNuxtApiAccessLog = (to: RouteLocationNormalized): void => {
   const runtimeConfig = useRuntimeConfig()
-  const { isProduction } = runtimeConfig.public
+  const { isProduction, pageBaseUrl } = runtimeConfig.public
 
   if (isProduction) {
     const commonLogApiStore = useCommonLogApiStore()
 
-    commonLogApiStore.postAccessLog(to)
+    commonLogApiStore.postAccessLog(pageBaseUrl, to)
   }
 }
 

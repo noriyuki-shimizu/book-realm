@@ -1,6 +1,6 @@
-import { isChangingPage } from '#app/components/utils'
 import type { RouterConfig } from '@nuxt/schema'
 import type { RouteLocationNormalized, RouterScrollBehavior } from 'vue-router'
+import { isChangingPage } from '#app/components/utils'
 import { appPageTransition as defaultPageTransition } from '#build/nuxt.config.mjs'
 
 type ScrollPosition = Awaited<ReturnType<RouterScrollBehavior>>

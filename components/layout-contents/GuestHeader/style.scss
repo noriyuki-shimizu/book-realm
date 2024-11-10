@@ -1,0 +1,14 @@
+@use '/assets/style/mixin/font' as font;
+@use '@/assets/style/mixin/mediaQuery' as mediaQuery;
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 40px;
+  background-color: var(--color-background-light);
+
+  @include mediaQuery.media {
+    padding: 16px;
+  }
+}
