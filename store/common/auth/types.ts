@@ -8,4 +8,8 @@ export type ApiState = {
   signUpResponse: ApiResponseState<void> | null
   /** Google ログインレスポンス */
   signInGoogleResponse: ApiResponseState<void> | null
+  /** パスワードリセットメール送信レスポンス */
+  sendPasswordResetEmailResponse: ApiResponseState<void> | null
+  /** パスワードリセットレスポンス */
+  passwordResetResponse: ApiResponseState<void> | null
 }

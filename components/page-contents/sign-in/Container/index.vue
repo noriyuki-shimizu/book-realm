@@ -6,10 +6,13 @@ const cssModule = useCssModule('classes')
 </script>
 
 <template>
-  <section :class="cssModule['container']">
-    <h1 :class="cssModule['container__title']">ログイン</h1>
-    <FormBody />
-  </section>
+  <div :class="cssModule['container']">
+    <img src="@/assets/img/book-realm.jpg" alt="" :class="cssModule['container__img']" />
+    <section :class="cssModule['container__form']">
+      <h1 :class="cssModule['container__title']">ログイン</h1>
+      <FormBody />
+    </section>
+  </div>
 </template>
 
 <style module="classes" lang="scss">

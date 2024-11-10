@@ -1,0 +1,45 @@
+@use '@/assets/style/mixin/font' as font;
+
+.password-form {
+  display: flex;
+  flex-direction: column;
+
+  &__item {
+    margin-bottom: 16px;
+  }
+
+  &__input-item {
+    display: block;
+    height: 100%;
+    margin-bottom: 4px;
+  }
+
+  &__alert-message {
+    margin-bottom: 16px;
+  }
+}
+
+.check-list {
+  list-style: none;
+
+  &__item {
+    @include font.font-size(14, 20);
+
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+
+  &__icon {
+    width: 16px;
+    height: 16px;
+
+    &--success {
+      color: var(--color-text-light-success);
+    }
+
+    &--error {
+      color: var(--color-text-light-error);
+    }
+  }
+}

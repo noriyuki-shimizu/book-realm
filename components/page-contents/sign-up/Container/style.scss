@@ -1,11 +1,17 @@
 @use '@/assets/style/mixin/font' as font;
+@use '@/assets/style/mixin/mediaQuery' as mediaQuery;
 
 .container {
-  max-width: 400px;
+  width: var(--auth-container-max-width);
+  max-width: var(--auth-container-max-width);
   margin: 0 auto;
   background-color: var(--color-background-light);
   border: 1px solid var(--color-border-light);
   border-radius: 8px;
+
+  @include mediaQuery.media {
+    width: auto;
+  }
 
   &__title {
     @include font.font-size(24, 24);

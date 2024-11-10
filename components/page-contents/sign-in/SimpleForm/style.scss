@@ -45,4 +45,16 @@
   &__button {
     margin-bottom: 24px;
   }
+
+  &__link-body {
+    display: inline-flex;
+    gap: 4px;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  &__icon {
+    width: 16px;
+    height: 16px;
+  }
 }

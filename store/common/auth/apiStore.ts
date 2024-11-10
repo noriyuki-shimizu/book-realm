@@ -1,9 +1,12 @@
 import {
+  confirmPasswordReset,
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
-  signOut
+  signOut,
+  verifyPasswordResetCode
 } from 'firebase/auth'
 import type { Auth } from 'firebase/auth'
 import type { ApiState } from './types'
@@ -19,7 +22,9 @@ export const useCommonAuthApiStore = defineStore('common-api-auth-store', {
     return {
       signInResponse: null,
       signUpResponse: null,
-      signInGoogleResponse: null
+      signInGoogleResponse: null,
+      sendPasswordResetEmailResponse: null,
+      passwordResetResponse: null
     }
   },
   getters: {},
@@ -96,6 +101,50 @@ export const useCommonAuthApiStore = defineStore('common-api-auth-store', {
      */
     async signOut(auth: Auth): Promise<void> {
       await signOut(auth)
+    },
+    /**
+     * パスワードリセットメールを送信する
+     * @param {Auth} auth Firebase Auth
+     * @param {string} email メールアドレス
+     */
+    async sendPasswordResetEmail(auth: Auth, email: string): Promise<void> {
+      try {
+        await sendPasswordResetEmail(auth, email)
+        this.sendPasswordResetEmailResponse = {
+          data: null,
+          status: StatusCode.STATUS_CODE_OK,
+          error: null
+        }
+      } catch (err) {
+        const nuxtErr = ErrorUtil.convertNuxtError(err)
+        this.sendPasswordResetEmailResponse = {
+          data: null,
+          status: nuxtErr.statusCode ?? StatusCode.STATUS_CODE_INTERNAL_SERVER_ERROR,
+          error: nuxtErr
+        }
+      }
+    },
+    async passwordReset(auth: Auth, password: string, resetParam: { mode: string; oobCode: string }) {
+      try {
+        const { mode, oobCode } = resetParam
+        if (mode !== 'resetPassword') {
+          throw new Error('Invalid mode')
+        }
+        await verifyPasswordResetCode(auth, oobCode)
+        await confirmPasswordReset(auth, oobCode, password)
+        this.passwordResetResponse = {
+          data: null,
+          status: StatusCode.STATUS_CODE_OK,
+          error: null
+        }
+      } catch (err) {
+        const nuxtErr = ErrorUtil.convertNuxtError(err)
+        this.passwordResetResponse = {
+          data: null,
+          status: nuxtErr.statusCode ?? StatusCode.STATUS_CODE_INTERNAL_SERVER_ERROR,
+          error: nuxtErr
+        }
+      }
     }
   }
 })

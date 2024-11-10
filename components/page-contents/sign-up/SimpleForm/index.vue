@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { ZodIssueCode } from 'zod'
 import { useCommonAuthApiStore } from '@/store/common/auth'
-import { useUiStore } from '@/store/page/sign-up'
+import { useUiStore, FormKey } from '@/store/page/sign-up'
 import CheckSolidIconSvg from '@/assets/svg/check-solid-icon.svg?component'
 import XmarkSolidIconSvg from '@/assets/svg/xmark-solid-icon.svg?component'
-import type { FormKey } from '@/store/page/sign-up'
 import { LangUtil } from '#shared/utils/core'
 
 /** Firebase Auth */
@@ -36,8 +35,9 @@ const { formState, submitValidation, validation, emailErrors, passwordErrors } =
   uiStore.checkPreSubmitInvalidParam();
 
   for (const key of Object.keys(submitValidation.value)) {
-    if (submitValidation.value[key as FormKey]) {
-      document.querySelector<HTMLLabelElement>(`label[for="${key}"]`)?.focus()
+    const formKey = key as FormKey
+    if (submitValidation.value[formKey]) {
+      document.querySelector<HTMLLabelElement>(`label[for="${formKey}"]`)?.focus()
       return false;
     }
   }
@@ -65,7 +65,7 @@ const handleSubmit = async (event: Event): Promise<void> => {
 }
 
 onMounted(() => {
-  document.querySelector<HTMLLabelElement>('label[for="email"]')?.focus()
+  document.querySelector<HTMLLabelElement>(`label[for="${FormKey.email}"]`)?.focus()
 })
 </script>
 
@@ -143,11 +143,11 @@ onMounted(() => {
     </div>
     <div :class="cssModule['simple-form__item']">
       <UiPartsDataEntryInputText
-        id="confirm-password"
+        id="confirmPassword"
         :model-value="formState.confirmPassword"
         :class="cssModule['simple-form__input-item']"
         :is-error="submitValidation.confirmPassword"
-        name="confirm-password"
+        name="confirmPassword"
         type="password"
         required
         aria-describedby="password-confirm-description"

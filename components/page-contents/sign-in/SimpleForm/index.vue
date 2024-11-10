@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useCommonAuthApiStore } from '@/store/common/auth'
-import { useUiStore } from '@/store/page/sign-in'
-import type { FormKey } from '@/store/page/sign-in'
+import { useUiStore, FormKey } from '@/store/page/sign-in'
 import { LangUtil } from '#shared/utils/core'
+import CircleQuestionIconSvg from '@/assets/svg/circle-question-icon.svg?component'
 
 /** Firebase Auth */
 const auth = useFirebaseAuth()!
@@ -36,8 +36,9 @@ const handleValidation = (): boolean => {
   uiStore.checkPreSubmitInvalidParam();
 
   for (const key of Object.keys(submitValidation.value)) {
-    if (submitValidation.value[key as FormKey]) {
-      document.querySelector<HTMLLabelElement>(`label[for="${key}"]`)?.focus()
+    const formKey = key as FormKey
+    if (submitValidation.value[formKey]) {
+      document.querySelector<HTMLLabelElement>(`label[for="${formKey}"]`)?.focus()
       return false;
     }
   }
@@ -67,7 +68,7 @@ const handleSubmit = async (event: Event): Promise<void> => {
 }
 
 onMounted(() => {
-  document.querySelector<HTMLLabelElement>('label[for="email"]')?.focus()
+  document.querySelector<HTMLLabelElement>(`label[for="${FormKey.email}"]`)?.focus()
 })
 </script>
 
@@ -128,6 +129,10 @@ onMounted(() => {
         ログインに失敗しました。メールアドレス・パスワードを確認してください。
       </UiPartsFeedbackAlert>
     </template>
+    <NuxtLink to="/forgot-password" :class="cssModule['simple-form__link-body']">
+      <CircleQuestionIconSvg :class="cssModule['simple-form__icon']" />
+      <span>パスワードを忘れた方</span>
+    </NuxtLink>
     <UiPartsGeneralBasicButton :class="cssModule['simple-form__button']" type="submit" color="primary" >
       ログイン
     </UiPartsGeneralBasicButton>
