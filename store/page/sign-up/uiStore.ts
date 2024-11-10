@@ -106,3 +106,5 @@ export const useUiStore = defineStore('page-ui-sign-up-store', {
     }
   }
 })
+
+export default useUiStore

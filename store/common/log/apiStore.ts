@@ -67,3 +67,5 @@ export const useCommonLogApiStore = defineStore('common-api-log-store', {
     }
   }
 })
+
+export default useCommonLogApiStore

@@ -50,3 +50,5 @@ export const useUiStore = defineStore('page-ui-sign-in-store', {
     }
   }
 })
+
+export default useUiStore

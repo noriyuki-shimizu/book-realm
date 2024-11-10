@@ -44,3 +44,5 @@ export const useUiStore = defineStore('page-ui-top-store', {
     }
   }
 })
+
+export default useUiStore

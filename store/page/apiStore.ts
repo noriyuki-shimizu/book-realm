@@ -40,3 +40,5 @@ export const useApiStore = defineStore('page-api-top-store', {
     }
   }
 })
+
+export default useApiStore

@@ -99,3 +99,5 @@ export const useCommonAuthApiStore = defineStore('common-api-auth-store', {
     }
   }
 })
+
+export default useCommonAuthApiStore
