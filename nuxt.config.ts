@@ -4,7 +4,7 @@ import { createServiceAccount } from './functions/business/google/serviceAccount
 createServiceAccount()
 
 /** 本番モードか */
-const isProduction = process.env.NODE_ENV === 'production'
+const isProduction = import.meta.env.NODE_ENV === 'production'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({

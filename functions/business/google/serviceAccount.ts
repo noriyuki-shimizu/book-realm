@@ -4,8 +4,9 @@ import fs from 'fs'
  * Create a service account file for Google Cloud Functions
  */
 export const createServiceAccount = (): void => {
+  const outputDir = import.meta.env.NODE_ENV === 'production' ? '.vercel/output/static/_nuxt/' : ''
   fs.writeFileSync(
-    process.env.GOOGLE_APPLICATION_CREDENTIALS ?? 'service-account.json',
+    `${outputDir}${process.env.GOOGLE_APPLICATION_CREDENTIALS ?? 'service-account.json'}`,
     `{
   "type": "${process.env.GOOGLE_APPLICATION_CREDENTIAL_TYPE}",
   "project_id": "${process.env.GOOGLE_APPLICATION_CREDENTIAL_PROJECT_ID}",
