@@ -5,6 +5,10 @@ import fs from 'fs'
  */
 export const createServiceAccount = (): void => {
   const outputDir = import.meta.env.NODE_ENV === 'production' ? '.vercel/output/static/_nuxt/' : ''
+  if (!fs.existsSync(outputDir)) {
+    fs.mkdirSync(outputDir, { recursive: true })
+  }
+
   fs.writeFileSync(
     `${outputDir}${process.env.GOOGLE_APPLICATION_CREDENTIALS ?? 'service-account.json'}`,
     `{
