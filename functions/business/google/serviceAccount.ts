@@ -4,15 +4,8 @@ import fs from 'fs'
  * Create a service account file for Google Cloud Functions
  */
 export const createServiceAccount = (): void => {
-  const outputDir = import.meta.env.NODE_ENV === 'production'
-    ? '/var/task/'
-    : ''
-  if (outputDir !== '' && !fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir, { recursive: true })
-  }
-
   fs.writeFileSync(
-    `${outputDir}${process.env.GOOGLE_APPLICATION_CREDENTIALS ?? 'service-account.json'}`,
+    `${process.cwd()}/${process.env.GOOGLE_APPLICATION_CREDENTIALS ?? 'service-account.json'}`,
     `{
   "type": "${process.env.GOOGLE_APPLICATION_CREDENTIAL_TYPE}",
   "project_id": "${process.env.GOOGLE_APPLICATION_CREDENTIAL_PROJECT_ID}",
