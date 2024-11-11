@@ -4,8 +4,10 @@ import fs from 'fs'
  * Create a service account file for Google Cloud Functions
  */
 export const createServiceAccount = (): void => {
-  const outputDir = import.meta.env.NODE_ENV === 'production' ? '.vercel/output/static/_nuxt/' : ''
-  if (!fs.existsSync(outputDir)) {
+  const outputDir = import.meta.env.NODE_ENV === 'production'
+    ? '.vercel/output/functions/__nitro.func/chunks/build/'
+    : ''
+  if (outputDir !== '' && !fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true })
   }
 
