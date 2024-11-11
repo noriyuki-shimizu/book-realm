@@ -5,7 +5,7 @@ import fs from 'fs'
  */
 export const createServiceAccount = (): void => {
   const outputDir = import.meta.env.NODE_ENV === 'production'
-    ? '.vercel/output/functions/__nitro.func/chunks/build/'
+    ? '/var/task/'
     : ''
   if (outputDir !== '' && !fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true })
