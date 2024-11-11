@@ -1,7 +1,4 @@
 import viteSvgLoader from 'vite-svg-loader'
-import { createServiceAccount } from './functions/business/google/serviceAccount'
-
-createServiceAccount()
 
 /** 本番モードか */
 const isProduction = import.meta.env.NODE_ENV === 'production'
