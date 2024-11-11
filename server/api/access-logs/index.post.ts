@@ -14,6 +14,7 @@ export default defineEventHandler(async (event) => {
   consola.level = config.public.logLevel
   const body: AccessLogRequestBody = camelcaseKeys(await readBody(event), { deep: true })
 
+  consola.info(process.env.PWD)
   consola.info(
     JSON.stringify({
       time: DateUtil.getNow().format(DATE_TIME_YYYYMMDDHHMMSS_COLON),
