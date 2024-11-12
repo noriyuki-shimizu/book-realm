@@ -32,17 +32,17 @@ const { formState, submitValidation, validation, emailErrors, passwordErrors } =
  * @returns {boolean} バリデーション結果
  */
  const handleValidation = (): boolean => {
-  uiStore.checkPreSubmitInvalidParam();
+  uiStore.checkPreSubmitInvalidParam()
 
   for (const key of Object.keys(submitValidation.value)) {
     const formKey = key as FormKey
     if (submitValidation.value[formKey]) {
       document.querySelector<HTMLLabelElement>(`label[for="${formKey}"]`)?.focus()
-      return false;
+      return false
     }
   }
 
-  return true;
+  return true
 }
 
 /**

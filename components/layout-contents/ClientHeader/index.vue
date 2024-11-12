@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { User } from 'firebase/auth';
+import type { User } from 'firebase/auth'
 import IconLink from '../IconLink/index.vue'
 import { useCommonAuthApiStore } from '@/store/common/auth'
 import UserIconSvg from '@/assets/svg/user-icon.svg?component'

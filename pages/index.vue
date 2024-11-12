@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import type { User } from 'firebase/auth';
+import type { User } from 'firebase/auth'
+import { callWithNuxt } from '#app'
 import { LangUtil } from '#shared/utils/core'
 
 /** Runtime Config */
@@ -27,8 +28,9 @@ definePageMeta({
   layout: false,
   middleware: [
     async () => {
+      const nuxtApp = useNuxtApp()
       const user: User | null = await getCurrentUser()
-      setPageLayout(!LangUtil.isNil(user) ? 'client' : 'guest')
+      callWithNuxt(nuxtApp, setPageLayout, [!LangUtil.isNil(user) ? 'client' : 'guest'])
     },
   ]
 })

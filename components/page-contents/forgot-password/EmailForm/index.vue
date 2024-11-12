@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useCommonAuthApiStore } from '@/store/common/auth'
-import type { EmailFormKey} from '@/store/page/forgot-password';
+import type { EmailFormKey} from '@/store/page/forgot-password'
 import { useUiStore } from '@/store/page/forgot-password'
 
 /** Firebase Auth */
@@ -35,11 +35,11 @@ const handleEmailValidation = (): boolean => {
     const emailFormKey = key as EmailFormKey
     if (emailSubmitValidation.value[emailFormKey]) {
       document.querySelector<HTMLLabelElement>(`label[for="${emailFormKey}"]`)?.focus()
-      return false;
+      return false
     }
   }
 
-  return true;
+  return true
 }
 
 /**
