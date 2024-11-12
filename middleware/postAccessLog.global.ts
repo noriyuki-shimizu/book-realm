@@ -1,4 +1,20 @@
+import type { RouteLocationNormalized } from '#vue-router'
 import { useCommonLogApiStore } from '@/store/common/log'
+
+/**
+ * アクセスログを記録する
+ * @param {RouteLocationNormalized} to - 現在のルート情報
+ */
+const recordNuxtApiAccessLog = (to: RouteLocationNormalized): void => {
+  const runtimeConfig = useRuntimeConfig()
+  const { isProduction, pageBaseUrl } = runtimeConfig.public
+
+  if (isProduction) {
+    const commonLogApiStore = useCommonLogApiStore()
+
+    commonLogApiStore.postAccessLog(pageBaseUrl, to)
+  }
+}
 
 /**
  * アクセスログ保存処理
@@ -10,12 +26,5 @@ export default defineNuxtRouteMiddleware(async (to) => {
     return
   }
 
-  const runtimeConfig = useRuntimeConfig()
-  const { isProduction, pageBaseUrl } = runtimeConfig.public
-
-  if (isProduction) {
-    const commonLogApiStore = useCommonLogApiStore()
-
-    commonLogApiStore.postAccessLog(pageBaseUrl, to)
-  }
+  recordNuxtApiAccessLog(to)
 })
