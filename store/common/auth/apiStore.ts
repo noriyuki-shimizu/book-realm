@@ -34,7 +34,10 @@ export const useCommonAuthApiStore = defineStore('common-api-auth-store', {
      * @param {Auth} auth Firebase Auth
      * @param {{ email: string; password: string }} body リクエストボディ
      */
-    async signIn(auth: Auth, body: { email: string; password: string }): Promise<void> {
+    async signIn(
+      auth: Auth,
+      body: { email: string; password: string }
+    ): Promise<void> {
       try {
         await signInWithEmailAndPassword(auth, body.email, body.password)
         this.signInResponse = {
@@ -46,7 +49,8 @@ export const useCommonAuthApiStore = defineStore('common-api-auth-store', {
         const nuxtErr = ErrorUtil.convertNuxtError(err)
         this.signInResponse = {
           data: null,
-          status: nuxtErr.statusCode ?? StatusCode.STATUS_CODE_INTERNAL_SERVER_ERROR,
+          status: nuxtErr.statusCode
+            ?? StatusCode.STATUS_CODE_INTERNAL_SERVER_ERROR,
           error: nuxtErr
         }
       }
@@ -56,7 +60,10 @@ export const useCommonAuthApiStore = defineStore('common-api-auth-store', {
      * @param {Auth} auth Firebase Auth
      * @param {{ email: string; password: string }} body リクエストボディ
      */
-    async signUp(auth: Auth, body: { email: string; password: string }): Promise<void> {
+    async signUp(
+      auth: Auth,
+      body: { email: string; password: string }
+    ): Promise<void> {
       try {
         await createUserWithEmailAndPassword(auth, body.email, body.password)
         this.signUpResponse = {
@@ -68,7 +75,8 @@ export const useCommonAuthApiStore = defineStore('common-api-auth-store', {
         const nuxtErr = ErrorUtil.convertNuxtError(err)
         this.signUpResponse = {
           data: null,
-          status: nuxtErr.statusCode ?? StatusCode.STATUS_CODE_INTERNAL_SERVER_ERROR,
+          status: nuxtErr.statusCode
+            ?? StatusCode.STATUS_CODE_INTERNAL_SERVER_ERROR,
           error: nuxtErr
         }
       }
@@ -90,7 +98,8 @@ export const useCommonAuthApiStore = defineStore('common-api-auth-store', {
         const nuxtErr = ErrorUtil.convertNuxtError(err)
         this.signInGoogleResponse = {
           data: null,
-          status: nuxtErr.statusCode ?? StatusCode.STATUS_CODE_INTERNAL_SERVER_ERROR,
+          status: nuxtErr.statusCode
+            ?? StatusCode.STATUS_CODE_INTERNAL_SERVER_ERROR,
           error: nuxtErr
         }
       }
@@ -119,12 +128,17 @@ export const useCommonAuthApiStore = defineStore('common-api-auth-store', {
         const nuxtErr = ErrorUtil.convertNuxtError(err)
         this.sendPasswordResetEmailResponse = {
           data: null,
-          status: nuxtErr.statusCode ?? StatusCode.STATUS_CODE_INTERNAL_SERVER_ERROR,
+          status: nuxtErr.statusCode
+            ?? StatusCode.STATUS_CODE_INTERNAL_SERVER_ERROR,
           error: nuxtErr
         }
       }
     },
-    async passwordReset(auth: Auth, password: string, resetParam: { mode: string; oobCode: string }) {
+    async passwordReset(
+      auth: Auth,
+      password: string,
+      resetParam: { mode: string; oobCode: string }
+    ) {
       try {
         const { mode, oobCode } = resetParam
         if (mode !== 'resetPassword') {
@@ -141,7 +155,8 @@ export const useCommonAuthApiStore = defineStore('common-api-auth-store', {
         const nuxtErr = ErrorUtil.convertNuxtError(err)
         this.passwordResetResponse = {
           data: null,
-          status: nuxtErr.statusCode ?? StatusCode.STATUS_CODE_INTERNAL_SERVER_ERROR,
+          status: nuxtErr.statusCode
+            ?? StatusCode.STATUS_CODE_INTERNAL_SERVER_ERROR,
           error: nuxtErr
         }
       }

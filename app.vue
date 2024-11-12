@@ -5,7 +5,7 @@ import { MAIN_HEAD_LINK } from '@/constants/components/head/link'
 const { isLoading } = useLoadingIndicator()
 
 useHead({
-  link: MAIN_HEAD_LINK,
+  link: MAIN_HEAD_LINK
 })
 </script>
 

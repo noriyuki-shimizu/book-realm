@@ -20,7 +20,9 @@ export const FormState = z.object({
     .max(255)
     .regex(PASSWORD_POLICY_REGEX.requiresUppercase, { message: 'uppercase' })
     .regex(PASSWORD_POLICY_REGEX.requiresLowercase, { message: 'lowercase' })
-    .regex(PASSWORD_POLICY_REGEX.requiresSpecialCharacter, { message: 'specialCharacter' })
+    .regex(PASSWORD_POLICY_REGEX.requiresSpecialCharacter, {
+      message: 'specialCharacter'
+    })
     .regex(PASSWORD_POLICY_REGEX.requiresDigit, { message: 'digit' }),
   [FormKey.confirmPassword]: z
     .string()
@@ -28,7 +30,9 @@ export const FormState = z.object({
     .max(255)
     .regex(PASSWORD_POLICY_REGEX.requiresUppercase, { message: 'uppercase' })
     .regex(PASSWORD_POLICY_REGEX.requiresLowercase, { message: 'lowercase' })
-    .regex(PASSWORD_POLICY_REGEX.requiresSpecialCharacter, { message: 'specialCharacter' })
+    .regex(PASSWORD_POLICY_REGEX.requiresSpecialCharacter, {
+      message: 'specialCharacter'
+    })
     .regex(PASSWORD_POLICY_REGEX.requiresDigit, { message: 'digit' })
 })
 
@@ -48,7 +52,9 @@ export const FormStatePassword = FormState.pick({ password: true })
 export type FormStatePassword = z.infer<typeof FormStatePassword>
 
 /** 確認用パスワードのバリデーション設定 */
-export const FormStateConfirmPassword = FormState.pick({ confirmPassword: true })
+export const FormStateConfirmPassword = FormState.pick({
+  confirmPassword: true
+})
 
 /** 確認用パスワードのバリデーション型 */
 export type FormStateConfirmPassword = z.infer<typeof FormStateConfirmPassword>

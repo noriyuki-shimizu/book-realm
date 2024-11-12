@@ -18,4 +18,3 @@ const cssModule = useCssModule('classes')
 <style module="classes" lang="scss">
 @use './style.scss';
 </style>
-

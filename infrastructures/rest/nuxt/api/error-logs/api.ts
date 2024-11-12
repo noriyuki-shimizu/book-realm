@@ -6,7 +6,9 @@ import type { ErrorLogRequestBody } from '@/types/nuxt-api/error-log/http'
  * @param {ErrorLogRequestBody} body - リクエストボディ
  * @returns {Promise<AppFetchResponse<void>>} - API レスポンス
  */
-export const post = (body: ErrorLogRequestBody): Promise<AppFetchResponse<void>> => {
+export const post = (
+  body: ErrorLogRequestBody
+): Promise<AppFetchResponse<void>> => {
   const { $nuxtServerHttpClient } = useNuxtApp()
 
   return $nuxtServerHttpClient('/api/error-logs', {

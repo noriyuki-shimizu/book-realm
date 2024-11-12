@@ -1,10 +1,11 @@
 // @ts-check
 // @ts-ignore
-import eslintConfigPrettier from 'eslint-config-prettier'
 import gitignore from 'eslint-config-flat-gitignore'
-import pluginVueA11y from 'eslint-plugin-vuejs-accessibility'
+// @ts-ignore
+import eslintConfigPrettier from 'eslint-config-prettier'
 import eslintPluginImportX from 'eslint-plugin-import-x'
 import eslintPluginUnusedImports from 'eslint-plugin-unused-imports'
+import pluginVueA11y from 'eslint-plugin-vuejs-accessibility'
 import globals from 'globals'
 import { withNuxt } from './.nuxt/eslint.config.mjs'
 
@@ -68,7 +69,15 @@ export default withNuxt([
       'import-x/order': [
         'error',
         {
-          groups: ['builtin', 'external', 'index', 'parent', 'sibling', 'internal', 'object']
+          groups: [
+            'builtin',
+            'external',
+            'index',
+            'parent',
+            'sibling',
+            'internal',
+            'object'
+          ]
         }
       ],
       'import-x/no-self-import': 'off',

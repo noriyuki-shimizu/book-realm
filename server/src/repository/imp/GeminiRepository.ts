@@ -28,7 +28,10 @@ export class GeminiRepository implements IGeminiRepository {
     return this.instance
   }
 
-  public async findByImage(image: Buffer, mimeType: string): Promise<GenerateContentResult> {
+  public async findByImage(
+    image: Buffer,
+    mimeType: string
+  ): Promise<GenerateContentResult> {
     const prompt = `
       こちらの写真にある本のタイトルを1冊1冊正しく抜き取ってください。
       情報は下記の JSON 形式で出力してください。

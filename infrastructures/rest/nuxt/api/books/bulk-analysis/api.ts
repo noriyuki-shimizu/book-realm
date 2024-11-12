@@ -12,8 +12,11 @@ export const postRequest = async (
 ): Promise<AppFetchResponse<BookBulkAnalysisPostResponse>> => {
   const { $nuxtServerHttpClient } = useNuxtApp()
 
-  return $nuxtServerHttpClient<BookBulkAnalysisPostResponse>('/api/books/bulk-analysis', {
-    method: 'POST',
-    body
-  })
+  return $nuxtServerHttpClient<BookBulkAnalysisPostResponse>(
+    '/api/books/bulk-analysis',
+    {
+      method: 'POST',
+      body
+    }
+  )
 }

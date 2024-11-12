@@ -16,13 +16,7 @@ const onClick = async () => {
   <div :class="cssModule['header-content']">
     <IconLink />
     <div :class="cssModule['header-content__navigate']">
-      <UiPartsGeneralBasicButton
-        type="button"
-        color="primary"
-        @click="onClick"
-      >
-        ログイン
-      </UiPartsGeneralBasicButton>
+      <UiPartsGeneralBasicButton type="button" color="primary" @click="onClick"> ログイン </UiPartsGeneralBasicButton>
     </div>
   </div>
 </template>

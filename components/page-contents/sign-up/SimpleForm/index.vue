@@ -31,7 +31,7 @@ const { formState, submitValidation, validation, emailErrors, passwordErrors } =
  * バリデーション処理の実行
  * @returns {boolean} バリデーション結果
  */
- const handleValidation = (): boolean => {
+const handleValidation = (): boolean => {
   uiStore.checkPreSubmitInvalidParam()
 
   for (const key of Object.keys(submitValidation.value)) {
@@ -87,8 +87,18 @@ onMounted(() => {
       </UiPartsDataEntryInputText>
       <ul :class="cssModule['check-list']" aria-label="パスワードポリシーチェックリスト">
         <li :class="cssModule['check-list__item']" aria-live="polite">
-          <CheckSolidIconSvg v-show="!LangUtil.isNull(validation.email) && !emailErrors.some((error) => error.code === ZodIssueCode.invalid_string)" role="img" aria-label="有効" :class="[cssModule['check-list__icon'], cssModule['check-list__icon--success']]" />
-          <XmarkSolidIconSvg v-show="LangUtil.isNull(validation.email) || emailErrors.some((error) => error.code === ZodIssueCode.invalid_string)" role="img" aria-label="無効" :class="[cssModule['check-list__icon'], cssModule['check-list__icon--error']]" />
+          <CheckSolidIconSvg
+            v-show="!LangUtil.isNull(validation.email) && !emailErrors.some((error) => error.code === ZodIssueCode.invalid_string)"
+            role="img"
+            aria-label="有効"
+            :class="[cssModule['check-list__icon'], cssModule['check-list__icon--success']]"
+          />
+          <XmarkSolidIconSvg
+            v-show="LangUtil.isNull(validation.email) || emailErrors.some((error) => error.code === ZodIssueCode.invalid_string)"
+            role="img"
+            aria-label="無効"
+            :class="[cssModule['check-list__icon'], cssModule['check-list__icon--error']]"
+          />
           <span>メールアドレスの形式</span>
         </li>
       </ul>
@@ -110,33 +120,92 @@ onMounted(() => {
       <ul :class="cssModule['check-list']" aria-label="パスワードポリシーチェックリスト">
         <li :class="cssModule['check-list__item']" aria-live="polite">
           <CheckSolidIconSvg
-            v-show="!LangUtil.isNull(validation.password) && !passwordErrors.some((error) => error.code === ZodIssueCode.too_small)" role="img" aria-label="有効" :class="[cssModule['check-list__icon'], cssModule['check-list__icon--success']]" />
-          <XmarkSolidIconSvg v-show="LangUtil.isNull(validation.password) || passwordErrors.some((error) => error.code === ZodIssueCode.too_small)" role="img" aria-label="無効" :class="[cssModule['check-list__icon'], cssModule['check-list__icon--error']]" />
+            v-show="!LangUtil.isNull(validation.password) && !passwordErrors.some((error) => error.code === ZodIssueCode.too_small)"
+            role="img"
+            aria-label="有効"
+            :class="[cssModule['check-list__icon'], cssModule['check-list__icon--success']]"
+          />
+          <XmarkSolidIconSvg
+            v-show="LangUtil.isNull(validation.password) || passwordErrors.some((error) => error.code === ZodIssueCode.too_small)"
+            role="img"
+            aria-label="無効"
+            :class="[cssModule['check-list__icon'], cssModule['check-list__icon--error']]"
+          />
           <span>６文字以上</span>
         </li>
         <li :class="cssModule['check-list__item']" aria-live="polite">
-          <CheckSolidIconSvg v-show="!LangUtil.isNull(validation.password) && !passwordErrors.some((error) => error.code === ZodIssueCode.too_big)" role="img" aria-label="有効" :class="[cssModule['check-list__icon'], cssModule['check-list__icon--success']]" />
-          <XmarkSolidIconSvg v-show="LangUtil.isNull(validation.password) || passwordErrors.some((error) => error.code === ZodIssueCode.too_big)" role="img" aria-label="無効" :class="[cssModule['check-list__icon'], cssModule['check-list__icon--error']]" />
+          <CheckSolidIconSvg
+            v-show="!LangUtil.isNull(validation.password) && !passwordErrors.some((error) => error.code === ZodIssueCode.too_big)"
+            role="img"
+            aria-label="有効"
+            :class="[cssModule['check-list__icon'], cssModule['check-list__icon--success']]"
+          />
+          <XmarkSolidIconSvg
+            v-show="LangUtil.isNull(validation.password) || passwordErrors.some((error) => error.code === ZodIssueCode.too_big)"
+            role="img"
+            aria-label="無効"
+            :class="[cssModule['check-list__icon'], cssModule['check-list__icon--error']]"
+          />
           <span>255文字以下</span>
         </li>
         <li :class="cssModule['check-list__item']" aria-live="polite">
-          <CheckSolidIconSvg v-show="!LangUtil.isNull(validation.password) && !passwordErrors.some((error) => error.message === 'uppercase')" role="img" aria-label="有効" :class="[cssModule['check-list__icon'], cssModule['check-list__icon--success']]" />
-          <XmarkSolidIconSvg v-show="LangUtil.isNull(validation.password) || passwordErrors.some((error) => error.message === 'uppercase')" role="img" aria-label="無効" :class="[cssModule['check-list__icon'], cssModule['check-list__icon--error']]" />
+          <CheckSolidIconSvg
+            v-show="!LangUtil.isNull(validation.password) && !passwordErrors.some((error) => error.message === 'uppercase')"
+            role="img"
+            aria-label="有効"
+            :class="[cssModule['check-list__icon'], cssModule['check-list__icon--success']]"
+          />
+          <XmarkSolidIconSvg
+            v-show="LangUtil.isNull(validation.password) || passwordErrors.some((error) => error.message === 'uppercase')"
+            role="img"
+            aria-label="無効"
+            :class="[cssModule['check-list__icon'], cssModule['check-list__icon--error']]"
+          />
           <span>大文字が含まれている</span>
         </li>
         <li :class="cssModule['check-list__item']" aria-live="polite">
-          <CheckSolidIconSvg v-show="!LangUtil.isNull(validation.password) && !passwordErrors.some((error) => error.message === 'lowercase')" role="img" aria-label="有効" :class="[cssModule['check-list__icon'], cssModule['check-list__icon--success']]" />
-          <XmarkSolidIconSvg v-show="LangUtil.isNull(validation.password) || passwordErrors.some((error) => error.message === 'lowercase')" role="img" aria-label="無効" :class="[cssModule['check-list__icon'], cssModule['check-list__icon--error']]" />
+          <CheckSolidIconSvg
+            v-show="!LangUtil.isNull(validation.password) && !passwordErrors.some((error) => error.message === 'lowercase')"
+            role="img"
+            aria-label="有効"
+            :class="[cssModule['check-list__icon'], cssModule['check-list__icon--success']]"
+          />
+          <XmarkSolidIconSvg
+            v-show="LangUtil.isNull(validation.password) || passwordErrors.some((error) => error.message === 'lowercase')"
+            role="img"
+            aria-label="無効"
+            :class="[cssModule['check-list__icon'], cssModule['check-list__icon--error']]"
+          />
           <span>小文字が含まれている</span>
         </li>
         <li :class="cssModule['check-list__item']" aria-live="polite">
-          <CheckSolidIconSvg v-show="!LangUtil.isNull(validation.password) && !passwordErrors.some((error) => error.message === 'specialCharacter')" role="img" aria-label="有効" :class="[cssModule['check-list__icon'], cssModule['check-list__icon--success']]" />
-          <XmarkSolidIconSvg v-show="LangUtil.isNull(validation.password) || passwordErrors.some((error) => error.message === 'specialCharacter')" role="img" aria-label="無効" :class="[cssModule['check-list__icon'], cssModule['check-list__icon--error']]" />
+          <CheckSolidIconSvg
+            v-show="!LangUtil.isNull(validation.password) && !passwordErrors.some((error) => error.message === 'specialCharacter')"
+            role="img"
+            aria-label="有効"
+            :class="[cssModule['check-list__icon'], cssModule['check-list__icon--success']]"
+          />
+          <XmarkSolidIconSvg
+            v-show="LangUtil.isNull(validation.password) || passwordErrors.some((error) => error.message === 'specialCharacter')"
+            role="img"
+            aria-label="無効"
+            :class="[cssModule['check-list__icon'], cssModule['check-list__icon--error']]"
+          />
           <span>特殊文字が含まれている</span>
         </li>
         <li :class="cssModule['check-list__item']" aria-live="polite">
-          <CheckSolidIconSvg v-show="!LangUtil.isNull(validation.password) && !passwordErrors.some((error) => error.message === 'digit')" role="img" aria-label="有効" :class="[cssModule['check-list__icon'], cssModule['check-list__icon--success']]" />
-          <XmarkSolidIconSvg v-show="LangUtil.isNull(validation.password) || passwordErrors.some((error) => error.message === 'digit')" role="img" aria-label="無効" :class="[cssModule['check-list__icon'], cssModule['check-list__icon--error']]" />
+          <CheckSolidIconSvg
+            v-show="!LangUtil.isNull(validation.password) && !passwordErrors.some((error) => error.message === 'digit')"
+            role="img"
+            aria-label="有効"
+            :class="[cssModule['check-list__icon'], cssModule['check-list__icon--success']]"
+          />
+          <XmarkSolidIconSvg
+            v-show="LangUtil.isNull(validation.password) || passwordErrors.some((error) => error.message === 'digit')"
+            role="img"
+            aria-label="無効"
+            :class="[cssModule['check-list__icon'], cssModule['check-list__icon--error']]"
+          />
           <span>数字が含まれている</span>
         </li>
       </ul>
@@ -157,8 +226,26 @@ onMounted(() => {
       </UiPartsDataEntryInputText>
       <ul :class="cssModule['check-list']" aria-label="パスワードポリシーチェックリスト">
         <li :class="cssModule['check-list__item']" aria-live="polite">
-          <CheckSolidIconSvg v-show="!LangUtil.isNull(validation.confirmPassword) && !LangUtil.isEmpty(formState.confirmPassword) && formState.password === formState.confirmPassword" role="img" aria-label="有効" :class="[cssModule['check-list__icon'], cssModule['check-list__icon--success']]" />
-          <XmarkSolidIconSvg v-show="LangUtil.isNull(validation.confirmPassword) || LangUtil.isEmpty(formState.confirmPassword) || formState.password !== formState.confirmPassword" role="img" aria-label="無効" :class="[cssModule['check-list__icon'], cssModule['check-list__icon--error']]" />
+          <CheckSolidIconSvg
+            v-show="
+              !LangUtil.isNull(validation.confirmPassword) &&
+              !LangUtil.isEmpty(formState.confirmPassword) &&
+              formState.password === formState.confirmPassword
+            "
+            role="img"
+            aria-label="有効"
+            :class="[cssModule['check-list__icon'], cssModule['check-list__icon--success']]"
+          />
+          <XmarkSolidIconSvg
+            v-show="
+              LangUtil.isNull(validation.confirmPassword) ||
+              LangUtil.isEmpty(formState.confirmPassword) ||
+              formState.password !== formState.confirmPassword
+            "
+            role="img"
+            aria-label="無効"
+            :class="[cssModule['check-list__icon'], cssModule['check-list__icon--error']]"
+          />
           <span>パスワード一致</span>
         </li>
       </ul>
@@ -189,18 +276,10 @@ onMounted(() => {
         <template v-if="signUpResponse.error.message?.includes('email-already-in-use')">
           入力されたメールアドレスは既に登録されています。ログイン画面からログインしてください。
         </template>
-        <template v-else>
-          アカウント登録に失敗しました。メールアドレス・パスワードを確認してください。
-        </template>
+        <template v-else> アカウント登録に失敗しました。メールアドレス・パスワードを確認してください。 </template>
       </UiPartsFeedbackAlert>
     </template>
-    <UiPartsGeneralBasicButton
-      :class="cssModule['simple-form__button']"
-      type="submit"
-      color="primary"
-    >
-      登録
-    </UiPartsGeneralBasicButton>
+    <UiPartsGeneralBasicButton :class="cssModule['simple-form__button']" type="submit" color="primary"> 登録 </UiPartsGeneralBasicButton>
   </form>
 </template>
 

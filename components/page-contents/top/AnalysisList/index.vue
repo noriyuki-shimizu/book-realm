@@ -71,13 +71,10 @@ const cssModule = useCssModule('classes')
             <div :class="cssModule['analysis-list__text']">
               <template v-if="LangUtil.isNull(data.publishedDate)">---</template>
               <template v-else>
-                <span :class="cssModule['analysis-list--number']">{{
-                  data.publishedDate.year
-                }}</span><span>年</span><span :class="cssModule['analysis-list--number']">{{
-                  padZero(data.publishedDate.month)
-                }}</span><span>月</span><span :class="cssModule['analysis-list--number']">{{
-                  padZero(data.publishedDate.day)
-                }}</span><span>日</span>
+                <span :class="cssModule['analysis-list--number']">{{ data.publishedDate.year }}</span
+                ><span>年</span><span :class="cssModule['analysis-list--number']">{{ padZero(data.publishedDate.month) }}</span
+                ><span>月</span><span :class="cssModule['analysis-list--number']">{{ padZero(data.publishedDate.day) }}</span
+                ><span>日</span>
               </template>
             </div>
           </li>

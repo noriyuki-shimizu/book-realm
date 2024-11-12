@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useCommonAuthApiStore } from '@/store/common/auth'
-import type { EmailFormKey} from '@/store/page/forgot-password'
+import type { EmailFormKey } from '@/store/page/forgot-password'
 import { useUiStore } from '@/store/page/forgot-password'
 
 /** Firebase Auth */
@@ -100,19 +100,12 @@ const handleEmailSubmit = async (event: Event): Promise<void> => {
       </UiPartsFeedbackAlert>
     </template>
     <template v-else-if="!LangUtil.isNull(sendPasswordResetEmailResponse) && LangUtil.isNull(sendPasswordResetEmailResponse.error)">
-      <UiPartsFeedbackAlert
-        id="email-description"
-        :class="cssModule['email-form__alert-message']"
-        type="success"
-        aria-live="assertive"
-      >
+      <UiPartsFeedbackAlert id="email-description" :class="cssModule['email-form__alert-message']" type="success" aria-live="assertive">
         パスワード再設定の案内メールを送信しました。<br />
         メールをご確認の上、再設定をお願いします。
       </UiPartsFeedbackAlert>
     </template>
-    <UiPartsGeneralBasicButton :class="cssModule['email-form__button']" type="submit" color="primary" >
-      送信
-    </UiPartsGeneralBasicButton>
+    <UiPartsGeneralBasicButton :class="cssModule['email-form__button']" type="submit" color="primary"> 送信 </UiPartsGeneralBasicButton>
   </form>
 </template>
 

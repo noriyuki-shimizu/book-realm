@@ -1,12 +1,36 @@
 {
+  "lineWidth": 140,
   "typescript": {
+    "indentWidth": 2,
     "quoteStyle": "alwaysSingle",
     "singleBodyPosition": "nextLine",
     "trailingCommas": "never",
     "semiColons": "asi",
     "module.sortImportDeclarations": "maintain"
   },
-  "json": {},
+  "prettier": {
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "quoteProps": "as-needed",
+    "jsxSingleQuote": false,
+    "bracketSpacing": true,
+    "bracketSameLine": false,
+    "arrowParens": "always",
+    "rangeStart": 0,
+    "requirePragma": false,
+    "insertPragma": false,
+    "proseWrap": "preserve",
+    "htmlWhitespaceSensitivity": "css",
+    "vueIndentScriptAndStyle": false,
+    "endOfLine": "lf",
+    "embeddedLanguageFormatting": "auto"
+  },
+  "json": {
+    "indentWidth": 2
+  },
   "markdown": {},
   "includes": [
     "**/*.{vue,md,js,jsx,cjs,mjs,ts,tsx,cts,mts,json}"
@@ -23,6 +47,7 @@
   "plugins": [
     "https://plugins.dprint.dev/typescript-0.89.3.wasm",
     "https://plugins.dprint.dev/json-0.19.2.wasm",
-    "https://plugins.dprint.dev/markdown-0.16.4.wasm"
+    "https://plugins.dprint.dev/markdown-0.16.4.wasm",
+    "https://plugins.dprint.dev/prettier-0.46.1.json@e5bd083088a8dfc6e5ce2d3c9bee81489b065bd5345ef55b59f5d96627928b7a"
   ]
 }

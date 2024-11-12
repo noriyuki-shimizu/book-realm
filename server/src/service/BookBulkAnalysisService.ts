@@ -1,6 +1,6 @@
-import { GeminiRepository } from '../repository/imp/GeminiRepository'
-import type { IGeminiRepository } from '../repository/IGeminiRepository'
 import { EnhancedGenerateContent } from '../domain/EnhancedGenerateContent'
+import type { IGeminiRepository } from '../repository/IGeminiRepository'
+import { GeminiRepository } from '../repository/imp/GeminiRepository'
 import type { BookBulkAnalysisPostResponse } from '@/types/nuxt-api/books/bulk-analysis'
 
 /** 本の一括解析におけるサービス */
@@ -35,9 +35,14 @@ export class BookBulkAnalysisService {
 
     for (const d of data) {
       if (d.name === 'file') {
-        const { response } = await this.repository.findByImage(d.data, d.type ?? 'image/png')
+        const { response } = await this.repository.findByImage(
+          d.data,
+          d.type ?? 'image/png'
+        )
         const enhancedGenerateContent = EnhancedGenerateContent.of(response)
-        const resultData = JSON.parse(enhancedGenerateContent.extractJsonFromString())
+        const resultData = JSON.parse(
+          enhancedGenerateContent.extractJsonFromString()
+        )
         resultDataList.push(resultData)
       }
     }

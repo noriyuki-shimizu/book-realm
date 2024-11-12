@@ -29,15 +29,12 @@ const cssModule = useCssModule('classes')
       </template>
       <template #title>機能を試してみる</template>
       <template #default>
-        本アプリケーションの１つ機能として、画像から書籍を解析できます。<br>
+        本アプリケーションの１つ機能として、画像から書籍を解析できます。<br />
         解析結果の正当性は保証されませんが、問題ある場合は書籍がより正確に映った画像を読み込んでください。
       </template>
     </DescriptionSection>
 
-    <template
-      v-if="!LangUtil.isNull(bookBulkAnalysisPostResponse) &&
-      !LangUtil.isNull(bookBulkAnalysisPostResponse.error)"
-    >
+    <template v-if="!LangUtil.isNull(bookBulkAnalysisPostResponse) && !LangUtil.isNull(bookBulkAnalysisPostResponse.error)">
       <UiPartsFeedbackAlert
         v-if="bookBulkAnalysisPostResponse.error.statusCode === StatusCode.STATUS_CODE_BAD_REQUEST"
         :class="cssModule['container__analysis-text']"
@@ -70,8 +67,10 @@ const cssModule = useCssModule('classes')
       </template>
       <template #title>解析結果</template>
       <template #default>
-        ファイルを解析すると、下記に解析結果が表示されます。<br>
-        アプリケーションに<span :class="cssModule['container--text-bold']"><NuxtLink to="/sign-in">ログイン</NuxtLink>すると解析結果を登録・編集する</span>ことができます。
+        ファイルを解析すると、下記に解析結果が表示されます。<br />
+        アプリケーションに<span :class="cssModule['container--text-bold']"
+          ><NuxtLink to="/sign-in">ログイン</NuxtLink>すると解析結果を登録・編集する</span
+        >ことができます。
       </template>
     </DescriptionSection>
 
