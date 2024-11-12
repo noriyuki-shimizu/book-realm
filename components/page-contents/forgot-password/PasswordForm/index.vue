@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ZodIssueCode } from 'zod';
+import { ZodIssueCode } from 'zod'
 import { useCommonAuthApiStore } from '@/store/common/auth'
-import type { PasswordFormKey} from '@/store/page/forgot-password';
+import type { PasswordFormKey} from '@/store/page/forgot-password'
 import { useUiStore } from '@/store/page/forgot-password'
 import CheckSolidIconSvg from '@/assets/svg/check-solid-icon.svg?component'
 import XmarkSolidIconSvg from '@/assets/svg/xmark-solid-icon.svg?component'
@@ -46,11 +46,11 @@ const {
     const passwordFormKey = key as PasswordFormKey
     if (passwordSubmitValidation.value[passwordFormKey]) {
       document.querySelector<HTMLLabelElement>(`label[for="${passwordFormKey}"]`)?.focus()
-      return false;
+      return false
     }
   }
 
-  return true;
+  return true
 }
 
 /**

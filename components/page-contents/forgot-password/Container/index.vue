@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import EmailForm from '../EmailForm/index.vue'
 import PasswordForm from '../PasswordForm/index.vue'
-import { EmailFormKey, PasswordFormKey } from '@/store/page/forgot-password';
+import { EmailFormKey, PasswordFormKey } from '@/store/page/forgot-password'
 import AngleLeftSolidIconSvg from '@/assets/svg/angle-left-solid-icon.svg?component'
 
 /** Route */
