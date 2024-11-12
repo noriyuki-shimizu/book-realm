@@ -89,9 +89,7 @@ const convertImageSrc = (file: File): string => {
         <UiPartsFeedbackSpinner size="small" />
         解析中...
       </div>
-      <div v-show="!pending">
-        解析する
-      </div>
+      <div v-show="!pending">解析する</div>
     </UiPartsGeneralBasicButton>
   </form>
 </template>

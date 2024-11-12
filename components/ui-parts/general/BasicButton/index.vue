@@ -4,7 +4,7 @@ import type { Props } from './types'
 /** Props */
 const props = withDefaults(defineProps<Props>(), {
   size: 'medium',
-  color: 'normal',
+  color: 'normal'
 })
 
 /** Emits */

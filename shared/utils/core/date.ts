@@ -23,7 +23,9 @@ export const getNow = (): Dayjs => {
  * @param {string} value 日付文字列
  * @returns {DateObject} 日付オブジェクト
  */
-export const parseDotSeparatedDate = (value: `${string}.${string}.${string}`): DateObject => {
+export const parseDotSeparatedDate = (
+  value: `${string}.${string}.${string}`
+): DateObject => {
   const dateParts = value.split('.').map(Number)
   const hasInvalidDatePart = dateParts.some(date => isNaN(date))
 

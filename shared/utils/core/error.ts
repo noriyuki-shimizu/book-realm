@@ -1,9 +1,9 @@
+import type { NuxtError } from '#app'
 import { FirebaseError } from 'firebase/app'
 import { FetchError } from 'ofetch'
-import type { NuxtError } from '#app'
 import { isObject, isString, isUndefined } from './lang'
-import { StatusCode } from '@/enums/common/http/statusCode'
 import { FirebaseErrorStatusCode } from '@/enums/common/firebase/code'
+import { StatusCode } from '@/enums/common/http/statusCode'
 import type { ApiResponseState } from '@/types/store/response'
 
 /**
@@ -32,7 +32,8 @@ export const convertNuxtError = (err: unknown): Partial<NuxtError> => {
       message: err.message,
       cause: err.cause,
       stack: err.stack,
-      statusCode: FirebaseErrorStatusCode[code] || StatusCode.STATUS_CODE_INTERNAL_SERVER_ERROR,
+      statusCode: FirebaseErrorStatusCode[code]
+        || StatusCode.STATUS_CODE_INTERNAL_SERVER_ERROR,
       data: err.customData
     }
   }
@@ -66,7 +67,9 @@ export const convertNuxtError = (err: unknown): Partial<NuxtError> => {
  * レスポンス配列内にステータスコードが404（Not Found）、429（Too Many Requests）、500以上（Internal Server Error）の
  * エラーレスポンスが含まれている場合、そのエラーをスローする。
  */
-export const throwFirstApiError = (apiResponses: ApiResponseState<unknown>[]): void => {
+export const throwFirstApiError = (
+  apiResponses: ApiResponseState<unknown>[]
+): void => {
   const apiErrorResponse = apiResponses.find((response) => {
     return (
       response.status === StatusCode.STATUS_CODE_NOT_FOUND

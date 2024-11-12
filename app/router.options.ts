@@ -1,6 +1,6 @@
+import { isChangingPage } from '#app/components/utils'
 import type { RouterConfig } from '@nuxt/schema'
 import type { RouteLocationNormalized, RouterScrollBehavior } from 'vue-router'
-import { isChangingPage } from '#app/components/utils'
 import { appPageTransition as defaultPageTransition } from '#build/nuxt.config.mjs'
 
 type ScrollPosition = Awaited<ReturnType<RouterScrollBehavior>>
@@ -21,7 +21,9 @@ type ScrollPosition = Awaited<ReturnType<RouterScrollBehavior>>
  * - `to.meta.scrollToTop`が関数の場合、その関数の結果を使用してスクロールするかどうかを決定
  * - 返される位置が偽値または空オブジェクトの場合、vue-routerは現在のスクロール位置を維持
  */
-function _getInitPosition(...args: Parameters<NonNullable<RouterConfig['scrollBehavior']>>): ScrollPosition {
+function _getInitPosition(
+  ...args: Parameters<NonNullable<RouterConfig['scrollBehavior']>>
+): ScrollPosition {
   const [to, from, savedPosition] = args
   // By default when the returned position is falsy or an empty object, vue-router will retain the current scroll position
   // savedPosition is only available for popstate navigations (back button)
@@ -32,7 +34,13 @@ function _getInitPosition(...args: Parameters<NonNullable<RouterConfig['scrollBe
     : to.meta.scrollToTop
 
   // Scroll to top if route is changed by default
-  if (!position && from && to && routeAllowsScrollToTop !== false && isChangingPage(to, from)) {
+  if (
+    !position
+    && from
+    && to
+    && routeAllowsScrollToTop !== false
+    && isChangingPage(to, from)
+  ) {
     return { left: 0, top: 0 }
   }
 
@@ -60,7 +68,9 @@ function _getHashElementScrollMarginTop(selector: string): number {
     if (elem) {
       return (
         Number.parseFloat(getComputedStyle(elem).scrollMarginTop)
-        + Number.parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop)
+        + Number.parseFloat(
+          getComputedStyle(document.documentElement).scrollPaddingTop
+        )
       )
     }
   } catch {
@@ -97,7 +107,11 @@ export default <RouterConfig> {
         return { left: 0, top: 0 }
       }
       if (to.hash) {
-        return { el: to.hash, top: _getHashElementScrollMarginTop(to.hash), behavior }
+        return {
+          el: to.hash,
+          top: _getHashElementScrollMarginTop(to.hash),
+          behavior
+        }
       }
       // The route isn't changing so keep current scroll position
       return false
@@ -105,12 +119,18 @@ export default <RouterConfig> {
 
     // Wait for `page:transition:finish` or `page:finish` depending on if transitions are enabled or not
     const hasTransition = (route: RouteLocationNormalized) => !!(route.meta.pageTransition ?? defaultPageTransition)
-    const hookToWait = hasTransition(from) && hasTransition(to) ? 'page:transition:finish' : 'page:finish'
+    const hookToWait = hasTransition(from) && hasTransition(to)
+      ? 'page:transition:finish'
+      : 'page:finish'
     return new Promise((resolve) => {
       nuxtApp.hooks.hookOnce(hookToWait, async () => {
         await new Promise((resolve) => setTimeout(resolve, 0))
         if (to.hash) {
-          resolve({ el: to.hash, top: _getHashElementScrollMarginTop(to.hash), behavior })
+          resolve({
+            el: to.hash,
+            top: _getHashElementScrollMarginTop(to.hash),
+            behavior
+          })
           return
         }
         resolve(position)

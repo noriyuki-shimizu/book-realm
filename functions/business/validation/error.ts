@@ -9,7 +9,9 @@ import { LangUtil } from '#shared/utils/core'
  * @param {SafeParseReturnType<T, T> | null} validation - バリデーション結果
  * @returns {ZodIssue[]} エラーの問題配列
  */
-export const errorIssues = <T>(validation: SafeParseReturnType<T, T> | null): ZodIssue[] => {
+export const errorIssues = <T>(
+  validation: SafeParseReturnType<T, T> | null
+): ZodIssue[] => {
   if (LangUtil.isNull(validation) || validation.success) {
     return []
   }

@@ -49,7 +49,9 @@ const cssModule = useCssModule('classes')
         <tbody>
           <template v-for="data in viewData" :key="data.uid">
             <tr>
-              <td :class="cssModule['analysis-table__body-cell']">{{ data.title }}</td>
+              <td :class="cssModule['analysis-table__body-cell']">
+                {{ data.title }}
+              </td>
               <td :class="cssModule['analysis-table__body-cell']">
                 <template v-if="LangUtil.isNull(data.author)">---</template>
                 <template v-else>{{ data.author }}</template>
@@ -68,18 +70,15 @@ const cssModule = useCssModule('classes')
               <td :class="cssModule['analysis-table__body-cell']">
                 <template v-if="LangUtil.isNull(data.publishedDate)">---</template>
                 <template v-else>
-                  <span :class="cssModule['analysis-table__text--number']">{{
-                    data.publishedDate.year
-                  }}</span><span>年</span><span :class="cssModule['analysis-table__text--number']">{{
-                    padZero(data.publishedDate.month)
-                  }}</span><span>月</span><span :class="cssModule['analysis-table__text--number']">{{
-                    padZero(data.publishedDate.day)
-                  }}</span><span>日</span>
+                  <span :class="cssModule['analysis-table__text--number']">{{ data.publishedDate.year }}</span
+                  ><span>年</span><span :class="cssModule['analysis-table__text--number']">{{ padZero(data.publishedDate.month) }}</span
+                  ><span>月</span><span :class="cssModule['analysis-table__text--number']">{{ padZero(data.publishedDate.day) }}</span
+                  ><span>日</span>
                 </template>
               </td>
             </tr>
           </template>
-          </tbody>
+        </tbody>
       </table>
     </template>
     <template v-else>

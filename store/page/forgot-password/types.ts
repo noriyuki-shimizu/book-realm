@@ -12,15 +12,21 @@ import type {
 /** メールフォームのバリデーション */
 export type EmailFormValidation = {
   /** メールアドレス */
-  [EmailFormKey.email]: SafeParseReturnType<FormStateEmail, FormStateEmail> | null
+  [EmailFormKey.email]:
+    | SafeParseReturnType<FormStateEmail, FormStateEmail>
+    | null
 }
 
 /** メールフォームのバリデーション */
 export type PasswordFormValidation = {
   /** パスワード */
-  [PasswordFormKey.password]: SafeParseReturnType<FormStatePassword, FormStatePassword> | null
+  [PasswordFormKey.password]:
+    | SafeParseReturnType<FormStatePassword, FormStatePassword>
+    | null
   /** 確認用パスワード */
-  [PasswordFormKey.confirmPassword]: SafeParseReturnType<FormStateConfirmPassword, FormStateConfirmPassword> | null
+  [PasswordFormKey.confirmPassword]:
+    | SafeParseReturnType<FormStateConfirmPassword, FormStateConfirmPassword>
+    | null
 }
 
 /** UI State */

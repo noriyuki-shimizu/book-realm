@@ -7,7 +7,6 @@ import type { ErrorProps } from '@/types/core/error'
 const props = defineProps<ErrorProps>()
 </script>
 
-
 <template>
   <ContentTemplate :error="props.error">
     <template #status>{{ StatusCode.STATUS_CODE_INTERNAL_SERVER_ERROR }}</template>

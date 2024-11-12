@@ -1,5 +1,5 @@
-import { useCommonLogApiStore } from '@/store/common/log'
 import { ErrorUtil } from '#shared/utils/core'
+import { useCommonLogApiStore } from '@/store/common/log'
 
 /**
  * エラーハンドリング
@@ -15,7 +15,11 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.hook('vue:error', (error, instance) => {
     if (isProduction) {
       const nuxtError = ErrorUtil.convertNuxtError(error)
-      commonLogApiStore.postErrorLog(pageBaseUrl, instance?.$route ?? route, nuxtError)
+      commonLogApiStore.postErrorLog(
+        pageBaseUrl,
+        instance?.$route ?? route,
+        nuxtError
+      )
     }
   })
 

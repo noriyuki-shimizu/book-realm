@@ -1,10 +1,10 @@
 import camelcaseKeys from 'camelcase-keys'
 import { consola } from 'consola'
 import snakecaseKeys from 'snakecase-keys'
+import { DateUtil } from '#shared/utils/core'
 import { DATE_TIME_YYYYMMDDHHMMSS_COLON } from '@/constants/date'
 import { StatusCode } from '@/enums/common/http/statusCode'
 import type { AccessLogRequestBody } from '@/types/nuxt-api/access-log/http'
-import { DateUtil } from '#shared/utils/core'
 
 /**
  * アクセスログの送信 API
@@ -12,7 +12,9 @@ import { DateUtil } from '#shared/utils/core'
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
   consola.level = config.public.logLevel
-  const body: AccessLogRequestBody = camelcaseKeys(await readBody(event), { deep: true })
+  const body: AccessLogRequestBody = camelcaseKeys(await readBody(event), {
+    deep: true
+  })
 
   consola.info(
     JSON.stringify({

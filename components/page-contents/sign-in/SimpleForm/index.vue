@@ -133,12 +133,10 @@ onMounted(() => {
       <CircleQuestionIconSvg :class="cssModule['simple-form__icon']" />
       <span>パスワードを忘れた方</span>
     </NuxtLink>
-    <UiPartsGeneralBasicButton :class="cssModule['simple-form__button']" type="submit" color="primary" >
+    <UiPartsGeneralBasicButton :class="cssModule['simple-form__button']" type="submit" color="primary">
       ログイン
     </UiPartsGeneralBasicButton>
-    <p>
-      <NuxtLink to="/sign-up">アカウント登録</NuxtLink>する
-    </p>
+    <p><NuxtLink to="/sign-up">アカウント登録</NuxtLink>する</p>
   </form>
 </template>
 

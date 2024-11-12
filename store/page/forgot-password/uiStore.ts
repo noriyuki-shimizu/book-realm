@@ -70,21 +70,26 @@ export const useUiStore = defineStore('page-ui-forgot-password-store', {
      */
     setEmail(value: EmailFormState['email']): void {
       this.emailFormState.email = value
-      this.emailValidation.email = FormStateEmail.safeParse(this.emailFormState)
+      this.emailValidation.email = FormStateEmail.safeParse(
+        this.emailFormState
+      )
     },
     /**
      * パスワードをセットする
      */
     setPassword(value: PasswordFormState['password']): void {
       this.passwordFormState.password = value
-      this.passwordValidation.password = FormStatePassword.safeParse(this.passwordFormState)
+      this.passwordValidation.password = FormStatePassword.safeParse(
+        this.passwordFormState
+      )
     },
     /**
      * 確認用パスワードをセットする
      */
     setConfirmPassword(value: PasswordFormState['confirmPassword']): void {
       this.passwordFormState.confirmPassword = value
-      this.passwordValidation.confirmPassword = FormStateConfirmPassword.safeParse(this.passwordFormState)
+      this.passwordValidation.confirmPassword = FormStateConfirmPassword
+        .safeParse(this.passwordFormState)
     },
     /**
      * 送信前のメールバリデーションエラーをチェックする
@@ -101,7 +106,8 @@ export const useUiStore = defineStore('page-ui-forgot-password-store', {
       this.passwordSubmitValidation = {
         password: !this.passwordValidation.password?.success,
         confirmPassword: !this.passwordValidation.confirmPassword?.success
-          || this.passwordFormState.password !== this.passwordFormState.confirmPassword
+          || this.passwordFormState.password
+            !== this.passwordFormState.confirmPassword
       }
     }
   }

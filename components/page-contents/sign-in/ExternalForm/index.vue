@@ -39,12 +39,7 @@ const onClickGoogleSignIn = async (): Promise<void> => {
 <template>
   <div :class="cssModule['external-form']">
     <template v-if="!(LangUtil.isNull(signInGoogleResponse) || LangUtil.isNull(signInGoogleResponse.error))">
-      <UiPartsFeedbackAlert
-        :class="cssModule['external-form__alert-text']"
-        type="error"
-        role="alert"
-        aria-live="assertive"
-      >
+      <UiPartsFeedbackAlert :class="cssModule['external-form__alert-text']" type="error" role="alert" aria-live="assertive">
         Google アカウントにおけるログインに失敗しました。
       </UiPartsFeedbackAlert>
     </template>
