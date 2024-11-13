@@ -1,10 +1,5 @@
 import type { AppFetchResponse, FetchResponse } from 'ofetch'
-import {
-  convertAppFetchResponse,
-  createCommonFetchOption,
-  generateRequestHashKey,
-  getCacheValue
-} from '@/functions/business/http/rest'
+import { convertAppFetchResponse, createCommonFetchOption, generateRequestHashKey, getCacheValue } from '@/functions/business/http/rest'
 import type { FetchRawParameters } from '@/types/core/http'
 
 /** Nuxt Server API 用の fetch 関数定義 */
@@ -21,7 +16,10 @@ export default defineNuxtPlugin((nuxtApp) => {
           const requestHashKey = await generateRequestHashKey(request)
 
           return nuxtApp.runWithContext(() => {
-            return getCacheValue<T>(requestHashKey, $fetch, { request, options: fetchOption })
+            return getCacheValue<T>(requestHashKey, $fetch, {
+              request,
+              options: fetchOption
+            })
           })
         }
 

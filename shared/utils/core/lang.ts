@@ -41,7 +41,8 @@ export const isObject = (value: unknown): value is object => {
  * @returns 指定された値が数値であるかどうかを示すブール値。
  */
 export const isNumber = (value: unknown): value is number => {
-  return typeof value === 'number' || toString.call(value) === '[object Number]'
+  return typeof value === 'number'
+    || toString.call(value) === '[object Number]'
 }
 
 /**
@@ -50,7 +51,8 @@ export const isNumber = (value: unknown): value is number => {
  * @returns 指定された値が文字列であるかどうかを示すブール値。
  */
 export const isString = (value: unknown): value is string => {
-  return typeof value === 'string' || toString.call(value) === '[object String]'
+  return typeof value === 'string'
+    || toString.call(value) === '[object String]'
 }
 
 /**
@@ -59,7 +61,8 @@ export const isString = (value: unknown): value is string => {
  * @returns 入力値がブール値であるかどうかを示すブール値。
  */
 export const isBoolean = (value: unknown): value is boolean => {
-  return typeof value === 'boolean' || toString.call(value) === '[object Boolean]'
+  return typeof value === 'boolean'
+    || toString.call(value) === '[object Boolean]'
 }
 
 /**
@@ -96,7 +99,16 @@ export const isSet = <T>(value: unknown): value is Set<T> => {
  * @returns 関数 `isEmpty` はブール値を返します。入力値が空であるとみなされる場合は「true」を返し、そうでない場合は「false」を返します。
  */
 export const isEmpty: {
-  (value: string | object | Map<unknown, unknown> | Set<unknown> | ArrayLike<unknown> | null | undefined): boolean
+  (
+    value:
+      | string
+      | object
+      | Map<unknown, unknown>
+      | Set<unknown>
+      | ArrayLike<unknown>
+      | null
+      | undefined
+  ): boolean
   (value?: unknown): boolean
 } = (value: unknown): boolean => {
   if (isNil(value)) {

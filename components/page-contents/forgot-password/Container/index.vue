@@ -3,6 +3,7 @@ import EmailForm from '../EmailForm/index.vue'
 import PasswordForm from '../PasswordForm/index.vue'
 import { EmailFormKey, PasswordFormKey } from '@/store/page/forgot-password'
 import AngleLeftSolidIconSvg from '@/assets/svg/angle-left-solid-icon.svg?component'
+import { LangUtil } from '#shared/utils/core'
 
 /** Route */
 const route = useRoute()

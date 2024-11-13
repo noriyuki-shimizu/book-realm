@@ -6,7 +6,9 @@ export type FormValidation = {
   /** メールアドレス */
   [FormKey.email]: SafeParseReturnType<FormStateEmail, FormStateEmail> | null
   /** パスワード */
-  [FormKey.password]: SafeParseReturnType<FormStatePassword, FormStatePassword> | null
+  [FormKey.password]:
+    | SafeParseReturnType<FormStatePassword, FormStatePassword>
+    | null
 }
 
 /** UI State */

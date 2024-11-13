@@ -1,7 +1,7 @@
 import type { ApiState } from './types'
-import { postRequest } from '@/infrastructures/rest/nuxt/api/books/bulk-analysis'
-import { StatusCode } from '@/enums/common/http/statusCode'
 import { ErrorUtil } from '#shared/utils/core'
+import { StatusCode } from '@/enums/common/http/statusCode'
+import { postRequest } from '@/infrastructures/rest/nuxt/api/books/bulk-analysis'
 
 /**
  * トップページの API Store を返す
@@ -33,7 +33,8 @@ export const useApiStore = defineStore('page-api-top-store', {
         const nuxtErr = ErrorUtil.convertNuxtError(err)
         this.bookBulkAnalysisPostResponse = {
           data: null,
-          status: nuxtErr.statusCode ?? StatusCode.STATUS_CODE_INTERNAL_SERVER_ERROR,
+          status: nuxtErr.statusCode
+            ?? StatusCode.STATUS_CODE_INTERNAL_SERVER_ERROR,
           error: nuxtErr
         }
       }

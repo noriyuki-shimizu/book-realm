@@ -18,16 +18,22 @@ useHeadSafe(() => {
     title,
     meta: [
       { name: 'og:locale', content: 'ja_JP' },
-      { name: 'og:url', content: `${runtimeConfig.public.pageBaseUrl}/${route.path}` },
-      { name: 'og:image', content: `${runtimeConfig.public.pageBaseUrl}/favicon/favicon-256x256.ico` },
+      {
+        name: 'og:url',
+        content: `${runtimeConfig.public.pageBaseUrl}/${route.path}`
+      },
+      {
+        name: 'og:image',
+        content: `${runtimeConfig.public.pageBaseUrl}/favicon/favicon-256x256.ico`
+      },
       { name: 'og:site_name', content: 'BOOK Realm' },
-      { property: 'og:title', content: title },
+      { property: 'og:title', content: title }
     ]
   }
 })
 
 useHead({
-  link: MAIN_HEAD_LINK,
+  link: MAIN_HEAD_LINK
 })
 
 prerenderRoutes(['/'])

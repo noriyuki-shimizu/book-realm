@@ -2,7 +2,7 @@
 /**
  * エラーをクリアしてユーザーをホームページにリダイレクトする
  */
- const handleError = async (): Promise<void> => {
+const handleError = async (): Promise<void> => {
   await clearError()
 }
 </script>

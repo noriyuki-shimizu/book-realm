@@ -1,7 +1,7 @@
-import type { RouteLocationNormalizedLoaded } from 'vue-router'
 import type { NuxtError } from '#app'
-import { generateQueryStringFromRoute, truncateString } from './utils'
+import type { RouteLocationNormalizedLoaded } from 'vue-router'
 import type { ApiState } from './types'
+import { generateQueryStringFromRoute, truncateString } from './utils'
 import { MAX_LOG_PARAMETER_LENGTH } from '@/constants/common/log'
 import { post as postAccessLogRequest } from '@/infrastructures/rest/nuxt/api/access-logs'
 import { post as postErrorLogRequest } from '@/infrastructures/rest/nuxt/api/error-logs'
@@ -21,7 +21,10 @@ export const useCommonLogApiStore = defineStore('common-api-log-store', {
      * @param {string} pageBaseUrl アプリケーションのベース URL
      * @param {RouteLocationNormalizedLoaded} route ルート
      */
-    async postAccessLog(pageBaseUrl: string, route: RouteLocationNormalizedLoaded): Promise<void> {
+    async postAccessLog(
+      pageBaseUrl: string,
+      route: RouteLocationNormalizedLoaded
+    ): Promise<void> {
       const getQueryString = generateQueryStringFromRoute(pageBaseUrl)
       const urlQuery = getQueryString(route)
 

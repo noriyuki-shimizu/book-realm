@@ -79,13 +79,7 @@ const onClick = (): void => {
     </label>
     <span :class="cssModule['input-file__text']">ここにファイルをドロップ</span>
     <span :class="cssModule['input-file__text']">または</span>
-    <UiPartsGeneralBasicButton
-      :class="cssModule['input-file__button']"
-      type="button"
-      size="small"
-      color="processing"
-      @click="onClick"
-    >
+    <UiPartsGeneralBasicButton :class="cssModule['input-file__button']" type="button" size="small" color="processing" @click="onClick">
       <UiPartsFeedbackSpinner v-show="props.isLoading" size="small" />
       ファイルを読み込む
     </UiPartsGeneralBasicButton>

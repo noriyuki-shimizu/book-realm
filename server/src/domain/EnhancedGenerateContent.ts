@@ -18,7 +18,9 @@ export class EnhancedGenerateContent {
    * @param {EnhancedGenerateContentResponse} value 生成されたコンテンツ
    * @returns {EnhancedGenerateContent} インスタンス
    */
-  public static of(value: EnhancedGenerateContentResponse): EnhancedGenerateContent {
+  public static of(
+    value: EnhancedGenerateContentResponse
+  ): EnhancedGenerateContent {
     return new EnhancedGenerateContent(value)
   }
 

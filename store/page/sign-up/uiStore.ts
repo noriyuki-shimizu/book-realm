@@ -91,7 +91,9 @@ export const useUiStore = defineStore('page-ui-sign-up-store', {
      */
     setConfirmPassword(value: FormState['confirmPassword']): void {
       this.formState.confirmPassword = value
-      this.validation.confirmPassword = FormStateConfirmPassword.safeParse(this.formState)
+      this.validation.confirmPassword = FormStateConfirmPassword.safeParse(
+        this.formState
+      )
     },
     /**
      * 送信前のバリデーションエラーをチェックする

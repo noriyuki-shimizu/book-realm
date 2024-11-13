@@ -6,7 +6,9 @@ import type { AccessLogRequestBody } from '@/types/nuxt-api/access-log/http'
  * @param {AccessLogRequestBody} body - リクエストボディ
  * @returns {Promise<AppFetchResponse<void>>} - API レスポンス
  */
-export const post = (body: AccessLogRequestBody): Promise<AppFetchResponse<void>> => {
+export const post = (
+  body: AccessLogRequestBody
+): Promise<AppFetchResponse<void>> => {
   const { $nuxtServerHttpClient } = useNuxtApp()
 
   return $nuxtServerHttpClient('/api/access-logs', {
