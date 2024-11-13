@@ -7,14 +7,17 @@ const cssModule = useCssModule('classes')
 </script>
 
 <template>
-  <section :class="cssModule['container']">
-    <h1 :class="cssModule['container__title']">アカウント登録</h1>
-    <SimpleForm :class="cssModule['container__form']" />
-    <NuxtLink to="/sign-in" :class="cssModule['container__link']">
-      <AngleLeftSolidIconSvg :class="cssModule['container__icon']" />
-      <span>ログイン画面に戻る</span>
-    </NuxtLink>
-  </section>
+  <div :class="cssModule['container']">
+    <img src="@/assets/img/book-realm.jpg" alt="" :class="cssModule['container__img']" />
+    <section :class="cssModule['container__form']">
+      <h1 :class="cssModule['container__title']">アカウント登録</h1>
+      <SimpleForm :class="cssModule['container__simple-form']" />
+      <NuxtLink to="/sign-in" :class="cssModule['container__link']">
+        <AngleLeftSolidIconSvg :class="cssModule['container__icon']" />
+        <span>ログイン画面に戻る</span>
+      </NuxtLink>
+    </section>
+  </div>
 </template>
 
 <style module="classes" lang="scss">

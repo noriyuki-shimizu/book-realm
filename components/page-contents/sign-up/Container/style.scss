@@ -2,15 +2,32 @@
 @use '@/assets/style/mixin/mediaQuery' as mediaQuery;
 
 .container {
-  width: var(--auth-container-max-width);
-  max-width: var(--auth-container-max-width);
-  margin: 0 auto;
-  background-color: var(--color-background-light);
-  border: 1px solid var(--color-border-light);
-  border-radius: 8px;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  justify-content: center;
 
-  @include mediaQuery.media {
-    width: auto;
+  &__img {
+    width: var(--auth-container-max-width);
+    height: var(--auth-container-max-width);
+    object-fit: cover;
+    border-radius: 8px;
+
+    @include mediaQuery.media {
+      display: none;
+    }
+  }
+
+  &__form {
+    width: var(--auth-container-max-width);
+    max-width: var(--auth-container-max-width);
+    background-color: var(--color-background-light);
+    border: 1px solid var(--color-border-light);
+    border-radius: 8px;
+
+    @include mediaQuery.media {
+      width: auto;
+    }
   }
 
   &__title {
@@ -22,7 +39,7 @@
     border-bottom: 1px solid var(--color-border-light);
   }
 
-  &__form {
+  &__simple-form {
     padding: 24px 0;
     margin: 0 24px;
     border-bottom: 1px solid var(--color-border-light);
