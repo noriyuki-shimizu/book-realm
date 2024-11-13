@@ -4,7 +4,11 @@ import { API_STORE_INDEX_FILE_PATH, UI_STORE_INDEX_FILE_PATH } from '@/constants
 /**
  * API / UI Store のリセットを行う
  */
-export default defineNuxtRouteMiddleware(() => {
+export default defineNuxtRouteMiddleware((to, from) => {
+  if (to.path === from.path) {
+    return
+  }
+
   const moduleGlob = import.meta.glob<
     true,
     string,

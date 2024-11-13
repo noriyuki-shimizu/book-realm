@@ -8,6 +8,7 @@ import SearchIconSvg from '@/assets/svg/search-icon.svg?component'
 import LightIconSvg from '@/assets/svg/light-icon.svg?component'
 import { useApiStore } from '@/store/page'
 import { LangUtil } from '#shared/utils/core'
+import { IMAGE_ANALYSIS_RESULT_HASH_ID } from '@/constants/business/router/hash'
 
 /** API Store */
 const apiStore = useApiStore()
@@ -61,7 +62,7 @@ const cssModule = useCssModule('classes')
 
     <PictureForm :class="cssModule['container__picture-form']" />
 
-    <DescriptionSection :class="cssModule['container__description-section']">
+    <DescriptionSection :id="IMAGE_ANALYSIS_RESULT_HASH_ID" :class="cssModule['container__description-section']">
       <template #icon>
         <SearchIconSvg :class="cssModule['container__icon']" aria-hidden="true" />
       </template>

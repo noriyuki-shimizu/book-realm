@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import { useApiStore, useUiStore } from '@/store/page'
 import { LangUtil } from '#shared/utils/core'
+import { IMAGE_ANALYSIS_RESULT_HASH_ID } from '@/constants/business/router/hash'
 
+/** Route */
+const route = useRoute()
+
+/** ファイル読み込み中か */
 const isFileLoading = ref<boolean>(false)
 
 /** API Store Param */
@@ -28,7 +33,10 @@ const { execute, pending } = useSubmitApi(async (): Promise<void> => {
 
   await apiStore.postBookBulkAnalysis(formData)
 
-  window.scrollTo({ top: 0, behavior: 'smooth' })
+  await navigateTo({
+    path: route.path,
+    hash: `#${IMAGE_ANALYSIS_RESULT_HASH_ID}`
+  })
 })
 
 /**

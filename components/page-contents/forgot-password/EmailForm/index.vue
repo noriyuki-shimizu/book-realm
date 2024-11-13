@@ -2,6 +2,7 @@
 import { useCommonAuthApiStore } from '@/store/common/auth'
 import type { EmailFormKey } from '@/store/page/forgot-password'
 import { useUiStore } from '@/store/page/forgot-password'
+import { LangUtil } from '#shared/utils/core'
 
 /** Firebase Auth */
 const auth = useFirebaseAuth()!

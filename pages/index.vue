@@ -2,6 +2,7 @@
 import type { User } from 'firebase/auth'
 import { callWithNuxt } from '#app'
 import { LangUtil } from '#shared/utils/core'
+import { useApiStore } from '@/store/page'
 
 /** Runtime Config */
 const runtimeConfig = useRuntimeConfig()
@@ -34,6 +35,12 @@ definePageMeta({
       const nuxtApp = useNuxtApp()
       const user: User | null = await getCurrentUser()
       callWithNuxt(nuxtApp, setPageLayout, [!LangUtil.isNil(user) ? 'client' : 'guest'])
+    },
+    (to) => {
+      const apiStore = useApiStore()
+      if (!LangUtil.isEmpty(to.hash) && LangUtil.isNull(apiStore.bookBulkAnalysisPostResponse)) {
+        return navigateTo({ path: to.path, hash: '' })
+      }
     }
   ]
 })
