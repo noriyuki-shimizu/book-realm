@@ -6,7 +6,7 @@ const cssModule = useCssModule('classes')
 </script>
 
 <template>
-  <div :class="cssModule['header-content']">
+  <div :class="cssModule['simple-header-content']">
     <IconLink />
   </div>
 </template>

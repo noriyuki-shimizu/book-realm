@@ -1,7 +1,7 @@
 @use '/assets/style/mixin/font' as font;
 @use '@/assets/style/mixin/mediaQuery' as mediaQuery;
 
-.header-content {
+.simple-header-content {
   padding: 16px 40px;
   background-color: var(--color-background-light);
 

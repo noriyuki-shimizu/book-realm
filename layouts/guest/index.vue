@@ -1,12 +1,14 @@
 <script setup lang="ts">
+import { HEADER_ELEMENT_ID } from '@/constants/components/header/attribute'
+
 /** CSS Module */
 const cssModule = useCssModule('classes')
 </script>
 
 <template>
   <div :class="cssModule['layout-container']">
-    <header :class="cssModule['layout-container__header']">
-      <LayoutContentsGuestHeader :class="cssModule['layout-container__header-content']" />
+    <header :id="HEADER_ELEMENT_ID" :class="cssModule['layout-container__header']">
+      <LayoutContentsGuestHeaderContent :class="cssModule['layout-container__header-content']" />
     </header>
     <main :class="cssModule['layout-container__main']">
       <slot />

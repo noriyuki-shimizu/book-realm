@@ -13,9 +13,9 @@ const onClick = async () => {
 </script>
 
 <template>
-  <div :class="cssModule['header-content']">
+  <div :class="cssModule['guest-header-content']">
     <IconLink />
-    <div :class="cssModule['header-content__navigate']">
+    <div :class="cssModule['guest-header-content__navigate']">
       <UiPartsGeneralBasicButton type="button" color="primary" @click="onClick"> ログイン </UiPartsGeneralBasicButton>
     </div>
   </div>

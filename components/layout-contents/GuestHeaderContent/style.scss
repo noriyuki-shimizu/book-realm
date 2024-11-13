@@ -1,7 +1,7 @@
 @use '/assets/style/mixin/font' as font;
 @use '@/assets/style/mixin/mediaQuery' as mediaQuery;
 
-.header-content {
+.guest-header-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
