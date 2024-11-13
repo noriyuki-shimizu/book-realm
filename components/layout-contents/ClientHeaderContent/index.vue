@@ -46,7 +46,7 @@ const handleSignOut = async (): Promise<void> => {
 </script>
 
 <template>
-  <div :class="cssModule['client-client-header-content']">
+  <div :class="cssModule['client-header-content']">
     <IconLink />
     <div :class="cssModule['client-header-content__navigate']">
       <button type="button" :class="cssModule['client-header-content__button']" @click="toggleIconNavigate">
