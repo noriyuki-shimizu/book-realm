@@ -12,10 +12,12 @@ const cssModule = useCssModule('classes')
     <section :class="cssModule['container__form']">
       <h1 :class="cssModule['container__title']">アカウント登録</h1>
       <SimpleForm :class="cssModule['container__simple-form']" />
-      <NuxtLink to="/sign-in" :class="cssModule['container__link']">
-        <AngleLeftSolidIconSvg :class="cssModule['container__icon']" />
-        <span>ログイン画面に戻る</span>
-      </NuxtLink>
+      <div :class="cssModule['container__link-wrapper']">
+        <NuxtLink to="/sign-in" :class="cssModule['container__link']">
+          <AngleLeftSolidIconSvg :class="cssModule['container__icon']" />
+          <span>ログイン画面に戻る</span>
+        </NuxtLink>
+      </div>
     </section>
   </div>
 </template>

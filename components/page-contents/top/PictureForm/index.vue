@@ -67,30 +67,10 @@ const convertImageSrc = (file: File): string => {
       @update:model-value="updateFiles"
     />
 
-    <section :class="[cssModule['picture-form__preview'], cssModule['preview']]">
-      <h3 :class="cssModule['preview__title']">解析対象ファイル</h3>
-      <template v-if="!LangUtil.isNull(files) && files.length > 0">
-        <div :class="cssModule['preview__image-container']">
-          <template v-for="f in files" :key="f.name">
-            <img
-              :class="cssModule['preview__image']"
-              :src="convertImageSrc(f)"
-              :alt="f.name"
-              sizes="(max-width: 896px) 200px, 300px"
-              loading="lazy"
-              decoding="async"
-            />
-          </template>
-        </div>
-      </template>
-      <template v-else>
-        <p>ファイルが選択されていません。</p>
-      </template>
-    </section>
-
     <UiPartsGeneralBasicButton
       type="submit"
       color="primary"
+      :class="cssModule['picture-form__submit']"
       :disabled="LangUtil.isNull(files) || (!LangUtil.isNull(files) && !files.length) || pending"
     >
       <div v-show="pending" :class="cssModule['picture-form__submit-text']">
@@ -99,6 +79,24 @@ const convertImageSrc = (file: File): string => {
       </div>
       <div v-show="!pending">解析する</div>
     </UiPartsGeneralBasicButton>
+
+    <template v-if="!LangUtil.isNull(files) && files.length > 0">
+      <div :class="cssModule['picture-form__image-container']">
+        <template v-for="f in files" :key="f.name">
+          <img
+            :class="cssModule['picture-form__image']"
+            :src="convertImageSrc(f)"
+            :alt="f.name"
+            sizes="(max-width: 896px) 200px, 300px"
+            loading="lazy"
+            decoding="async"
+          />
+        </template>
+      </div>
+    </template>
+    <template v-else>
+      <p>ファイルを読み込むと、こちらにプレビューが表示されます。</p>
+    </template>
   </form>
 </template>
 

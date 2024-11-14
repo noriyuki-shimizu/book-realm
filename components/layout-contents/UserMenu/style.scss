@@ -1,0 +1,55 @@
+@use '@/assets/style/mixin/focus' as focus;
+
+.user-menu {
+  min-width: 260px;
+  max-width: calc(-32px + 100vw);
+  max-height: calc(-160px + 100vh);
+  overflow: hidden auto;
+  background-color: var(--color-background-light);
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgb(0 0 0 / 30%);
+
+  &__list-container {
+    padding: 12px 8px;
+  }
+
+  &__list {
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    list-style: none;
+    border-bottom: 1px solid var(--color-border-light);
+
+    &:last-child {
+      padding-bottom: 0;
+      margin-bottom: 0;
+      border-bottom: none;
+    }
+  }
+
+  &__link {
+    @include focus.focus-visible;
+
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    width: 100%;
+    padding: 4px 8px;
+    color: var(--color-text);
+    cursor: pointer;
+
+    &:hover {
+      color: var(--color-text);
+      text-decoration: none;
+      background-color: var(--color-background-hover-normal);
+    }
+
+    &:visited {
+      color: var(--color-text);
+    }
+  }
+
+  &__icon {
+    width: 16px;
+    height: 16px;
+  }
+}

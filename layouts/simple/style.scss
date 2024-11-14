@@ -2,10 +2,10 @@
 
 .layout-container {
   position: relative;
-  padding: 80px 0 56px;
+  padding: var(--pc-max-height) 0 56px;
 
   @include mediaQuery.media {
-    padding: 80px 0 48px;
+    padding: var(--pc-max-height) 0 48px;
   }
 
   &__header {
@@ -20,6 +20,7 @@
 
   &__header-content {
     max-width: var(--pc-max-width);
+    max-height: var(--pc-max-height);
     margin: auto;
 
     @include mediaQuery.media {

@@ -1,7 +1,7 @@
 @use '/assets/style/mixin/font' as font;
 
 .icon-link {
-  display: flex;
+  display: inline-flex;
   gap: 8px;
   align-items: center;
   color: var(--color-text);

@@ -1,4 +1,5 @@
 @use '@/assets/style/mixin/font' as font;
+@use '@/assets/style/mixin/focus' as focus;
 
 .input-text {
   display: block;
@@ -29,6 +30,8 @@
   }
 
   &__input {
+    @include focus.focus-visible;
+
     width: 100%;
     padding: 8px 16px;
     border: 1px solid var(--color-border-light);

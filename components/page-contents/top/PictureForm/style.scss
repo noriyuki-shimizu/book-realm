@@ -8,8 +8,7 @@
     margin-bottom: 16px;
   }
 
-  &__preview {
-    max-width: 100%;
+  &__submit {
     margin-bottom: 16px;
   }
 
@@ -17,14 +16,6 @@
     display: inline-flex;
     gap: 8px;
     align-items: center;
-  }
-}
-
-.preview {
-  &__title {
-    @include font.font-size(20);
-
-    margin-bottom: 8px;
   }
 
   &__image-container {

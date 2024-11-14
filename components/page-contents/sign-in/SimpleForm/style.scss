@@ -1,3 +1,5 @@
+@use '/assets/style/mixin/font' as font;
+
 .simple-form {
   display: flex;
   flex-direction: column;
@@ -47,10 +49,16 @@
   }
 
   &__link-body {
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+
+  &__link {
+    @include font.font-size(16, 16);
+
     display: inline-flex;
     gap: 4px;
     align-items: center;
-    margin-bottom: 8px;
   }
 
   &__icon {
