@@ -7,7 +7,7 @@ const cssModule = useCssModule('classes')
 /**
  * ログインページへ遷移
  */
-const onClick = async () => {
+const toSignIn = async () => {
   await navigateTo('/sign-in')
 }
 </script>
@@ -16,7 +16,7 @@ const onClick = async () => {
   <div :class="cssModule['guest-header-content']">
     <IconLink />
     <div :class="cssModule['guest-header-content__navigate']">
-      <UiPartsGeneralBasicButton type="button" color="primary" @click="onClick"> ログイン </UiPartsGeneralBasicButton>
+      <UiPartsGeneralBasicButton type="button" color="primary" @click="toSignIn">ログイン</UiPartsGeneralBasicButton>
     </div>
   </div>
 </template>

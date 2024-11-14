@@ -1,12 +1,11 @@
+@use '@/assets/style/mixin/focus' as focus;
+
 .basic-button {
   padding: 4px 8px;
   cursor: pointer;
   border-radius: 6px;
 
-  &:focus-visible {
-    outline: 2px solid var(--color-focus-visible-outline);
-    outline-offset: 2px;
-  }
+  @include focus.focus-visible;
 
   &--small {
     padding: 4px 8px;

@@ -129,10 +129,12 @@ onMounted(() => {
         ログインに失敗しました。メールアドレス・パスワードを確認してください。
       </UiPartsFeedbackAlert>
     </template>
-    <NuxtLink to="/forgot-password" :class="cssModule['simple-form__link-body']">
-      <CircleQuestionIconSvg :class="cssModule['simple-form__icon']" />
-      <span>パスワードを忘れた方</span>
-    </NuxtLink>
+    <div :class="cssModule['simple-form__link-body']">
+      <NuxtLink to="/forgot-password" :class="cssModule['simple-form__link']">
+        <CircleQuestionIconSvg :class="cssModule['simple-form__icon']" />
+        <span>パスワードを忘れた方</span>
+      </NuxtLink>
+    </div>
     <UiPartsGeneralBasicButton :class="cssModule['simple-form__button']" type="submit" color="primary">
       ログイン
     </UiPartsGeneralBasicButton>

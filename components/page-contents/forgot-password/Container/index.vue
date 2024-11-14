@@ -38,10 +38,12 @@ onMounted(() => {
         <PasswordForm />
       </template>
     </div>
-    <NuxtLink to="/sign-in" :class="cssModule['container__link']">
-      <AngleLeftSolidIconSvg :class="cssModule['container__icon']" />
-      <span>ログイン画面に戻る</span>
-    </NuxtLink>
+    <div :class="cssModule['container__link-wrapper']">
+      <NuxtLink to="/sign-in" :class="cssModule['container__link']">
+        <AngleLeftSolidIconSvg :class="cssModule['container__icon']" />
+        <span>ログイン画面に戻る</span>
+      </NuxtLink>
+    </div>
   </section>
 </template>
 

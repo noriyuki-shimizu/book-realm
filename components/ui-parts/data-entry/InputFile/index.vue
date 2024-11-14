@@ -69,6 +69,7 @@ const onClick = (): void => {
         id="input-file"
         ref="htmlInputElement"
         :class="cssModule['input-file__input']"
+        tabindex="-1"
         type="file"
         name="input-file"
         accept="image/png, image/jpeg"

@@ -1,4 +1,5 @@
 @use './mixin/font' as font;
+@use './mixin/focus' as focus;
 
 // font setting
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Noto+Sans:wght@100..900&display=swap');
@@ -155,6 +156,7 @@
   --line-height-root: 24;
   --pc-max-width: 1280px;
   --sp-max-width: 896px;
+  --pc-max-height: 80px;
   --auth-container-max-width: 400px;
 }
 
@@ -168,6 +170,8 @@ html {
 }
 
 a {
+  @include focus.focus-visible;
+
   color: var(--color-text-link);
   text-decoration: none;
 
