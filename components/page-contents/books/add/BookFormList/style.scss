@@ -1,0 +1,87 @@
+@use '/assets/style/mixin/font' as font;
+
+.book-form-list {
+  &__accordion {
+    width: 100%;
+    margin-bottom: 8px;
+    border: 1px solid var(--color-border-light);
+    border-radius: 8px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__summary {
+    position: relative;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px 8px 8px;
+    cursor: pointer;
+  }
+
+  &__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  &__chevron {
+    width: 16px;
+    height: 16px;
+    background-image: url('@/assets/svg/chevron-down-solid.svg?inline');
+  }
+
+  &__accordion[open] &__chevron {
+    background-image: url('@/assets/svg/chevron-up-solid.svg?inline');
+  }
+
+  &__summary-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+
+  &__title-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__title {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  &__title-text {
+    font-weight: bold;
+  }
+
+  &__icon {
+    width: 16px;
+    height: 14px;
+  }
+
+  &__detail {
+    padding: 8px 8px 16px;
+  }
+
+  &__input-item {
+    margin-bottom: 4px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__input {
+    width: 94%;
+    margin-bottom: 4px;
+  }
+
+  &__description {
+    @include font.font-size(12, 12);
+  }
+}

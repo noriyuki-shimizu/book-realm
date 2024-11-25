@@ -2,10 +2,10 @@
 
 .layout-container {
   position: relative;
-  padding: var(--pc-max-height) 0 56px;
+  padding: var(--pc-header-height) 0 var(--pc-footer-height);
 
   @include mediaQuery.media {
-    padding: var(--pc-max-height) 0 48px;
+    padding: var(--sp-header-height) 0 var(--sp-footer-height);
   }
 
   &__header {
@@ -20,7 +20,7 @@
 
   &__header-content {
     max-width: var(--pc-max-width);
-    max-height: var(--pc-max-height);
+    max-height: var(--pc-header-height);
     margin: auto;
 
     @include mediaQuery.media {
@@ -29,14 +29,13 @@
   }
 
   &__main {
-    z-index: 1;
     max-width: var(--pc-max-width);
     padding: 24px 40px;
     margin: auto;
 
     @include mediaQuery.media {
       max-width: var(--sp-max-width);
-      padding: 16px 8px;
+      padding: 0;
     }
   }
 

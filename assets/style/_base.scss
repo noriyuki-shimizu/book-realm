@@ -1,5 +1,6 @@
 @use './mixin/font' as font;
 @use './mixin/focus' as focus;
+@use './mixin/mediaQuery' as mediaQuery;
 
 // font setting
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Noto+Sans:wght@100..900&display=swap');
@@ -61,7 +62,6 @@
   --vt-c-red-5: #ffe6e6;
   --vt-c-red-10: #fcc;
   --vt-c-red-20: #f99;
-  --vt-c-red-25: #ff8080;
   --vt-c-red-30: #f66;
   --vt-c-red-40: #f33;
   --vt-c-red-50: #f00;
@@ -108,6 +108,7 @@
   --vt-c-purple-100: #10001a;
 
   /* semantic color variables for this project */
+  --color-white: var(--vt-c-white);
   --color-text: var(--vt-c-gray-75);
   --color-dark-text: var(--vt-c-gray-110);
   --color-text-light-normal: var(--vt-c-gray-60);
@@ -123,6 +124,7 @@
   --color-text-success: var(--vt-c-green-100);
   --color-text-error: var(--vt-c-red-100);
   --color-text-warning: var(--vt-c-yellow-100);
+  --color-text-danger: var(--vt-c-red-100);
   --color-text-link-visited: var(--vt-c-purple-70);
   --color-text-link: var(--vt-c-blue-55);
   --color-background-disabled: var(--vt-c-gray-40);
@@ -135,15 +137,17 @@
   --color-background-light-success: var(--vt-c-green-40);
   --color-background-light-error: var(--vt-c-red-30);
   --color-background-light-warning: var(--vt-c-yellow-40);
+  --color-background-light-danger: var(--vt-c-red-30);
   --color-background-light-hover-normal: var(--vt-c-gray-10);
   --color-background-light-hover-processing: var(--vt-c-blue-30);
   --color-background-light-hover-primary: var(--vt-c-orange-30);
   --color-background-light-hover-success: var(--vt-c-green-30);
   --color-background-light-hover-error: var(--vt-c-red-20);
   --color-background-light-hover-warning: var(--vt-c-yellow-30);
+  --color-background-light-hover-danger: var(--vt-c-red-20);
   --color-background-light-drag-over: var(--vt-c-blue-5);
   --color-background-input-error: var(--vt-c-red-5);
-  --color-background-tag-red: var(--vt-c-red-25);
+  --color-background-red: var(--vt-c-red-30);
   --color-border-light: var(--vt-c-gray-30);
   --color-border-normal: var(--vt-c-gray-70);
   --color-border-processing: var(--vt-c-blue-70);
@@ -156,7 +160,10 @@
   --line-height-root: 24;
   --pc-max-width: 1280px;
   --sp-max-width: 896px;
-  --pc-max-height: 80px;
+  --pc-header-height: 80px;
+  --sp-header-height: 80px;
+  --pc-footer-height: 56px;
+  --sp-footer-height: 48px;
   --auth-container-max-width: 400px;
 }
 
@@ -167,6 +174,10 @@ html {
   font-family: YuGothic, 'Yu Gothic M', 'Yu Gothic Medium', sans-serif;
   color: var(--color-text);
   background-color: var(--color-background-light-normal);
+
+  @include mediaQuery.media {
+    background-color: var(--color-white);
+  }
 }
 
 a {

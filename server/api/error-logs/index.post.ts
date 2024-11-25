@@ -2,7 +2,7 @@ import camelcaseKeys from 'camelcase-keys'
 import { consola } from 'consola'
 import snakecaseKeys from 'snakecase-keys'
 import { DateUtil } from '#shared/utils/core'
-import { DATE_TIME_YYYYMMDDHHMMSS_COLON } from '@/constants/date'
+import { DATE_TIME_YYYYMMDDHHMMSS_COLON } from '@/constants/business/date/template'
 import { StatusCode } from '@/enums/common/http/statusCode'
 import type { ErrorLogRequestBody } from '@/types/nuxt-api/error-log/http'
 

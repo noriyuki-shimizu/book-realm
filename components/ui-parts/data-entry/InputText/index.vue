@@ -7,6 +7,7 @@ const cssModule = useCssModule('classes')
 
 /** Props */
 const props = withDefaults(defineProps<Props>(), {
+  size: 'medium',
   type: 'text',
   required: false,
   placeholder: '',
@@ -45,14 +46,19 @@ const onChange = (event: Event): void => {
 <template>
   <label :class="cssModule['input-text']" :for="props.id">
     <div v-if="!LangUtil.isEmpty($slots.label)" :class="cssModule['input-text__label-area']">
-      <span v-if="props.required" :class="cssModule['input-text__tag']">必須</span>
+      <UiPartsDataDisplayTag v-if="props.required" color="red">必須</UiPartsDataDisplayTag>
       <span :class="[cssModule['input-text__text'], cssModule['input-text__text--bold']]"><slot name="label" /></span>
     </div>
     <input
       :id="props.id"
       :model-value="model"
+      :value="model"
       :name="props.name"
-      :class="[cssModule['input-text__input'], { [cssModule['input-text__input--error']]: props.isError }]"
+      :class="[
+        cssModule['input-text__input'],
+        cssModule[`input-text__input--${props.size}`],
+        { [cssModule['input-text__input--error']]: props.isError }
+      ]"
       :type="props.type"
       :required="props.required"
       :placeholder="props.placeholder"

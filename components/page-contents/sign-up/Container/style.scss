@@ -32,6 +32,8 @@
     @include mediaQuery.media {
       width: auto;
       margin: auto;
+      border: none;
+      border-radius: 0;
     }
   }
 

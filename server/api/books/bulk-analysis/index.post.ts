@@ -2,7 +2,6 @@ import { consola } from 'consola'
 import { LangUtil } from '#shared/utils/core'
 import { StatusCode } from '@/enums/common/http/statusCode'
 import { BookBulkAnalysisService } from '@/server/src/service/BookBulkAnalysisService'
-import type { BookBulkAnalysisPostResponse } from '@/types/nuxt-api/books/bulk-analysis'
 
 /** 本の一括分析 API */
 export default defineEventHandler(async (event) => {
@@ -20,9 +19,7 @@ export default defineEventHandler(async (event) => {
 
   try {
     const service = BookBulkAnalysisService.of()
-    const resultDataList: BookBulkAnalysisPostResponse = await service.analyze(
-      data
-    )
+    const resultDataList = await service.analyze(data)
 
     consola.info('guest book bulk analysis result: ', resultDataList)
 
