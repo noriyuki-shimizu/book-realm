@@ -11,6 +11,8 @@
 
   @include mediaQuery.media {
     width: auto;
+    border: none;
+    border-radius: 0;
   }
 
   &__title {

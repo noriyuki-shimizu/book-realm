@@ -39,3 +39,17 @@ export const parseDotSeparatedDate = (
     day: dateParts[2]
   }
 }
+
+/**
+ * 文字列から日付オブジェクトにパースする
+ * @param {`${string}.${string}.${string}`} value 対象の日付文字列
+ * @returns {Date} Date
+ */
+export const parseDotSeparatedDateObject = (value: `${string}.${string}.${string}`): Date => {
+  const date = dayjs(value)
+  if (date.isValid()) {
+    throw new Error(`Invalid date, value: ${value}`)
+  }
+
+  return date.toDate()
+}

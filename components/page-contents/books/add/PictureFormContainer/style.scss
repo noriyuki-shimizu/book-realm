@@ -1,0 +1,26 @@
+@use '/assets/style/mixin/font' as font;
+@use '@/assets/style/mixin/mediaQuery' as mediaQuery;
+
+.picture-form-container {
+  &__title {
+    @include font.font-size(24);
+
+    margin-bottom: 8px;
+
+    @include mediaQuery.media {
+      @include font.font-size(20, 24);
+    }
+  }
+
+  &__description {
+    margin-bottom: 8px;
+  }
+
+  &__form {
+    margin-bottom: 24px;
+  }
+
+  &__alert-text {
+    margin-bottom: 12px;
+  }
+}

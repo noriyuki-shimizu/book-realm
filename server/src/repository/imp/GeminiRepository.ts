@@ -5,7 +5,7 @@ import type { IGeminiRepository } from '../IGeminiRepository'
 /** Gemini リポジトリ */
 export class GeminiRepository implements IGeminiRepository {
   /** インスタンス */
-  private static readonly instance: GeminiRepository = new GeminiRepository()
+  private static readonly instance: IGeminiRepository = new GeminiRepository()
 
   /** Gemini Repository */
   private repository: GenerativeModel
@@ -22,9 +22,9 @@ export class GeminiRepository implements IGeminiRepository {
 
   /**
    * インスタンス生成
-   * @returns {GeminiRepository} Gemini リポジトリ
+   * @returns {IGeminiRepository} Gemini リポジトリ
    */
-  public static getInstance(): GeminiRepository {
+  public static getInstance(): IGeminiRepository {
     return this.instance
   }
 

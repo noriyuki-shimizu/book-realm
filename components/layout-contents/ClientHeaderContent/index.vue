@@ -4,12 +4,22 @@ import UserNavigate from '../UserNavigate/index.vue'
 
 /** CSS Module */
 const cssModule = useCssModule('classes')
+
+/**
+ * 書籍管理ページへ遷移
+ */
+const toBookManagement = async (): Promise<void> => {
+  await navigateTo('/books/managements')
+}
 </script>
 
 <template>
   <div :class="cssModule['client-header-content']">
     <IconLink />
-    <UserNavigate />
+    <div :class="cssModule['client-header-content__right-nav']">
+      <UiPartsGeneralBasicButton type="button" color="primary" @click="toBookManagement">書籍を管理</UiPartsGeneralBasicButton>
+      <UserNavigate />
+    </div>
   </div>
 </template>
 

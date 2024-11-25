@@ -3,6 +3,7 @@ import type { Props } from './types'
 
 /** Props */
 const props = withDefaults(defineProps<Props>(), {
+  size: 'middle',
   type: 'normal'
 })
 
@@ -11,7 +12,7 @@ const cssModule = useCssModule('classes')
 </script>
 
 <template>
-  <p :class="[cssModule['alert'], cssModule[`alert--${props.type}`]]">
+  <p :class="[cssModule['alert'], cssModule[`alert--${props.size}`], cssModule[`alert--${props.type}`]]">
     <span><slot /></span>
   </p>
 </template>

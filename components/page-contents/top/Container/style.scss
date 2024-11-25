@@ -8,6 +8,7 @@
 
   @include mediaQuery.media {
     padding: 24px 16px;
+    border-radius: 0;
   }
 
   &--text-bold {

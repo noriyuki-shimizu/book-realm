@@ -11,4 +11,10 @@
   @include mediaQuery.media {
     padding: 16px;
   }
+
+  &__right-nav {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
 }

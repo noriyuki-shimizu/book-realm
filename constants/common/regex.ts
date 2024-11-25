@@ -5,3 +5,9 @@ export const PASSWORD_POLICY_REGEX = {
   requiresSpecialCharacter: /(?=.*[!@#$%^&*(),.?":{}|<>_\\-])/,
   requiresDigit: /(?=.*\d)/
 }
+
+/** 数値かの正規表現（空文字も許容） */
+export const INTEGER_PATTERN_REGEX = /^-?\d+$|^$/
+
+/** 日付かの正規表現（空文字も許容） */
+export const DATE_PATTERN_REGEX = /^\d{4}\.\d{2}\.\d{2}$|^$/

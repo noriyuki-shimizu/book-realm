@@ -1,7 +1,13 @@
 <script setup lang="ts">
-import { useApiStore, useUiStore } from '@/store/page'
+import type { Props } from './types'
 import { LangUtil } from '#shared/utils/core'
 import { IMAGE_ANALYSIS_RESULT_HASH_ID } from '@/constants/business/router/hash'
+
+/** Props */
+const props = defineProps<Props>()
+
+/** Model */
+const model = defineModel<File[] | null>({ required: true })
 
 /** Route */
 const route = useRoute()
@@ -9,29 +15,20 @@ const route = useRoute()
 /** ファイル読み込み中か */
 const isFileLoading = ref<boolean>(false)
 
-/** API Store Param */
-const apiStore = useApiStore()
-
-/** UI Store Param */
-const uiStore = useUiStore()
-
-/** UI Store Reactive Param */
-const { files } = storeToRefs(uiStore)
-
 /** CSS Module */
 const cssModule = useCssModule('classes')
 
 /** Submit API */
 const { execute, pending } = useSubmitApi(async (): Promise<void> => {
-  if (LangUtil.isNull(files.value)) {
+  if (LangUtil.isNull(model.value)) {
     return
   }
   const formData = new FormData()
-  for (const f of files.value) {
+  for (const f of model.value) {
     formData.append('file', f)
   }
 
-  await apiStore.postBookBulkAnalysis(formData)
+  await props.onSubmit(formData)
 
   await navigateTo({
     path: route.path,
@@ -45,7 +42,7 @@ const { execute, pending } = useSubmitApi(async (): Promise<void> => {
  */
 const updateFiles = async (files: File[] | null): Promise<void> => {
   isFileLoading.value = true
-  await uiStore.setFiles(files)
+  await props.onChange(files)
   isFileLoading.value = false
 }
 
@@ -61,7 +58,7 @@ const convertImageSrc = (file: File): string => {
 <template>
   <form :class="cssModule['picture-form']" @submit.prevent="execute">
     <UiPartsDataEntryInputFile
-      :model-value="files"
+      :model-value="model"
       :is-loading="isFileLoading"
       :class="cssModule['picture-form__input-file']"
       @update:model-value="updateFiles"
@@ -71,18 +68,18 @@ const convertImageSrc = (file: File): string => {
       type="submit"
       color="primary"
       :class="cssModule['picture-form__submit']"
-      :disabled="LangUtil.isNull(files) || (!LangUtil.isNull(files) && !files.length) || pending"
+      :disabled="LangUtil.isNull(model) || (!LangUtil.isNull(model) && !model.length) || pending"
     >
       <div v-show="pending" :class="cssModule['picture-form__submit-text']">
         <UiPartsFeedbackSpinner size="small" />
         解析中...
       </div>
-      <div v-show="!pending">解析する</div>
+      <div v-show="!pending">解析</div>
     </UiPartsGeneralBasicButton>
 
-    <template v-if="!LangUtil.isNull(files) && files.length > 0">
+    <template v-if="!LangUtil.isNull(model) && model.length > 0">
       <div :class="cssModule['picture-form__image-container']">
-        <template v-for="f in files" :key="f.name">
+        <template v-for="f in model" :key="f.name">
           <img
             :class="cssModule['picture-form__image']"
             :src="convertImageSrc(f)"

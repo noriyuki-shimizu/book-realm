@@ -1,5 +1,5 @@
 import type { StoreDefinition } from 'pinia'
-import { API_STORE_INDEX_FILE_PATH, UI_STORE_INDEX_FILE_PATH } from '@/constants/store/path'
+import { API_STORE_INDEX_FILE_PATH, UI_STORE_INDEX_FILE_PATH } from '@/constants/business/store/path'
 
 /**
  * API / UI Store のリセットを行う

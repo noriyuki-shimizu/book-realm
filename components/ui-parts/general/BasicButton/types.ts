@@ -3,7 +3,7 @@ export type Props = {
   /** タイプ */
   type: 'button' | 'submit' | 'reset'
   /** サイズ */
-  size?: 'small' | 'medium' | 'large' | 'full'
+  size?: 'x-small' | 'small' | 'medium' | 'large' | 'full'
   /** カラー */
-  color?: 'normal' | 'processing' | 'primary' // | 'success' | 'error' | 'warning'
+  color?: 'normal' | 'processing' | 'primary' | 'danger' // | 'success' | 'warning'
 }
