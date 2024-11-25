@@ -2,11 +2,10 @@
 import AnalysisList from '../AnalysisList/index.vue'
 import AnalysisTable from '../AnalysisTable/index.vue'
 import DescriptionSection from '../DescriptionSection/index.vue'
-import PictureForm from '../PictureForm/index.vue'
 import { StatusCode } from '@/enums/common/http/statusCode'
 import SearchIconSvg from '@/assets/svg/search-icon.svg?component'
 import LightIconSvg from '@/assets/svg/light-icon.svg?component'
-import { useApiStore } from '@/store/page'
+import { useApiStore, useUiStore } from '@/store/page'
 import { LangUtil } from '#shared/utils/core'
 import { IMAGE_ANALYSIS_RESULT_HASH_ID } from '@/constants/business/router/hash'
 
@@ -15,6 +14,12 @@ const apiStore = useApiStore()
 
 /** API Store Reactive Param */
 const { bookBulkAnalysisPostResponse } = storeToRefs(apiStore)
+
+/** UI Store Param */
+const uiStore = useUiStore()
+
+/** UI Store Reactive Param */
+const { files } = storeToRefs(uiStore)
 
 /** CSS Module */
 const cssModule = useCssModule('classes')
@@ -40,6 +45,8 @@ const cssModule = useCssModule('classes')
         v-if="bookBulkAnalysisPostResponse.error.statusCode === StatusCode.STATUS_CODE_BAD_REQUEST"
         :class="cssModule['container__analysis-text']"
         type="error"
+        role="alert"
+        aria-live="assertive"
       >
         ファイルの解析に失敗しました。書籍が正しく写されているか確認してください。
       </UiPartsFeedbackAlert>
@@ -47,6 +54,8 @@ const cssModule = useCssModule('classes')
         v-else-if="bookBulkAnalysisPostResponse.error.statusCode === StatusCode.STATUS_CODE_PAYLOAD_TOO_LARGE"
         :class="cssModule['container__analysis-text']"
         type="error"
+        role="alert"
+        aria-live="assertive"
       >
         ファイルサイズが大きすぎます。ファイルサイズを小さくして再度お試しください。
       </UiPartsFeedbackAlert>
@@ -56,11 +65,18 @@ const cssModule = useCssModule('classes')
       v-if="!LangUtil.isNull(bookBulkAnalysisPostResponse) && !LangUtil.isNull(bookBulkAnalysisPostResponse.data)"
       :class="cssModule['container__analysis-text']"
       type="success"
+      aria-live="assertive"
     >
       ファイルの解析が完了しました。解析結果は画面下部に表示されています。
     </UiPartsFeedbackAlert>
 
-    <PictureForm :class="cssModule['container__picture-form']" />
+    <ProjectsPictureForm
+      :class="cssModule['container__picture-form']"
+      :model-value="files"
+      :on-change="uiStore.setFiles"
+      :on-submit="apiStore.postBookBulkAnalysis"
+      @update:model-value="uiStore.setFiles"
+    />
 
     <DescriptionSection :id="IMAGE_ANALYSIS_RESULT_HASH_ID" :class="cssModule['container__description-section']">
       <template #icon>
@@ -79,6 +95,7 @@ const cssModule = useCssModule('classes')
       v-if="!LangUtil.isNull(bookBulkAnalysisPostResponse) && !LangUtil.isNull(bookBulkAnalysisPostResponse.data)"
       :class="cssModule['container__analysis-text']"
       type="success"
+      aria-live="assertive"
     >
       ファイルの解析が完了しました。
     </UiPartsFeedbackAlert>

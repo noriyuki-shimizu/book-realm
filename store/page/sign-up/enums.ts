@@ -40,20 +40,20 @@ export const FormState = z.object({
 export type FormState = z.infer<typeof FormState>
 
 /** メールアドレスのバリデーション設定 */
-export const FormStateEmail = FormState.pick({ email: true })
+export const FormStateEmail = FormState.pick({ [FormKey.email]: true })
 
 /** メールアドレスのバリデーション型 */
 export type FormStateEmail = z.infer<typeof FormStateEmail>
 
 /** パスワードのバリデーション設定 */
-export const FormStatePassword = FormState.pick({ password: true })
+export const FormStatePassword = FormState.pick({ [FormKey.password]: true })
 
 /** パスワードのバリデーション型 */
 export type FormStatePassword = z.infer<typeof FormStatePassword>
 
 /** 確認用パスワードのバリデーション設定 */
 export const FormStateConfirmPassword = FormState.pick({
-  confirmPassword: true
+  [FormKey.confirmPassword]: true
 })
 
 /** 確認用パスワードのバリデーション型 */

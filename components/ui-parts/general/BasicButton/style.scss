@@ -1,11 +1,24 @@
+@use '@/assets/style/mixin/font' as font;
 @use '@/assets/style/mixin/focus' as focus;
 
 .basic-button {
+  @include focus.focus-visible;
+
   padding: 4px 8px;
   cursor: pointer;
   border-radius: 6px;
 
-  @include focus.focus-visible;
+  &:disabled {
+    color: var(--color-text-disabled);
+    cursor: not-allowed;
+    background-color: var(--color-background-disabled);
+  }
+
+  &--x-small {
+    @include font.font-size(12, 12);
+
+    padding: 6px;
+  }
 
   &--small {
     padding: 4px 8px;
@@ -32,12 +45,6 @@
     &:hover {
       background-color: var(--color-background-hover-normal);
     }
-
-    &:disabled {
-      color: var(--color-text-disabled);
-      cursor: not-allowed;
-      background-color: var(--color-background-disabled);
-    }
   }
 
   &--processing {
@@ -46,12 +53,6 @@
 
     &:hover {
       background-color: var(--color-background-light-hover-processing);
-    }
-
-    &:disabled {
-      color: var(--color-text-disabled);
-      cursor: not-allowed;
-      background-color: var(--color-background-disabled);
     }
   }
 
@@ -62,11 +63,14 @@
     &:hover {
       background-color: var(--color-background-light-hover-primary);
     }
+  }
 
-    &:disabled {
-      color: var(--color-text-disabled);
-      cursor: not-allowed;
-      background-color: var(--color-background-disabled);
+  &--danger {
+    color: var(--color-text-danger);
+    background-color: var(--color-background-light-danger);
+
+    &:hover {
+      background-color: var(--color-background-light-hover-danger);
     }
   }
 }

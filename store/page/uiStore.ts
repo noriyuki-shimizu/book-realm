@@ -1,7 +1,7 @@
 import imageCompression from 'browser-image-compression'
-import type { Options } from 'browser-image-compression'
 import type { UiState } from './types'
 import { LangUtil } from '#shared/utils/core'
+import { IMAGE_COMPRESSION_OPTIONS } from '@/constants/business/image/option'
 
 /**
  * トップページの UI Store を返す
@@ -25,14 +25,10 @@ export const useUiStore = defineStore('page-ui-top-store', {
         return
       }
 
-      const options: Options = {
-        maxSizeMB: 5,
-        useWebWorker: true
-      }
       this.files = (
         await Promise.all(files.map((file) => {
           try {
-            return imageCompression(file, options)
+            return imageCompression(file, IMAGE_COMPRESSION_OPTIONS)
           } catch (error) {
             console.error('Error compressing file:', error)
             return null

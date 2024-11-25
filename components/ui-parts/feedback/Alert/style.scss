@@ -1,7 +1,22 @@
+@use '/assets/style/mixin/font' as font;
+
 .alert {
   display: block;
-  padding: 8px 16px;
   border-radius: 8px;
+
+  &--small {
+    @include font.font-size(12, 12);
+
+    padding: 8px;
+  }
+
+  &--middle {
+    padding: 8px 16px;
+  }
+
+  &--large {
+    padding: 12px 24px;
+  }
 
   &--normal {
     color: var(--color-text-normal);
@@ -26,5 +41,10 @@
   &--error {
     color: var(--color-text-error);
     background-color: var(--color-background-light-error);
+  }
+
+  &--warning {
+    color: var(--color-text-warning);
+    background-color: var(--color-background-light-warning);
   }
 }

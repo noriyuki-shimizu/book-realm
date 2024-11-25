@@ -36,7 +36,7 @@ const cssModule = useCssModule('classes')
 <template>
   <div :class="cssModule['analysis-table']">
     <template v-if="!(LangUtil.isNull(bookBulkAnalysisPostResponse) || LangUtil.isNull(bookBulkAnalysisPostResponse.data))">
-      <table :class="[cssModule['container__analysis-table'], cssModule['analysis-table__body']]">
+      <table :class="cssModule['analysis-table__body']">
         <thead>
           <tr>
             <th :class="cssModule['analysis-table__head-cell']" scope="col">書籍名</th>
