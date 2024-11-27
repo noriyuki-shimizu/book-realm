@@ -6,7 +6,7 @@ import EmptySection from '../EmptySection/index.vue'
 import BookTable from '../BookTable/index.vue'
 import BookList from '../BookList/index.vue'
 import type { Props } from './types'
-import { useApiStore } from '~/store/page/users/books/managements'
+import { useApiStore } from '@/store/page/users/books/managements'
 import type { BookListViewData } from '@/types/business/book/viewData'
 
 /** Props */

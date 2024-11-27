@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { User } from 'firebase/auth'
-import { useApiStore } from '~/store/page/users/books/managements'
+import { useApiStore } from '@/store/page/users/books/managements'
 
 /** Runtime Config */
 const runtimeConfig = useRuntimeConfig()

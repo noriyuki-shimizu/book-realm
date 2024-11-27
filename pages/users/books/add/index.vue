@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { User } from 'firebase/auth'
-import { useApiStore } from '~/store/page/users/books/add'
+import { useApiStore } from '@/store/page/users/books/add'
 import { LangUtil } from '#shared/utils/core'
 
 /** Runtime Config */

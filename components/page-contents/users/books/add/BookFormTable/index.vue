@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useApiStore, useUiStore } from '~/store/page/users/books/add'
+import { useApiStore, useUiStore } from '@/store/page/users/books/add'
 import TrashCanSolidSvg from '@/assets/svg/trash-can-solid.svg?component'
 import {
   TITLE_AREA_LABEL_ID,

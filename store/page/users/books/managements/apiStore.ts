@@ -16,6 +16,11 @@ export const useApiStore = defineStore('page-api-books-managements-store', {
   },
   getters: {},
   actions: {
+    /**
+     * ユーザーの書籍情報を取得する
+     * @param {string} userId ユーザー ID
+     * @param {UserDetailBookKey[]} keys 取得する書籍情報のキー
+     */
     async getBookAll(userId: string, keys: UserDetailBookKey[]): Promise<void> {
       try {
         const response = await userDetailBookGetRequest({ userId }, { keys })

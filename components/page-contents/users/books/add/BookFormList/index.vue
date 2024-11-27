@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useApiStore, useUiStore } from '~/store/page/users/books/add'
+import { useApiStore, useUiStore } from '@/store/page/users/books/add'
 import {
   TITLE_AREA_LABEL_ID,
   AUTHOR_AREA_LABEL_ID,

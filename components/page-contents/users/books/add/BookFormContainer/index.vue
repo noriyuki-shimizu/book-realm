@@ -2,7 +2,7 @@
 import type { User } from 'firebase/auth'
 import BookFormTable from '../BookFormTable/index.vue'
 import BookFormList from '../BookFormList/index.vue'
-import { useApiStore, useUiStore } from '~/store/page/users/books/add'
+import { useApiStore, useUiStore } from '@/store/page/users/books/add'
 import { LangUtil } from '#shared/utils/core'
 import { StatusCode } from '@/enums/common/http/statusCode'
 import { IMAGE_ANALYSIS_RESULT_HASH_ID } from '@/constants/business/router/hash'
