@@ -1,0 +1,68 @@
+@use '/assets/style/mixin/font' as font;
+@use '@/assets/style/mixin/mediaQuery' as mediaQuery;
+
+.container {
+  padding: 24px;
+  background-color: var(--color-background-light);
+  border-radius: 8px;
+
+  @include mediaQuery.media {
+    padding: 24px 16px;
+    border-radius: 0;
+  }
+
+  &__title-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+
+    @include mediaQuery.media {
+      margin-bottom: 16px;
+    }
+  }
+
+  &__title {
+    @include font.font-size(32, 32);
+
+    @include mediaQuery.media {
+      @include font.font-size(24, 32);
+    }
+  }
+
+  &__alert-text {
+    margin-bottom: 16px;
+  }
+
+  &__skeleton-table {
+    @include mediaQuery.media {
+      display: none;
+    }
+  }
+
+  &__skeleton-list {
+    display: none;
+
+    @include mediaQuery.media {
+      display: block;
+    }
+  }
+
+  &__empty-table {
+    margin-bottom: 24px;
+  }
+
+  &__table {
+    @include mediaQuery.media {
+      display: none;
+    }
+  }
+
+  &__list {
+    display: none;
+
+    @include mediaQuery.media {
+      display: block;
+    }
+  }
+}

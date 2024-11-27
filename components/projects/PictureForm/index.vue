@@ -19,7 +19,7 @@ const isFileLoading = ref<boolean>(false)
 const cssModule = useCssModule('classes')
 
 /** Submit API */
-const { execute, pending } = useSubmitApi(async (): Promise<void> => {
+const { execute, pending } = useAppFetchApi(async (): Promise<void> => {
   if (LangUtil.isNull(model.value)) {
     return
   }

@@ -29,7 +29,7 @@ const onClickGoogleSignIn = async (): Promise<void> => {
   await commonAuthApiStore.signInWithGoogle(auth)
   if (!LangUtil.isNull(signInGoogleResponse.value) && LangUtil.isNull(signInGoogleResponse.value.error)) {
     const { query } = route
-    const path = LangUtil.isNil(query.redirect) ? '/home' : query.redirect.toString()
+    const path = LangUtil.isNil(query.redirect) ? '/users/home' : query.redirect.toString()
     await navigateTo(path)
   }
   finish()

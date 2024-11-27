@@ -61,7 +61,8 @@ const handleSubmit = async (event: Event): Promise<void> => {
   await commonAuthApiStore.signIn(auth, formState.value)
   if (!LangUtil.isNull(signInResponse.value) && LangUtil.isNull(signInResponse.value.error)) {
     const { query } = route
-    const path = LangUtil.isNil(query.redirect) ? '/home' : query.redirect.toString()
+    const path = LangUtil.isNil(query.redirect) ? '/users/home' : query.redirect.toString()
+    uiStore.$reset()
     await navigateTo(path)
   }
   finish()

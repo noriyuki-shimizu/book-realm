@@ -5,6 +5,11 @@ import CircleInfoSolidSvg from '@/assets/svg/circle-info-solid.svg?component'
 import GearSolidSvg from '@/assets/svg/gear-solid.svg?component'
 import RightFromBracketSolidSvg from '@/assets/svg/right-from-bracket-solid.svg?component'
 
+/** Emits */
+const emit = defineEmits<{
+  (e: 'clickMenu'): void
+}>()
+
 /** Firebase Auth */
 const auth = useFirebaseAuth()!
 
@@ -22,6 +27,7 @@ const commonAuthApiStore = useCommonAuthApiStore()
  */
 const handleSignOut = async (): Promise<void> => {
   start()
+  emit('clickMenu')
   await commonAuthApiStore.signOut(auth)
   await navigateTo('/sign-in')
   finish()
@@ -34,13 +40,13 @@ const handleSignOut = async (): Promise<void> => {
       <div :class="cssModule['user-menu__list-container']">
         <ul :class="cssModule['user-menu__list']">
           <li>
-            <NuxtLink :class="cssModule['user-menu__link']" to="/home">
+            <NuxtLink :class="cssModule['user-menu__link']" :to="'/users/home'" @click="emit('clickMenu')">
               <UserIconSvg :class="cssModule['user-menu__icon']" />
               <span>マイページ（開発中）</span>
             </NuxtLink>
           </li>
           <li>
-            <NuxtLink :class="cssModule['user-menu__link']" to="/home">
+            <NuxtLink :class="cssModule['user-menu__link']" :to="'/users/home'" @click="emit('clickMenu')">
               <CircleInfoSolidSvg :class="cssModule['user-menu__icon']" />
               <span>お知らせ（開発中）</span>
             </NuxtLink>
@@ -48,7 +54,7 @@ const handleSignOut = async (): Promise<void> => {
         </ul>
         <ul :class="cssModule['user-menu__list']">
           <li>
-            <NuxtLink :class="cssModule['user-menu__link']" to="/home">
+            <NuxtLink :class="cssModule['user-menu__link']" :to="'/users/home'" @click="emit('clickMenu')">
               <GearSolidSvg :class="cssModule['user-menu__icon']" />
               <span>設定（開発中）</span>
             </NuxtLink>

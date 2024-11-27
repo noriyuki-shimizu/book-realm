@@ -11,7 +11,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
 
   if (!LangUtil.isNull(user)) {
     if (to.path.startsWith('/sign-in')) {
-      return callWithNuxt(app, navigateTo, ['/home'])
+      return callWithNuxt(app, navigateTo, ['/users/home'])
     }
   } else {
     if (to.meta.auth === false) {

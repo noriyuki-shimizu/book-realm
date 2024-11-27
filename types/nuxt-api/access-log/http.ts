@@ -11,7 +11,7 @@ export type AccessLogRequestBody = {
   /** コンテキスト */
   context: {
     /** ユーザー ID */
-    userId: number | null
+    userId: string | null
     /** レンダリングモード */
     renderingMode: 'ssr' | 'csr'
   }

@@ -1,0 +1,75 @@
+@use '/assets/style/mixin/font' as font;
+@use '@/assets/style/mixin/mediaQuery' as mediaQuery;
+
+.book-form-container {
+  &__title {
+    @include font.font-size(24);
+
+    margin-bottom: 8px;
+
+    @include mediaQuery.media {
+      @include font.font-size(20, 24);
+    }
+  }
+
+  &__description {
+    margin-bottom: 8px;
+  }
+
+  &__description-text {
+    &--bold {
+      font-weight: bold;
+    }
+  }
+
+  &__book-form-table {
+    margin-bottom: 16px;
+
+    @include mediaQuery.media {
+      display: none;
+    }
+  }
+
+  &__book-form-list {
+    display: none;
+    margin-bottom: 16px;
+
+    @include mediaQuery.media {
+      display: block;
+    }
+  }
+
+  &__alert-text {
+    margin-bottom: 16px;
+  }
+
+  &__action-button-container {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__action-button {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  &__action-button-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.modal {
+  &__title {
+    font-weight: bold;
+  }
+
+  &__button-container {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+  }
+}
