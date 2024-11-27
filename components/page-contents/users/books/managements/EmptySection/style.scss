@@ -4,8 +4,13 @@
 .empty-section {
   &__table {
     width: 100%;
+    margin-bottom: 24px;
     table-layout: fixed;
     border-collapse: collapse;
+
+    @include mediaQuery.media {
+      display: none;
+    }
   }
 
   &__table-head-cell {
