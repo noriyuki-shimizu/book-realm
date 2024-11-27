@@ -1,3 +1,4 @@
+import type { User } from 'firebase/auth'
 import { useCommonLogApiStore } from '@/store/common/log'
 
 /**
@@ -11,11 +12,12 @@ export default defineNuxtRouteMiddleware(async (to) => {
   }
 
   const runtimeConfig = useRuntimeConfig()
+  const user: User | null = await getCurrentUser()
   const { isProduction, pageBaseUrl } = runtimeConfig.public
 
   if (isProduction) {
     const commonLogApiStore = useCommonLogApiStore()
 
-    commonLogApiStore.postAccessLog(pageBaseUrl, to)
+    commonLogApiStore.postAccessLog(pageBaseUrl, to, user)
   }
 })

@@ -5,7 +5,7 @@ import type { State } from './types'
  * @param handler submit 実行における処理
  * @returns submit 実行に関する状態と処理
  */
-export const useSubmitApi = <T = unknown>(handler: () => Promise<T>) => {
+export const useAppFetchApi = <T = unknown>(handler: () => Promise<T>) => {
   const state = reactive<State>({
     pending: false
   })
