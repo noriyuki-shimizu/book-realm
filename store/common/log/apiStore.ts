@@ -21,12 +21,13 @@ export const useCommonLogApiStore = defineStore('common-api-log-store', {
      * アクセスログを送信する
      * @param {string} pageBaseUrl アプリケーションのベース URL
      * @param {RouteLocationNormalizedLoaded} route ルート
+     * @param {User | null} user ユーザー情報
      */
     async postAccessLog(
       pageBaseUrl: string,
-      route: RouteLocationNormalizedLoaded
+      route: RouteLocationNormalizedLoaded,
+      user: User | null
     ): Promise<void> {
-      const user: User | null = await getCurrentUser()
       const getQueryString = generateQueryStringFromRoute(pageBaseUrl)
       const urlQuery = getQueryString(route)
 
@@ -46,14 +47,15 @@ export const useCommonLogApiStore = defineStore('common-api-log-store', {
      * エラーログを送信する
      * @param {string} pageBaseUrl アプリケーションのベース URL
      * @param {RouteLocationNormalizedLoaded} route ルート
+     * @param {User | null} user ユーザー情報
      * @param {Partial<NuxtError>} error エラー
      */
     async postErrorLog(
       pageBaseUrl: string,
       route: RouteLocationNormalizedLoaded,
+      user: User | null,
       error: Partial<NuxtError>
     ): Promise<void> {
-      const user: User | null = await getCurrentUser()
       const getQueryString = generateQueryStringFromRoute(pageBaseUrl)
       const urlQuery = getQueryString(route)
 
