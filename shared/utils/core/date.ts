@@ -24,8 +24,17 @@ export const getNow = (): Dayjs => {
  * @returns {DateObject} 日付オブジェクト
  */
 export const parseDotSeparatedDate = (
-  value: `${string}.${string}.${string}`
+  value: string
 ): DateObject => {
+  const date = dayjs(value)
+  if (date.isValid()) {
+    return {
+      year: date.year(),
+      month: date.month() + 1,
+      day: date.date()
+    }
+  }
+
   const dateParts = value.split('.').map(Number)
   const hasInvalidDatePart = dateParts.some(date => isNaN(date))
 
@@ -47,7 +56,7 @@ export const parseDotSeparatedDate = (
  */
 export const parseDotSeparatedDateObject = (value: `${string}.${string}.${string}`): Date => {
   const date = dayjs(value)
-  if (date.isValid()) {
+  if (!date.isValid()) {
     throw new Error(`Invalid date, value: ${value}`)
   }
 

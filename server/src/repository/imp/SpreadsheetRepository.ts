@@ -32,7 +32,7 @@ export class SpreadsheetRepository implements ISpreadsheetRepository {
 
   public async saveAll(userId: string, data: UserDetailBookPostData[]): Promise<UserDetailBookPostResponse> {
     return $fetch<UserDetailBookPostResponse>(
-      `${this.API_BASE_URL}/AKfycbxAIpqoxEda6t5-DtKay0BhMm8lGLIGOtWC5KsWYHXI6TW0488kgfGiAvNhqY34e_xX/exec`,
+      `${this.API_BASE_URL}/AKfycbzoBjhe4ERPEqW185lL5L1luRE1D7O33Y-zY1BjSjsfjaB5tQ2oOgQ9rW5O2tOwMdyh/exec`,
       { method: 'POST', body: { 'user_id': userId, data } }
     )
   }

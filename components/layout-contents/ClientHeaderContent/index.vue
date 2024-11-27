@@ -9,7 +9,7 @@ const cssModule = useCssModule('classes')
  * 書籍管理ページへ遷移
  */
 const toBookManagement = async (): Promise<void> => {
-  await navigateTo('/books/managements')
+  await navigateTo('/users/books/managements')
 }
 </script>
 
@@ -17,7 +17,7 @@ const toBookManagement = async (): Promise<void> => {
   <div :class="cssModule['client-header-content']">
     <IconLink />
     <div :class="cssModule['client-header-content__right-nav']">
-      <UiPartsGeneralBasicButton type="button" color="primary" @click="toBookManagement">書籍を管理</UiPartsGeneralBasicButton>
+      <UiPartsGeneralBasicButton type="button" color="primary" @click="toBookManagement">書籍一覧</UiPartsGeneralBasicButton>
       <UserNavigate />
     </div>
   </div>

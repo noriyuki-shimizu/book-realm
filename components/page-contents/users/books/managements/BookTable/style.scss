@@ -1,0 +1,42 @@
+@use '/assets/style/mixin/font' as font;
+
+.book-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+
+  &__head-cell {
+    padding: 8px 16px;
+    text-align: left;
+    background-color: var(--color-background-light-normal);
+    border-top: 1px solid var(--color-border-normal);
+    border-bottom: 1px solid var(--color-border-normal);
+
+    &:first-child {
+      width: 25%;
+    }
+  }
+
+  &__body-cell {
+    @include font.font-size(14);
+
+    padding: 8px 16px;
+    border-top: 1px solid var(--color-border-normal);
+    border-bottom: 1px solid var(--color-border-normal);
+
+    &:first-child {
+      width: 25%;
+    }
+  }
+
+  &__text {
+    &--number {
+      @include font.font-size(16);
+      @include font.font-face('Roboto');
+    }
+  }
+
+  &__currency-symbol {
+    margin-left: 4px;
+  }
+}

@@ -1,5 +1,6 @@
 import type { NuxtError } from '#app'
 import type { RouteLocationNormalizedLoaded } from 'vue-router'
+import type { User } from 'firebase/auth'
 import type { ApiState } from './types'
 import { generateQueryStringFromRoute, truncateString } from './utils'
 import { MAX_LOG_PARAMETER_LENGTH } from '@/constants/common/log'
@@ -20,10 +21,12 @@ export const useCommonLogApiStore = defineStore('common-api-log-store', {
      * アクセスログを送信する
      * @param {string} pageBaseUrl アプリケーションのベース URL
      * @param {RouteLocationNormalizedLoaded} route ルート
+     * @param {User | null} user ユーザー情報
      */
     async postAccessLog(
       pageBaseUrl: string,
-      route: RouteLocationNormalizedLoaded
+      route: RouteLocationNormalizedLoaded,
+      user: User | null
     ): Promise<void> {
       const getQueryString = generateQueryStringFromRoute(pageBaseUrl)
       const urlQuery = getQueryString(route)
@@ -34,7 +37,7 @@ export const useCommonLogApiStore = defineStore('common-api-log-store', {
         path: route.path,
         query: truncateString(urlQuery, MAX_LOG_PARAMETER_LENGTH),
         context: {
-          userId: null,
+          userId: user?.uid ?? null,
           renderingMode: import.meta.server ? 'ssr' : 'csr'
         },
         status: '200'
@@ -44,11 +47,13 @@ export const useCommonLogApiStore = defineStore('common-api-log-store', {
      * エラーログを送信する
      * @param {string} pageBaseUrl アプリケーションのベース URL
      * @param {RouteLocationNormalizedLoaded} route ルート
+     * @param {User | null} user ユーザー情報
      * @param {Partial<NuxtError>} error エラー
      */
     async postErrorLog(
       pageBaseUrl: string,
       route: RouteLocationNormalizedLoaded,
+      user: User | null,
       error: Partial<NuxtError>
     ): Promise<void> {
       const getQueryString = generateQueryStringFromRoute(pageBaseUrl)
@@ -60,7 +65,7 @@ export const useCommonLogApiStore = defineStore('common-api-log-store', {
         path: route.path,
         query: truncateString(urlQuery, MAX_LOG_PARAMETER_LENGTH),
         context: {
-          userId: null,
+          userId: user?.uid ?? null,
           renderingMode: import.meta.server ? 'ssr' : 'csr'
         },
         status: error.statusCode?.toString() || '',

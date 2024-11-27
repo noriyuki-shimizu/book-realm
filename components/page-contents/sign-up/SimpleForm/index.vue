@@ -59,6 +59,7 @@ const handleSubmit = async (event: Event): Promise<void> => {
   start()
   await commonAuthApiStore.signUp(auth, uiStore.formState)
   if (!LangUtil.isNull(signUpResponse.value) && LangUtil.isNull(signUpResponse.value.error)) {
+    uiStore.$reset()
     await navigateTo('/sign-up/complete')
   }
   finish()

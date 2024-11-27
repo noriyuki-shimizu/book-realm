@@ -66,6 +66,7 @@ const handlePasswordSubmit = async (event: Event): Promise<void> => {
   const oobCode = route.query.oobCode?.toString() ?? ''
   await commonAuthApiStore.passwordReset(auth, passwordFormState.value.password, { mode, oobCode })
   if (!LangUtil.isNull(passwordResetResponse.value) && LangUtil.isNull(passwordResetResponse.value.error)) {
+    uiStore.$reset()
     await navigateTo('/forgot-password/complete')
   }
   finish()

@@ -1,0 +1,45 @@
+@use '/assets/style/mixin/font' as font;
+@use '@/assets/style/mixin/mediaQuery' as mediaQuery;
+
+.empty-section {
+  &__table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+  }
+
+  &__table-head-cell {
+    padding: 8px 16px;
+    text-align: left;
+    background-color: var(--color-background-light-normal);
+    border-top: 1px solid var(--color-border-normal);
+    border-bottom: 1px solid var(--color-border-normal);
+
+    &:first-child {
+      width: 25%;
+    }
+  }
+
+  &__title {
+    @include font.font-size(20, 20);
+
+    margin-bottom: 16px;
+
+    @include mediaQuery.media {
+      @include font.font-size(16, 20);
+
+      margin-bottom: 8px;
+    }
+  }
+
+  &__description {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  &__icon {
+    width: 16px;
+    height: 16px;
+  }
+}

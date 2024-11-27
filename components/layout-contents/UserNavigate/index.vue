@@ -74,7 +74,7 @@ onUnmounted(() => {
         />
       </template>
     </button>
-    <UserMenu v-show="isIconNavigateOpen" :class="cssModule['user-navigate__user-menu']" />
+    <UserMenu v-show="isIconNavigateOpen" :class="cssModule['user-navigate__user-menu']" @click-menu="toggleIconNavigate" />
   </div>
 </template>
 
