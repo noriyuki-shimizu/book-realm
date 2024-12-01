@@ -48,7 +48,10 @@ definePageMeta({
         return navigateTo({ path: to.path, hash: '' })
       }
     },
-    () => {
+    (to, from) => {
+      if (to.path === from.path) {
+        return
+      }
       const apiStore = useApiStore()
       const uiStore = useUiStore()
       apiStore.$reset()

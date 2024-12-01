@@ -32,7 +32,10 @@ definePageMeta({
   auth: false,
   layout: 'simple',
   middleware: [
-    () => {
+    (to, from) => {
+      if (to.path === from.path) {
+        return
+      }
       const commonAuthApiStore = useCommonAuthApiStore()
       const uiStore = useUiStore()
       commonAuthApiStore.$reset()
