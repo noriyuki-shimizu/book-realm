@@ -48,7 +48,7 @@ const cssModule = useCssModule('classes')
             <span :class="cssModule['book-table__currency-symbol']">円</span>
           </td>
           <td :class="cssModule['book-table__body-cell']">
-            <template v-if="LangUtil.isNull(d.publisher)">---</template>
+            <template v-if="LangUtil.isEmpty(d.publisher)">---</template>
             <template v-else>{{ d.publisher }}</template>
           </td>
           <td :class="cssModule['book-table__body-cell']">
