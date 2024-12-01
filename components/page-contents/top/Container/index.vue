@@ -36,7 +36,7 @@ const cssModule = useCssModule('classes')
       <template #title>機能を試してみる</template>
       <template #default>
         本アプリケーションの１つ機能として、画像から書籍を解析できます。<br />
-        解析結果の正当性は保証されませんが、問題ある場合は書籍がより正確に映った画像を読み込んでください。
+        解析には20秒程度かかります。予めご了承ください。
       </template>
     </DescriptionSection>
 
