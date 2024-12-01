@@ -16,6 +16,12 @@
     margin-bottom: 8px;
   }
 
+  &__text {
+    &--bold {
+      font-weight: bold;
+    }
+  }
+
   &__form {
     margin-bottom: 24px;
   }

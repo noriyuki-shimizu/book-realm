@@ -36,6 +36,12 @@
     height: auto;
   }
 
+  &__text {
+    &--bold {
+      font-weight: bold;
+    }
+  }
+
   &__analysis-text {
     margin-bottom: 12px;
   }
