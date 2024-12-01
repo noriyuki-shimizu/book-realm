@@ -2,6 +2,7 @@
 import type { User } from 'firebase/auth'
 import type { Props } from './types'
 import { formatNumberWithCommas, padZero } from '@/filter/number'
+import { LangUtil } from '#shared/utils/core'
 
 /** Props */
 const props = defineProps<Props>()

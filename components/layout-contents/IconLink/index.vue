@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { User } from 'firebase/auth'
+import { LangUtil } from '#shared/utils/core'
 
 /** CSS Module */
 const cssModule = useCssModule('classes')

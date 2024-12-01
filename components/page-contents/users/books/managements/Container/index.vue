@@ -8,6 +8,7 @@ import BookList from '../BookList/index.vue'
 import type { Props } from './types'
 import { useApiStore } from '@/store/page/users/books/managements'
 import type { BookListViewData } from '@/types/business/book/viewData'
+import { LangUtil, DateUtil } from '#shared/utils/core'
 
 /** Props */
 const props = defineProps<Props>()

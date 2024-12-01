@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Props } from './types'
+import { LangUtil } from '#shared/utils/core'
 
 /** Props */
 const props = defineProps<Props>()
