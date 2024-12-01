@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { useCommonAuthApiStore } from '@/store/common/auth'
+import { useUiStore } from '@/store/page/sign-in'
+
 /** Runtime Config */
 const runtimeConfig = useRuntimeConfig()
 
@@ -27,7 +30,15 @@ useHeadSafe(() => {
 
 definePageMeta({
   auth: false,
-  layout: 'simple'
+  layout: 'simple',
+  middleware: [
+    () => {
+      const commonAuthApiStore = useCommonAuthApiStore()
+      const uiStore = useUiStore()
+      commonAuthApiStore.$reset()
+      uiStore.$reset()
+    }
+  ]
 })
 </script>
 

@@ -56,7 +56,10 @@ const onBookBulkAnalysisSubmit = async (data: FormData): Promise<void> => {
 <template>
   <section :class="cssModule['picture-form-container']">
     <h2 :class="cssModule['picture-form-container__title']">画像から書籍を解析する</h2>
-    <p :class="cssModule['picture-form-container__description']">解析を実施した際、「書籍を入力する」フォームに反映されます。</p>
+    <p :class="cssModule['picture-form-container__description']">
+      解析を実施した際、「書籍を入力する」フォームに反映されます。<br />
+      解析には<span :class="cssModule['picture-form-container__text--bold']">20秒程度</span>かかります。予めご了承ください。
+    </p>
     <template v-if="!LangUtil.isNull(bookBulkAnalysisPostResponse) && !LangUtil.isNull(bookBulkAnalysisPostResponse.error)">
       <UiPartsFeedbackAlert
         v-if="bookBulkAnalysisPostResponse.error.statusCode === StatusCode.STATUS_CODE_BAD_REQUEST"

@@ -10,12 +10,12 @@ const cssModule = useCssModule('classes')
 <template>
   <div :class="cssModule['form-body']">
     <FormItem>
-      <template #title>メールアドレス・パスワードでログイン</template>
-      <SimpleForm />
-    </FormItem>
-    <FormItem>
       <template #title>外部サービスからログイン</template>
       <ExternalForm />
+    </FormItem>
+    <FormItem>
+      <template #title>メールアドレス・パスワードでログイン</template>
+      <SimpleForm />
     </FormItem>
   </div>
 </template>

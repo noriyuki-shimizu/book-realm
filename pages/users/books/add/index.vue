@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { User } from 'firebase/auth'
-import { useApiStore } from '@/store/page/users/books/add'
+import { useUiStore, useApiStore } from '@/store/page/users/books/add'
 import { LangUtil } from '#shared/utils/core'
 
 /** Runtime Config */
@@ -47,6 +47,12 @@ definePageMeta({
       if (!LangUtil.isEmpty(to.hash) && LangUtil.isNull(apiStore.bookBulkAnalysisPostResponse)) {
         return navigateTo({ path: to.path, hash: '' })
       }
+    },
+    () => {
+      const apiStore = useApiStore()
+      const uiStore = useUiStore()
+      apiStore.$reset()
+      uiStore.$reset()
     }
   ]
 })
