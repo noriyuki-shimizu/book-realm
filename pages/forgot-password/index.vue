@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useUiStore } from '@/store/page/forgot-password'
+
 /** Runtime Config */
 const runtimeConfig = useRuntimeConfig()
 
@@ -28,7 +30,13 @@ useHeadSafe(() => {
 
 definePageMeta({
   auth: false,
-  layout: 'simple'
+  layout: 'simple',
+  middleware: [
+    () => {
+      const uiStore = useUiStore()
+      uiStore.$reset()
+    }
+  ]
 })
 </script>
 
