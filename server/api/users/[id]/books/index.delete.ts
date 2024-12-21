@@ -2,9 +2,9 @@ import camelcaseKeys from 'camelcase-keys'
 import { LangUtil } from '#shared/utils/core'
 import { StatusCode } from '@/enums/common/http/statusCode'
 import { UserDetailBookService } from '@/server/src/service/UserDetailBookService'
-import { isUserDetailBookPostData } from '@/server/src/function/route'
+import { isUserDetailBookDeleteData } from '@/server/src/function/route'
 
-/** 書籍の一括登録 API */
+/** 書籍の一括削除 API */
 export default defineEventHandler(async (event) => {
   const id = getRouterParam(event, 'id')
   const body = camelcaseKeys(await readBody(event), { deep: true })
@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
       statusMessage: 'User ID is invalid.'
     })
   }
-  if (!isUserDetailBookPostData(body)) {
+  if (!isUserDetailBookDeleteData(body)) {
     throw createError({
       statusCode: StatusCode.STATUS_CODE_BAD_REQUEST,
       statusMessage: 'Request data is invalid.'
@@ -24,7 +24,7 @@ export default defineEventHandler(async (event) => {
 
   try {
     const service = UserDetailBookService.of()
-    const result = await service.management(id, body, 'POST')
+    const result = await service.management(id, body, 'DELETE')
     setResponseStatus(event, result.statusCode)
     return result.message
   } catch (err) {

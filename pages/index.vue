@@ -29,12 +29,14 @@ useHeadSafe(() => {
 
 definePageMeta({
   auth: false,
-  layout: false,
+  layout: 'guest',
   middleware: [
     async () => {
       const nuxtApp = useNuxtApp()
       const user: User | null = await getCurrentUser()
-      callWithNuxt(nuxtApp, setPageLayout, [!LangUtil.isNil(user) ? 'client' : 'guest'])
+      if (!LangUtil.isNull(user)) {
+        return callWithNuxt(nuxtApp, navigateTo, ['/users/home'])
+      }
     },
     (to) => {
       const apiStore = useApiStore()

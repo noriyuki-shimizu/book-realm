@@ -18,6 +18,7 @@ export class GeminiRepository implements IGeminiRepository {
     const genAI = new GoogleGenerativeAI(runtimeConfig.googleAiStudioApiKey)
     // this.repository = genAI.getGenerativeModel({ model: 'gemini-1.5-pro' })
     this.repository = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' })
+    // this.repository = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' })
   }
 
   /**

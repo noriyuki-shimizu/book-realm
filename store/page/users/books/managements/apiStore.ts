@@ -2,7 +2,10 @@ import type { ApiState } from './types'
 import { ErrorUtil } from '#shared/utils/core'
 import { StatusCode } from '@/enums/common/http/statusCode'
 import type { UserDetailBookKey } from '@/enums/nuxt-api/users/[id]/books'
-import { getRequest as userDetailBookGetRequest } from '@/infrastructures/rest/nuxt/api/users/[id]/books'
+import {
+  deleteRequest as userDetailBookDeleteRequest,
+  getRequest as userDetailBookGetRequest
+} from '@/infrastructures/rest/nuxt/api/users/[id]/books'
 
 /**
  * 書籍登録画面の API Store を返す
@@ -11,7 +14,8 @@ import { getRequest as userDetailBookGetRequest } from '@/infrastructures/rest/n
 export const useApiStore = defineStore('page-api-books-managements-store', {
   state: (): ApiState => {
     return {
-      userDetailBookGetResponse: null
+      userDetailBookGetResponse: null,
+      userDetailBookDeleteResponse: null
     }
   },
   getters: {},
@@ -32,6 +36,29 @@ export const useApiStore = defineStore('page-api-books-managements-store', {
       } catch (err) {
         const nuxtErr = ErrorUtil.convertNuxtError(err)
         this.userDetailBookGetResponse = {
+          data: null,
+          status: nuxtErr.statusCode
+            ?? StatusCode.STATUS_CODE_INTERNAL_SERVER_ERROR,
+          error: nuxtErr
+        }
+      }
+    },
+    /**
+     * 書籍を一括登録する
+     * @param {string} userId ユーザー ID
+     * @param {number} bookId 書籍 ID
+     */
+    async deleteBookAll(userId: string, bookId: number): Promise<void> {
+      try {
+        const response = await userDetailBookDeleteRequest({ userId }, { id: bookId })
+        this.userDetailBookDeleteResponse = {
+          data: null,
+          status: response.status,
+          error: null
+        }
+      } catch (err) {
+        const nuxtErr = ErrorUtil.convertNuxtError(err)
+        this.userDetailBookDeleteResponse = {
           data: null,
           status: nuxtErr.statusCode
             ?? StatusCode.STATUS_CODE_INTERNAL_SERVER_ERROR,

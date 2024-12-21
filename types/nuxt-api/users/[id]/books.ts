@@ -23,6 +23,12 @@ export type UserDetailBookData = {
   [UserDetailBookKey.deletedAt]: string
 }
 
+/** 書籍の削除データ */
+export type UserDetailBookDeleteData = {
+  /** ID */
+  [UserDetailBookKey.id]: number
+}
+
 /** 書籍一覧取得レスポンス */
 export type UserDetailBookGetResponse = {
   /** HTTP Status Code */
@@ -33,6 +39,8 @@ export type UserDetailBookGetResponse = {
 
 /** ユーザー書籍データ */
 export type UserDetailBookPostData = {
+  /** ID */
+  [UserDetailBookKey.id]?: number
   /** 書籍タイトル */
   [UserDetailBookKey.title]: string
   /** 著者名 */

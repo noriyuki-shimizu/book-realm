@@ -1,5 +1,11 @@
+import snakecaseKeys from 'snakecase-keys'
 import type { ISpreadsheetRepository } from '../ISpreadsheetRepository'
-import type { UserDetailBookGetResponse, UserDetailBookPostData, UserDetailBookPostResponse } from '@/types/nuxt-api/users/[id]/books'
+import type {
+  UserDetailBookDeleteData,
+  UserDetailBookGetResponse,
+  UserDetailBookPostData,
+  UserDetailBookPostResponse
+} from '@/types/nuxt-api/users/[id]/books'
 import type { UserDetailBookKey } from '@/enums/nuxt-api/users/[id]/books'
 
 /** Gemini リポジトリ */
@@ -26,14 +32,18 @@ export class SpreadsheetRepository implements ISpreadsheetRepository {
   public async findAll(userId: string, keys?: UserDetailBookKey[]): Promise<UserDetailBookGetResponse> {
     return $fetch<UserDetailBookGetResponse>(
       `${this.API_BASE_URL}/AKfycbyPWsH4xrnoOWlzgSCnPN7EoDQvxXoBbR4vh2RNMVHdM-pMeXw7DtXG6-OVA7b-IQco/exec`,
-      { query: { 'user_id': userId, keys } }
+      { query: snakecaseKeys({ userId, keys }) }
     )
   }
 
-  public async saveAll(userId: string, data: UserDetailBookPostData[]): Promise<UserDetailBookPostResponse> {
+  public async management(
+    userId: string,
+    data: UserDetailBookPostData[] | UserDetailBookDeleteData,
+    action: 'POST' | 'PUT' | 'DELETE'
+  ): Promise<UserDetailBookPostResponse> {
     return $fetch<UserDetailBookPostResponse>(
       `${this.API_BASE_URL}/AKfycbzoBjhe4ERPEqW185lL5L1luRE1D7O33Y-zY1BjSjsfjaB5tQ2oOgQ9rW5O2tOwMdyh/exec`,
-      { method: 'POST', body: { 'user_id': userId, data } }
+      { method: 'POST', body: snakecaseKeys({ userId, data, action }) }
     )
   }
 }

@@ -25,11 +25,12 @@
     width: 100%;
   }
 
-  &__half-text {
+  &__title {
     @include skelton.skeleton;
 
     width: 50%;
     height: 24px;
+    margin-bottom: 8px;
   }
 
   &__text {
