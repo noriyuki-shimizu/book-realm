@@ -43,6 +43,8 @@
 
     &:last-child {
       width: 9%;
+      padding: 8px 8px 24px;
+      vertical-align: middle;
     }
 
     &--center {
@@ -63,7 +65,7 @@
   }
 
   &__icon {
-    width: 24px;
-    height: 24px;
+    width: 16px;
+    height: 16px;
   }
 }

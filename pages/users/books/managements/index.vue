@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { User } from 'firebase/auth'
 import { useApiStore } from '@/store/page/users/books/managements'
+import { LangUtil } from '#shared/utils/core'
 
 /** Runtime Config */
 const runtimeConfig = useRuntimeConfig()
@@ -42,12 +43,12 @@ definePageMeta({
   layout: 'client'
 })
 
-const { status } = await useLazyAsyncData(async () => {
+const { status, refresh } = await useLazyAsyncData(async () => {
   await apiStore.getBookAll(user.uid, [])
   return {}
 })
 </script>
 
 <template>
-  <PageContentsUsersBooksManagementsContainer :is-loading="status === 'pending'" />
+  <PageContentsUsersBooksManagementsContainer :is-loading="status === 'pending'" @refresh-book-fetch="refresh" />
 </template>

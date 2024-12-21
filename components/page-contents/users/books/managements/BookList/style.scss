@@ -1,5 +1,23 @@
 @use '/assets/style/mixin/font' as font;
 
+.modal {
+  &__title {
+    @include font.font-size(20);
+  }
+
+  &__desc-text {
+    &--bold {
+      font-weight: bold;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+  }
+}
+
 .book-list {
   &__accordion {
     width: 100%;
@@ -41,6 +59,12 @@
     flex-direction: column;
     gap: 4px;
     width: 100%;
+  }
+
+  &__title-content {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
   }
 
   &__title {

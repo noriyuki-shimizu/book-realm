@@ -2,6 +2,7 @@
 import type { User } from 'firebase/auth'
 import BookFormTable from '../BookFormTable/index.vue'
 import BookFormList from '../BookFormList/index.vue'
+import { BOOK_DUPLICATE_MODAL_TRIGGER_ID } from './constants'
 import { useApiStore, useUiStore } from '@/store/page/users/books/add'
 import { LangUtil } from '#shared/utils/core'
 import { StatusCode } from '@/enums/common/http/statusCode'
@@ -33,42 +34,20 @@ const uiStore = useUiStore()
 /** UI Store Reactive Param */
 const { formData, isInvalid, invalidFormItemIds } = storeToRefs(uiStore)
 
-/** モーダルの表示可否 */
-const isOpen = ref(false)
-
-/**
- * モーダルを開閉する
- */
-const toggleModal = (): void => {
-  isOpen.value = !isOpen.value
-}
-
-/**
- * モーダルを閉じる
- */
-const closeModal = (): void => {
-  isOpen.value = false
-}
-
-/**
- * 確認モーダルより、登録が実行された際の処理
- */
-const onConfirmedAddBookSubmit = async () => {
-  toggleModal()
-  await onAddBooksSubmit()
-}
-
-/**
- * 書籍登録ボタンがクリックされた際の処理
- */
-const onClickAddBookSubmit = async () => {
-  const isDuplicateTitle = bookTitles.value.some((title) => {
+/** 重複しているタイトルがあるか */
+const isDuplicateTitle = computed<boolean>(() => {
+  return bookTitles.value.some((title) => {
     return formData.value.some((data) => {
       return data.state.title === title
     })
   })
-  if (isDuplicateTitle) {
-    toggleModal()
+})
+
+/**
+ * 書籍登録ボタンがクリックされた際の処理
+ */
+const onClickAddBookSubmit = async (): Promise<void> => {
+  if (isDuplicateTitle.value) {
     return
   }
 
@@ -93,10 +72,7 @@ const onAddBooksSubmit = async (): Promise<void> => {
   if (userDetailBookPostResponse.value?.status === StatusCode.STATUS_CODE_CREATED) {
     apiStore.resetBookBulkAnalysisPostResponse()
     uiStore.$reset()
-    await navigateTo({
-      path: '/users/books/managements',
-      query: { status: 'created' }
-    })
+    await navigateTo('/users/books/managements')
   }
   finish()
 }
@@ -143,21 +119,36 @@ const onAddBooksSubmit = async (): Promise<void> => {
           <CirclePlusSolid :class="cssModule['book-form-container__action-button-icon']" />
           <span>入力欄を追加</span>
         </UiPartsGeneralBasicButton>
-        <UiPartsGeneralBasicButton type="submit" color="primary">登録</UiPartsGeneralBasicButton>
+        <UiPartsGeneralBasicButton
+          v-show="isDuplicateTitle"
+          type="submit"
+          color="primary"
+          :data-open-trigger="BOOK_DUPLICATE_MODAL_TRIGGER_ID"
+          >登録</UiPartsGeneralBasicButton
+        >
+        <UiPartsGeneralBasicButton v-show="!isDuplicateTitle" type="submit" color="primary">登録</UiPartsGeneralBasicButton>
       </div>
     </form>
 
-    <UiPartsFeedbackModal :is-open="isOpen" @close="closeModal">
+    <UiPartsFeedbackModal :trigger-id="BOOK_DUPLICATE_MODAL_TRIGGER_ID">
       <template #header>
-        <p :class="cssModule['modal__title']">
+        <h2 :class="cssModule['modal__title']">
           重複している書籍があります。<br />
           登録しますか？
-        </p>
+        </h2>
       </template>
       <template #footer>
         <div :class="cssModule['modal__button-container']">
-          <UiPartsGeneralBasicButton type="button" color="normal" @click="toggleModal">キャンセル</UiPartsGeneralBasicButton>
-          <UiPartsGeneralBasicButton type="button" color="primary" @click="onConfirmedAddBookSubmit">登録する</UiPartsGeneralBasicButton>
+          <UiPartsGeneralBasicButton type="button" color="normal" :data-close-trigger="BOOK_DUPLICATE_MODAL_TRIGGER_ID"
+            >キャンセル</UiPartsGeneralBasicButton
+          >
+          <UiPartsGeneralBasicButton
+            type="button"
+            color="primary"
+            :data-close-trigger="BOOK_DUPLICATE_MODAL_TRIGGER_ID"
+            @click="onAddBooksSubmit"
+            >登録する</UiPartsGeneralBasicButton
+          >
         </div>
       </template>
     </UiPartsFeedbackModal>

@@ -1,6 +1,6 @@
 import type { AppFetchResponse } from 'ofetch'
 import type { UserDetailBookPostRequestBody, UserDetailBookRequestParam, UserDetailBookRequestQuery } from './types'
-import type { UserDetailBookData } from '@/types/nuxt-api/users/[id]/books'
+import type { UserDetailBookData, UserDetailBookDeleteData } from '@/types/nuxt-api/users/[id]/books'
 
 export const getRequest = async (
   param: UserDetailBookRequestParam,
@@ -29,5 +29,23 @@ export const postRequest = async (
   return $nuxtServerHttpClient(
     `/api/users/${param.userId}/books`,
     { method: 'POST', body }
+  )
+}
+
+/**
+ * 書籍一括削除リクエスト
+ * @param {UserDetailBookRequestParam} param リクエストパスパラメータ
+ * @param {UserDetailBookDeleteData} body リクエストボディ
+ * @returns {Promise<AppFetchResponse<void>>} 書籍一括削除レスポンス
+ */
+export const deleteRequest = async (
+  param: UserDetailBookRequestParam,
+  body: UserDetailBookDeleteData
+): Promise<AppFetchResponse<void>> => {
+  const { $nuxtServerHttpClient } = useNuxtApp()
+
+  return $nuxtServerHttpClient(
+    `/api/users/${param.userId}/books`,
+    { method: 'DELETE', body }
   )
 }

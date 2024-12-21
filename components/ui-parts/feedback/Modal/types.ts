@@ -1,5 +1,5 @@
 /** Props */
 export type Props = {
-  /** 表示可否 */
-  isOpen: boolean
+  /** トリガー ID */
+  triggerId: string
 }

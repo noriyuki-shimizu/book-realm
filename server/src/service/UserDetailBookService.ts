@@ -1,7 +1,12 @@
 import type { ISpreadsheetRepository } from '../repository/ISpreadsheetRepository'
 import { SpreadsheetRepository } from '../repository/imp/SpreadsheetRepository'
 import { isUserDetailBookKey, isUserDetailBookKeyList } from '../function/route'
-import type { UserDetailBookGetResponse, UserDetailBookPostData, UserDetailBookPostResponse } from '@/types/nuxt-api/users/[id]/books'
+import type {
+  UserDetailBookDeleteData,
+  UserDetailBookGetResponse,
+  UserDetailBookPostData,
+  UserDetailBookPostResponse
+} from '@/types/nuxt-api/users/[id]/books'
 import type { UserDetailBookKey } from '@/enums/nuxt-api/users/[id]/books'
 
 /** 本の一括解析におけるサービス */
@@ -39,12 +44,17 @@ export class UserDetailBookService {
   }
 
   /**
-   * 書籍の一括登録
+   * 書籍の管理
    * @param {string} userId ユーザー ID
    * @param {UserDetailBookPostData[]} data 保存データ一覧
+   * @param {'POST' | 'PUT' | 'DELETE'} action アクション
    * @returns {Promise<UserDetailBookPostResponse>} 書籍の一括登録レスポンス
    */
-  public async saveAll(userId: string, data: UserDetailBookPostData[]): Promise<UserDetailBookPostResponse> {
-    return this.repository.saveAll(userId, data)
+  public async management(
+    userId: string,
+    data: UserDetailBookPostData[] | UserDetailBookDeleteData,
+    action: 'POST' | 'PUT' | 'DELETE'
+  ): Promise<UserDetailBookPostResponse> {
+    return this.repository.management(userId, data, action)
   }
 }

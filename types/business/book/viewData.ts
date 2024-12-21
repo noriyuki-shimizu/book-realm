@@ -2,8 +2,8 @@ import type { DateObject } from '@/types/core/date'
 
 /** 表示データ */
 export type BookListViewData = {
-  /** ユニーク ID */
-  uid: string
+  /** ID */
+  id: number
   /** 本のタイトル */
   title: string
   /** 著者名 */
