@@ -64,7 +64,7 @@
 
 .modal {
   &__title {
-    font-weight: bold;
+    @include font.font-size(20);
   }
 
   &__button-container {

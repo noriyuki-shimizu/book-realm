@@ -43,12 +43,12 @@ definePageMeta({
   layout: 'client'
 })
 
-const { status } = await useLazyAsyncData(async () => {
+const { status, refresh } = await useLazyAsyncData(async () => {
   await apiStore.getBookAll(user.uid, [])
   return {}
 })
 </script>
 
 <template>
-  <PageContentsUsersBooksManagementsContainer :is-loading="status === 'pending'" />
+  <PageContentsUsersBooksManagementsContainer :is-loading="status === 'pending'" @refresh-book-fetch="refresh" />
 </template>
