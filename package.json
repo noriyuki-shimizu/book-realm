@@ -32,7 +32,7 @@
     "firebase": "^10.14.1",
     "firebase-admin": "^12.7.0",
     "firebase-functions": "^5.1.1",
-    "nuxt": "^3.13.0",
+    "nuxt": "^3.15.0",
     "nuxt-vuefire": "^1.0.4",
     "ress": "^5.0.2",
     "snakecase-keys": "^8.0.1",
