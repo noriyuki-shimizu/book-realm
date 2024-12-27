@@ -1,11 +1,7 @@
 <script setup lang="ts">
 import { FOCUSABLE_ELEMENTS } from './constants'
-import type { Props } from './types'
 
-const props = defineProps<Props>()
-
-/** モーダルの表示可否 */
-const isOpen = ref<boolean>(false)
+const model = defineModel<boolean>({ required: true, default: false })
 
 /** モーダルの参照 */
 const modalRef = ref<HTMLDivElement | null>(null)
@@ -22,13 +18,12 @@ const focusableElements = ref<HTMLElement[]>([])
 /**
  * ダイアログを開く関数。
  * @description
- * `isOpen` 状態を true に設定し、現在フォーカスされている要素を保存し、
+ * ダイアログを表示状態にして、現在フォーカスされている要素を保存し、
  * ダイアログ内の最初のフォーカス可能な要素にフォーカスを移動します。
  * さらに、背景のスクロールと操作を防ぐために、body に 'fixed' クラスを追加し、
  * スクロール位置の CSS 変数を設定し、main 要素に 'user-select-none' クラスと 'inert' 属性を追加します。
  */
 const handleDialogOpen = (): void => {
-  isOpen.value = true
   focusBeforeElement.value = document.activeElement
   focusableElements.value[0]?.focus()
 
@@ -49,7 +44,6 @@ const handleDialogOpen = (): void => {
  * - メイン要素の inert 属性を削除します。
  */
 const handleDialogClose = (): void => {
-  isOpen.value = false
   ;(focusBeforeElement.value as HTMLElement | null)?.focus()
   focusBeforeElement.value = null
 
@@ -96,33 +90,26 @@ const handleKeydownDialogContainer = (e: KeyboardEvent): void => {
 
 onMounted(() => {
   mainElement.value = document.getElementById('main-layout')
-  const openTriggers = [...document.querySelectorAll(`*[data-open-trigger="${props.triggerId}"]`)]
-  const closeTriggers = [...document.querySelectorAll(`*[data-close-trigger="${props.triggerId}"]`)]
   focusableElements.value = [...(modalRef.value?.querySelectorAll<HTMLElement>(FOCUSABLE_ELEMENTS.join(',')) ?? [])]
-
-  for (const trigger of openTriggers) {
-    trigger.addEventListener('click', handleDialogOpen)
-  }
-  for (const trigger of closeTriggers) {
-    trigger.addEventListener('click', handleDialogClose)
-  }
 
   window.addEventListener('keydown', handleKeydownDialogContainer)
 })
 
 onUnmounted(() => {
-  const openTriggers = [...document.querySelectorAll(`*[data-open-trigger="${props.triggerId}"]`)]
-  const closeTriggers = [...document.querySelectorAll(`*[data-close-trigger="${props.triggerId}"]`)]
-
-  for (const trigger of openTriggers) {
-    trigger.removeEventListener('click', handleDialogOpen)
-  }
-  for (const trigger of closeTriggers) {
-    trigger.removeEventListener('click', handleDialogClose)
-  }
-
   window.removeEventListener('keydown', handleKeydownDialogContainer)
 })
+
+watch(
+  () => model.value,
+  (isOpen) => {
+    model.value = isOpen
+    if (isOpen) {
+      handleDialogOpen()
+    } else {
+      handleDialogClose()
+    }
+  }
+)
 </script>
 
 <template>
@@ -133,8 +120,9 @@ onUnmounted(() => {
       leave-active-class="dialog-leave-active"
       leave-to-class="dialog-leave-to"
     >
-      <div v-show="isOpen" id="dialog" ref="modalRef" class="dialog">
-        <div class="dialog__bg-layer" :data-close-trigger="props.triggerId"></div>
+      <div v-show="model" id="dialog" ref="modalRef" class="dialog">
+        <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions vuejs-accessibility/click-events-have-key-events -->
+        <div class="dialog__bg-layer" @click="model = false"></div>
         <div class="dialog__container" role="dialog" aria-modal="true" aria-labelledby="dialog-header" aria-describedby="dialog-desc">
           <div v-if="$slots.header" id="dialog-header" class="dialog__header"><slot name="header" /></div>
           <div v-if="$slots.desc" id="dialog-desc" class="dialog__desc"><slot name="desc" /></div>
