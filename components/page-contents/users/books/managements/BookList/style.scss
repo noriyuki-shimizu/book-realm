@@ -63,12 +63,22 @@
 
   &__title-content {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     margin-bottom: 8px;
   }
 
   &__title {
     font-weight: bold;
+  }
+
+  &__button {
+    display: inline-flex;
+  }
+
+  &__icon {
+    width: 16px;
+    height: 16px;
   }
 
   &__detail {
