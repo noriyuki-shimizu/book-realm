@@ -5,6 +5,7 @@ import { formatNumberWithCommas, padZero } from '@/filter/number'
 import { LangUtil } from '#shared/utils/core'
 import type { BookListViewData } from '@/types/business/book/viewData'
 import { useApiStore } from '@/store/page/users/books/managements'
+import TrashCanSolidSvg from '@/assets/svg/trash-can-solid.svg?component'
 
 /** Props */
 const props = defineProps<Props>()
@@ -88,11 +89,11 @@ const onConfirmedDeleteBookSubmit = async (): Promise<void> => {
                 <UiPartsGeneralBasicButton
                   :class="cssModule['book-list__button']"
                   type="button"
-                  size="x-small"
+                  size="medium"
                   color="danger"
                   @click="setSelectedBook(d)"
                 >
-                  削除
+                  <TrashCanSolidSvg :class="cssModule['book-list__icon']" />
                 </UiPartsGeneralBasicButton>
               </div>
               <div>
