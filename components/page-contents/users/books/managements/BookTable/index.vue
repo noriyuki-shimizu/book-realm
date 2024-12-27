@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { User } from 'firebase/auth'
 import type { Props } from './types'
-import { DELETE_BOOK_MODAL_TRIGGER_ID } from './constants'
 import { formatNumberWithCommas, padZero } from '@/filter/number'
 import { LangUtil } from '#shared/utils/core'
 import TrashCanSolidSvg from '@/assets/svg/trash-can-solid.svg?component'
@@ -32,6 +31,9 @@ const cssModule = useCssModule('classes')
 /** Loading Indicator */
 const { start, finish } = useLoadingIndicator()
 
+/** モーダルの開閉状態 */
+const isModalOpen = ref<boolean>(false)
+
 /** 選択中の書籍 */
 const selectedBook = ref<BookListViewData | null>(null)
 
@@ -39,6 +41,7 @@ const selectedBook = ref<BookListViewData | null>(null)
  * 選択中の書籍を設定する
  */
 const setSelectedBook = (book: BookListViewData): void => {
+  isModalOpen.value = true
   selectedBook.value = book
 }
 
@@ -120,13 +123,7 @@ const onConfirmedDeleteBookSubmit = async (): Promise<void> => {
               </template>
             </td>
             <td :class="cssModule['book-table__body-cell']">
-              <UiPartsGeneralBasicButton
-                :class="cssModule['book-table__button']"
-                type="button"
-                color="danger"
-                :data-open-trigger="DELETE_BOOK_MODAL_TRIGGER_ID"
-                @click="setSelectedBook(d)"
-              >
+              <UiPartsGeneralBasicButton :class="cssModule['book-table__button']" type="button" color="danger" @click="setSelectedBook(d)">
                 <TrashCanSolidSvg :class="cssModule['book-table__icon']" role="img" :aria-label="`${d.title}を削除する`" />
               </UiPartsGeneralBasicButton>
             </td>
@@ -134,7 +131,7 @@ const onConfirmedDeleteBookSubmit = async (): Promise<void> => {
         </template>
       </tbody>
     </table>
-    <UiPartsFeedbackModal :trigger-id="DELETE_BOOK_MODAL_TRIGGER_ID">
+    <UiPartsFeedbackModal v-model="isModalOpen">
       <template #header>
         <h2 :class="cssModule['modal__title']">書籍を削除</h2>
       </template>
@@ -147,16 +144,8 @@ const onConfirmedDeleteBookSubmit = async (): Promise<void> => {
       </template>
       <template #footer>
         <div :class="cssModule['modal__footer']">
-          <UiPartsGeneralBasicButton type="button" color="normal" :data-close-trigger="DELETE_BOOK_MODAL_TRIGGER_ID"
-            >キャンセル</UiPartsGeneralBasicButton
-          >
-          <UiPartsGeneralBasicButton
-            type="button"
-            color="danger"
-            :data-close-trigger="DELETE_BOOK_MODAL_TRIGGER_ID"
-            @click="onConfirmedDeleteBookSubmit"
-            >削除する</UiPartsGeneralBasicButton
-          >
+          <UiPartsGeneralBasicButton type="button" color="normal" @click="isModalOpen = false">キャンセル</UiPartsGeneralBasicButton>
+          <UiPartsGeneralBasicButton type="button" color="danger" @click="onConfirmedDeleteBookSubmit">削除する</UiPartsGeneralBasicButton>
         </div>
       </template>
     </UiPartsFeedbackModal>

@@ -2,7 +2,6 @@
 import type { User } from 'firebase/auth'
 import BookFormTable from '../BookFormTable/index.vue'
 import BookFormList from '../BookFormList/index.vue'
-import { BOOK_DUPLICATE_MODAL_TRIGGER_ID } from './constants'
 import { useApiStore, useUiStore } from '@/store/page/users/books/add'
 import { LangUtil } from '#shared/utils/core'
 import { StatusCode } from '@/enums/common/http/statusCode'
@@ -34,6 +33,9 @@ const uiStore = useUiStore()
 /** UI Store Reactive Param */
 const { formData, isInvalid, invalidFormItemIds } = storeToRefs(uiStore)
 
+/** モーダルの開閉状態 */
+const isModalOpen = ref<boolean>(false)
+
 /** 重複しているタイトルがあるか */
 const isDuplicateTitle = computed<boolean>(() => {
   return bookTitles.value.some((title) => {
@@ -48,6 +50,7 @@ const isDuplicateTitle = computed<boolean>(() => {
  */
 const onClickAddBookSubmit = async (): Promise<void> => {
   if (isDuplicateTitle.value) {
+    isModalOpen.value = true
     return
   }
 
@@ -119,18 +122,11 @@ const onAddBooksSubmit = async (): Promise<void> => {
           <CirclePlusSolid :class="cssModule['book-form-container__action-button-icon']" />
           <span>入力欄を追加</span>
         </UiPartsGeneralBasicButton>
-        <UiPartsGeneralBasicButton
-          v-show="isDuplicateTitle"
-          type="submit"
-          color="primary"
-          :data-open-trigger="BOOK_DUPLICATE_MODAL_TRIGGER_ID"
-          >登録</UiPartsGeneralBasicButton
-        >
-        <UiPartsGeneralBasicButton v-show="!isDuplicateTitle" type="submit" color="primary">登録</UiPartsGeneralBasicButton>
+        <UiPartsGeneralBasicButton type="submit" color="primary">登録</UiPartsGeneralBasicButton>
       </div>
     </form>
 
-    <UiPartsFeedbackModal :trigger-id="BOOK_DUPLICATE_MODAL_TRIGGER_ID">
+    <UiPartsFeedbackModal v-model="isModalOpen">
       <template #header>
         <h2 :class="cssModule['modal__title']">
           重複している書籍があります。<br />
@@ -139,16 +135,8 @@ const onAddBooksSubmit = async (): Promise<void> => {
       </template>
       <template #footer>
         <div :class="cssModule['modal__button-container']">
-          <UiPartsGeneralBasicButton type="button" color="normal" :data-close-trigger="BOOK_DUPLICATE_MODAL_TRIGGER_ID"
-            >キャンセル</UiPartsGeneralBasicButton
-          >
-          <UiPartsGeneralBasicButton
-            type="button"
-            color="primary"
-            :data-close-trigger="BOOK_DUPLICATE_MODAL_TRIGGER_ID"
-            @click="onAddBooksSubmit"
-            >登録する</UiPartsGeneralBasicButton
-          >
+          <UiPartsGeneralBasicButton type="button" color="normal" @click="isModalOpen = false">キャンセル</UiPartsGeneralBasicButton>
+          <UiPartsGeneralBasicButton type="button" color="primary" @click="onAddBooksSubmit">登録する</UiPartsGeneralBasicButton>
         </div>
       </template>
     </UiPartsFeedbackModal>
