@@ -7,6 +7,7 @@ import {
   PUBLISHER_AREA_LABEL_ID,
   PUBLISHED_DATE_AREA_LABEL_ID
 } from '@/constants/components/form/book'
+import TrashCanSolidSvg from '@/assets/svg/trash-can-solid.svg?component'
 
 /** API Store */
 const apiStore = useApiStore()
@@ -38,11 +39,11 @@ const { formData } = storeToRefs(uiStore)
               <UiPartsGeneralBasicButton
                 :class="cssModule['book-form-list__button']"
                 type="button"
-                size="x-small"
+                size="medium"
                 color="danger"
                 @click="uiStore.removeFormStateRecord(index)"
               >
-                削除
+                <TrashCanSolidSvg :class="cssModule['book-form-list__icon']" />
               </UiPartsGeneralBasicButton>
             </div>
             <UiPartsDataEntryInputText
