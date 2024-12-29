@@ -1,6 +1,7 @@
 import { EnhancedGenerateContent } from '../domain/EnhancedGenerateContent'
 import type { IGeminiRepository } from '../repository/IGeminiRepository'
 import { GeminiRepository } from '../repository/imp/GeminiRepository'
+import { LangUtil } from '@/shared/utils/core'
 import type { BookBulkAnalysisPostResponse } from '@/types/nuxt-api/books/bulk-analysis'
 
 /** 本の一括解析におけるサービス */
@@ -21,6 +22,21 @@ export class BookBulkAnalysisService {
    */
   public static of(): BookBulkAnalysisService {
     return new BookBulkAnalysisService()
+  }
+
+  /**
+   * タイトルの重複を削除した本の一括解析結果レスポンスを取得する
+   * @param data 本の一括解析結果レスポンス
+   * @returns タイトルの重複を削除した本の一括解析結果レスポンス
+   */
+  private removeDuplicateTitles(data: BookBulkAnalysisPostResponse): BookBulkAnalysisPostResponse {
+    return data.flat().reduce((acc, current) => {
+      const foundItem = acc.find(item => item.title === current.title)
+      if (LangUtil.isUndefined(foundItem)) {
+        acc.push(current)
+      }
+      return acc
+    }, [] as BookBulkAnalysisPostResponse)
   }
 
   /**
@@ -47,6 +63,6 @@ export class BookBulkAnalysisService {
       }
     }
 
-    return resultDataList.flat()
+    return this.removeDuplicateTitles(resultDataList)
   }
 }

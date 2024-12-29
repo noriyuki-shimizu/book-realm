@@ -25,7 +25,7 @@ export class EnhancedGenerateContent {
   }
 
   /**
-   * JSON を文字列から抽出する
+   * JSON 文字列を抽出する
    * @returns {string} JSON 文字列
    */
   public extractJsonFromString(): string {
