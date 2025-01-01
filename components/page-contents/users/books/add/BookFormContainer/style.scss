@@ -67,6 +67,10 @@
     @include font.font-size(20);
   }
 
+  &__list {
+    padding: 0 16px;
+  }
+
   &__button-container {
     display: flex;
     gap: 8px;
