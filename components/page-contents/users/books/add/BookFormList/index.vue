@@ -22,7 +22,7 @@ const { bookTitles } = storeToRefs(apiStore)
 const uiStore = useUiStore()
 
 /** UI Store Reactive Param */
-const { formData } = storeToRefs(uiStore)
+const { formData, duplicateTitleIndexList } = storeToRefs(uiStore)
 </script>
 
 <template>
@@ -66,6 +66,16 @@ const { formData } = storeToRefs(uiStore)
               aria-live="assertive"
             >
               こちらの書籍は既に登録されています。
+            </UiPartsFeedbackAlert>
+            <UiPartsFeedbackAlert
+              v-else-if="duplicateTitleIndexList.includes(index)"
+              :id="`${TITLE_AREA_LABEL_ID}-${index}`"
+              type="warning"
+              size="small"
+              role="alert"
+              aria-live="assertive"
+            >
+              こちらは既に入力されています。
             </UiPartsFeedbackAlert>
           </div>
           <div :class="cssModule['book-form-list__chevron']"></div>

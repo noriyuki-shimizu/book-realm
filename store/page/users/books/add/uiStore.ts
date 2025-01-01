@@ -33,6 +33,18 @@ export const useUiStore = defineStore('page-ui-books-add-store', {
         })
       })
     },
+    duplicateTitleIndexList(state): number[] {
+      return state.formData
+        .map((data, index) => {
+          const foundInvalidIndex = state.formData.findIndex((d, i) => {
+            return d.state.title === data.state.title && i !== index
+          })
+          return foundInvalidIndex !== -1 ? index : null
+        })
+        .filter((index) => {
+          return !LangUtil.isNull(index)
+        })
+    },
     invalidFormItemIds(state): string[] {
       return state.formData.reduce<string[]>((acc, data, index) => {
         const fields: (keyof FormValidation)[] = ['title', 'author', 'price', 'publisher', 'publishedDate']
