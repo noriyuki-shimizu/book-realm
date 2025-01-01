@@ -31,13 +31,16 @@ const { userDetailBookPostResponse, bookTitles } = storeToRefs(apiStore)
 const uiStore = useUiStore()
 
 /** UI Store Reactive Param */
-const { formData, isInvalid, invalidFormItemIds } = storeToRefs(uiStore)
+const { formData, isInvalid, invalidFormItemIds, duplicateTitleIndexList } = storeToRefs(uiStore)
 
-/** モーダルの開閉状態 */
-const isModalOpen = ref<boolean>(false)
+/** 登録されているデータのタイトル情報と重複しているかにおけるモーダルの開閉状態 */
+const isTitleDuplicateModalOpen = ref<boolean>(false)
 
-/** 重複しているタイトルがあるか */
-const isDuplicateTitle = computed<boolean>(() => {
+/** フォーム内のタイトル情報が重複しているかにおけるモーダルの開閉状態 */
+const isDuplicateTitleIndexModalOpen = ref<boolean>(false)
+
+/** 登録されているデータのタイトル情報と重複しているか */
+const isTitleDuplicate = computed<boolean>(() => {
   return bookTitles.value.some((title) => {
     return formData.value.some((data) => {
       return data.state.title === title
@@ -49,8 +52,12 @@ const isDuplicateTitle = computed<boolean>(() => {
  * 書籍登録ボタンがクリックされた際の処理
  */
 const onClickAddBookSubmit = async (): Promise<void> => {
-  if (isDuplicateTitle.value) {
-    isModalOpen.value = true
+  if (isTitleDuplicate.value) {
+    isTitleDuplicateModalOpen.value = true
+    return
+  }
+  if (duplicateTitleIndexList.value) {
+    isDuplicateTitleIndexModalOpen.value = true
     return
   }
 
@@ -126,7 +133,7 @@ const onAddBooksSubmit = async (): Promise<void> => {
       </div>
     </form>
 
-    <UiPartsFeedbackModal v-model="isModalOpen">
+    <UiPartsFeedbackModal v-model="isTitleDuplicateModalOpen">
       <template #header>
         <h2 :class="cssModule['modal__title']">
           重複している書籍があります。<br />
@@ -135,7 +142,34 @@ const onAddBooksSubmit = async (): Promise<void> => {
       </template>
       <template #footer>
         <div :class="cssModule['modal__button-container']">
-          <UiPartsGeneralBasicButton type="button" color="normal" @click="isModalOpen = false">キャンセル</UiPartsGeneralBasicButton>
+          <UiPartsGeneralBasicButton type="button" color="normal" @click="isTitleDuplicateModalOpen = false"
+            >キャンセル</UiPartsGeneralBasicButton
+          >
+          <UiPartsGeneralBasicButton type="button" color="primary" @click="onAddBooksSubmit">登録する</UiPartsGeneralBasicButton>
+        </div>
+      </template>
+    </UiPartsFeedbackModal>
+
+    <UiPartsFeedbackModal v-model="isDuplicateTitleIndexModalOpen">
+      <template #header>
+        <h2 :class="cssModule['modal__title']">
+          入力された書籍タイトルにて、重複している書籍があります。<br />
+          登録しますか？
+        </h2>
+      </template>
+      <template #desc>
+        <p :class="cssModule['modal__desc']">重複している書籍タイトルは以下の通りです。</p>
+        <ul :class="cssModule['modal__list']">
+          <template v-for="index in duplicateTitleIndexList" :key="`duplicateTitleIndex${index}`">
+            <li :class="cssModule['modal__list-item']">［{{ index + 1 }}行目］{{ formData[index].state.title }}</li>
+          </template>
+        </ul>
+      </template>
+      <template #footer>
+        <div :class="cssModule['modal__button-container']">
+          <UiPartsGeneralBasicButton type="button" color="normal" @click="isDuplicateTitleIndexModalOpen = false"
+            >キャンセル</UiPartsGeneralBasicButton
+          >
           <UiPartsGeneralBasicButton type="button" color="primary" @click="onAddBooksSubmit">登録する</UiPartsGeneralBasicButton>
         </div>
       </template>
