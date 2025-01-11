@@ -37,7 +37,7 @@ export const useUiStore = defineStore('page-ui-books-add-store', {
       return state.formData
         .map((data, index) => {
           const foundInvalidIndex = state.formData.findIndex((d, i) => {
-            return d.state.title === data.state.title && i !== index
+            return !LangUtil.isEmpty(d.state.title) && d.state.title === data.state.title && i !== index
           })
           return foundInvalidIndex !== -1 ? index : null
         })
