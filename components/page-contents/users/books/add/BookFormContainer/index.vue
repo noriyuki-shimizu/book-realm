@@ -56,7 +56,7 @@ const onClickAddBookSubmit = async (): Promise<void> => {
     isTitleDuplicateModalOpen.value = true
     return
   }
-  if (duplicateTitleIndexList.value) {
+  if (!LangUtil.isEmpty(duplicateTitleIndexList.value)) {
     isDuplicateTitleIndexModalOpen.value = true
     return
   }
